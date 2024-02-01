@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>7d03c0bd-5f96-4779-922c-e28e2518dc1a</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Boardgame.Contracts\Boardgame.Contracts.csproj" />
+    <ProjectReference Include="..\Boardgame.Application\Boardgame.Application.csproj" />
+    <ProjectReference Include="..\Boardgame.Infrastructure\Boardgame.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

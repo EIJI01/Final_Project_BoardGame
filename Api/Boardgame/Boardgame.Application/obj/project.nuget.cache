@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "IOHaw1niAJ7vPuFpH5Pq5JhNF2dRjPU/umZG1JPkp9AmHQMQOPHF5hQOZn3P3bA9EE9QXRsos7r3fmpYMHtxLg==",
+  "success": true,
+  "projectFilePath": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Application\\Boardgame.Application.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\chany\\.nuget\\packages\\erroror\\1.9.0\\erroror.1.9.0.nupkg.sha512",
+    "C:\\Users\\chany\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

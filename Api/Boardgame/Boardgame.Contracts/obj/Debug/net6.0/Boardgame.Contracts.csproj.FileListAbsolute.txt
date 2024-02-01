@@ -1,0 +1,12 @@
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Contracts\bin\Debug\net6.0\Boardgame.Contracts.deps.json
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Contracts\bin\Debug\net6.0\Boardgame.Contracts.dll
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Contracts\bin\Debug\net6.0\Boardgame.Contracts.pdb
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Contracts\obj\Debug\net6.0\Boardgame.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Contracts\obj\Debug\net6.0\Boardgame.Contracts.AssemblyInfoInputs.cache
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Contracts\obj\Debug\net6.0\Boardgame.Contracts.AssemblyInfo.cs
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Contracts\obj\Debug\net6.0\Boardgame.Contracts.csproj.CoreCompileInputs.cache
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Contracts\obj\Debug\net6.0\Boardgame.Contracts.sourcelink.json
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Contracts\obj\Debug\net6.0\Boardgame.Contracts.dll
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Contracts\obj\Debug\net6.0\refint\Boardgame.Contracts.dll
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Contracts\obj\Debug\net6.0\Boardgame.Contracts.pdb
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Contracts\obj\Debug\net6.0\ref\Boardgame.Contracts.dll

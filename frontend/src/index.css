@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --main-color: #03c9d7;
+  --spinner-color: #03c9d7;
+  --hover-footer: #03c9d7;
+  --nav-mid: #03c9d7;
+  --body-color: #ffff;
+  --service: #ffff;
+}
+
+#my-element:hover {
+  background-color: var(--main-color);
+  color: white;
+}
+
+#spinner {
+  color: var(--spinner-color);
+}
+
+.footer:hover {
+  color: var(--hover-footer);
+}
+.nav-mid:hover {
+  background-color: var(--nav-mid);
+}
+#service {
+  color: var(--service);
+}
+#service:hover {
+  background-color: var(--service);
+  color: white;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  /* display: none; */
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(130, 128, 128, 0.279);
+  border-radius: 40px;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+/* .scrollable-content {
+  overflow-y: auto;
+  max-height: calc(100vh - 24px);
+} */
+/* body::-webkit-scrollbar {
+  display: none;
+} */
+body {
+  overflow-y: auto;
+  max-height: calc(100vh - 24px);
+}
+body {
+  background-color: var(--body-color);
+  height: 100vh;
+}
+
+#list-mid {
+  background-color: aqua;
+}
+
+.tables {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10rem;
+}
+.table-item {
+  background-color: lightgray;
+  border-radius: 30%;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.dropdown .dropdown-menu {
+  max-height: 250px;
+  overflow: auto;
+}
+
+.datepicker {
+  background-color: var(--hover-footer);
+  border-color: var(--hover-footer);
+}

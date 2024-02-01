@@ -1,0 +1,13 @@
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Domain\bin\Debug\net6.0\Boardgame.Domain.deps.json
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Domain\bin\Debug\net6.0\Boardgame.Domain.dll
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Domain\bin\Debug\net6.0\Boardgame.Domain.pdb
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Domain\obj\Debug\net6.0\Boardgame.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Domain\obj\Debug\net6.0\Boardgame.Domain.AssemblyInfoInputs.cache
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Domain\obj\Debug\net6.0\Boardgame.Domain.AssemblyInfo.cs
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Domain\obj\Debug\net6.0\Boardgame.Domain.csproj.CoreCompileInputs.cache
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Domain\obj\Debug\net6.0\Boardgame.Domain.sourcelink.json
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Domain\obj\Debug\net6.0\Boardgame.Domain.dll
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Domain\obj\Debug\net6.0\refint\Boardgame.Domain.dll
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Domain\obj\Debug\net6.0\Boardgame.Domain.pdb
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Domain\obj\Debug\net6.0\ref\Boardgame.Domain.dll
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Domain\obj\Debug\net6.0\Boardgame.Domain.csproj.AssemblyReference.cache

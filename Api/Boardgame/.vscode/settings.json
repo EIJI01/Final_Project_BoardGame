@@ -1,0 +1,13 @@
+{
+  "rest-client.environmentVariables": {
+    "$shared": {
+      "route": "api"
+    },
+    "dev": {
+      "host": "https://localhost:7124"
+    },
+    "prod": {
+      "host": "https://localhost:7124"
+    }
+  }
+}
