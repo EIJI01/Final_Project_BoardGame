@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "svnhCZl/1w9eP9fU0R7PUZna6Ua7XyJdU1hej4sn0RuYAhY6+bplo7TGKUWU4r0v9+wCw0KytEpqzbnTQ4YSsg==",
+  "dgSpecHash": "5DqwMCNHqcATOOMxa7Om97Xmvrt0jfDEZDq1tv6oxyjP2If593CIEr0zm7dmrK7yCE/Qi5AbPOl96RiYaVVTjA==",
   "success": true,
   "projectFilePath": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Api\\Boardgame.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\chany\\.nuget\\packages\\erroror\\1.9.0\\erroror.1.9.0.nupkg.sha512",
+    "C:\\Users\\chany\\.nuget\\packages\\mediatr\\8.0.0\\mediatr.8.0.0.nupkg.sha512",
+    "C:\\Users\\chany\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\8.0.0\\mediatr.extensions.microsoft.dependencyinjection.8.0.0.nupkg.sha512",
     "C:\\Users\\chany\\.nuget\\packages\\microsoft.extensions.configuration\\6.0.1\\microsoft.extensions.configuration.6.0.1.nupkg.sha512",
     "C:\\Users\\chany\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\chany\\.nuget\\packages\\microsoft.extensions.configuration.binder\\6.0.0\\microsoft.extensions.configuration.binder.6.0.0.nupkg.sha512",

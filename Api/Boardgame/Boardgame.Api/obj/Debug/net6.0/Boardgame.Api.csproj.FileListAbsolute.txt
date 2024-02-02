@@ -41,3 +41,5 @@ C:\Final-Project\project-final\Api\Boardgame\Boardgame.Api\bin\Debug\net6.0\Micr
 C:\Final-Project\project-final\Api\Boardgame\Boardgame.Api\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Final-Project\project-final\Api\Boardgame\Boardgame.Api\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
 C:\Final-Project\project-final\Api\Boardgame\Boardgame.Api\bin\Debug\net6.0\ErrorOr.dll
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Api\bin\Debug\net6.0\MediatR.dll
+C:\Final-Project\project-final\Api\Boardgame\Boardgame.Api\bin\Debug\net6.0\MediatR.Extensions.Microsoft.DependencyInjection.dll

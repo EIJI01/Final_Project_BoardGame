@@ -1,6 +1,6 @@
 using Boardgame.Domain.Entities;
 
-namespace Boardgame.Application.Services.Authentication;
+namespace Boardgame.Application.Authentication.Common;
 
 public record AuthenticationResult(
     User User,
