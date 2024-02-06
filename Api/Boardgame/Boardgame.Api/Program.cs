@@ -1,27 +1,19 @@
-using Boardgame.Api.Common.Errors;
+using Boardgame.Api;
+using Boardgame.Api.Common.Http;
 using Boardgame.Application;
 using Boardgame.Infrastructure;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services
+        .AddPresentation()
         .AddApplication()
         .AddInfrastructure(builder.Configuration);
-    builder.Services.AddControllers();
-    builder.Services.AddSingleton<ProblemDetailsFactory, BoardgameProblemDetailsFactory>();
-    builder.Services.AddCors(o => o.AddPolicy(
-        "MyPolicy", builder =>
-        {
-            builder.AllowAnyOrigin()
-                   .AllowAnyMethod()
-                   .AllowAnyHeader();
-        }));
 }
 
 var app = builder.Build();
 {
-    app.UseCors("MyPolicy");
+    app.UseCors(MyPolicyKeys.MyPolicy);
     app.UseExceptionHandler("/error");
     app.UseHttpsRedirection();
     app.MapControllers();

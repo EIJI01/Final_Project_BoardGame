@@ -172,3 +172,6 @@ C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Api\obj\Debug\net6.
 C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Api\obj\Debug\net6.0\Boardgame.Api.pdb
 C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Api\obj\Debug\net6.0\Boardgame.Api.genruntimeconfig.cache
 C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Api\obj\Debug\net6.0\ref\Boardgame.Api.dll
+C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Api\bin\Debug\net6.0\Mapster.dll
+C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Api\bin\Debug\net6.0\Mapster.Core.dll
+C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Api\bin\Debug\net6.0\Mapster.DependencyInjection.dll

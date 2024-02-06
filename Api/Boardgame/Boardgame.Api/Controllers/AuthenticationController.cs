@@ -4,6 +4,7 @@ using Boardgame.Application.Authentication.Queries.Login;
 using Boardgame.Contracts.Authentication;
 using Boardgame.Domain.Common.Errors;
 using ErrorOr;
+using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,25 +15,22 @@ namespace Boardgame.Api.Controllers;
 public class AuthenticationController : ApiController
 {
     private readonly IMediator _mediator;
-
-    public AuthenticationController(IMediator mediator)
+    private readonly IMapper _mapper;
+    public AuthenticationController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterRequest request)
     {
-        var requestRegister = new RegisterCommand(
-            request.FirstName,
-            request.LastName,
-            request.Email,
-            request.Password);
+        var requestRegister = _mapper.Map<RegisterCommand>(request);
 
         ErrorOr<AuthenticationResult> authResult = await _mediator.Send(requestRegister);
 
         return authResult.Match(
-            authResult => Ok(MapAuthResult(authResult)),
+            authResult => Ok(_mapper.Map<AuthenticationResponse>(authResult)),
             error => Problem(error)
         );
     }
@@ -41,7 +39,7 @@ public class AuthenticationController : ApiController
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginRequest request)
     {
-        var requestLogin = new LoginQuery(request.Email, request.Password);
+        var requestLogin = _mapper.Map<LoginQuery>(request);
         ErrorOr<AuthenticationResult> authResult = await _mediator.Send(requestLogin);
 
         if (authResult.IsError && authResult.FirstError == Errors.Authentication.InvalidCredentials)
@@ -52,18 +50,9 @@ public class AuthenticationController : ApiController
         }
 
         return authResult.Match(
-            authResult => Ok(MapAuthResult(authResult)),
+            authResult => Ok(_mapper.Map<AuthenticationResponse>(authResult)),
             error => Problem(error)
         );
 
-    }
-    private static AuthenticationResponse MapAuthResult(AuthenticationResult authResult)
-    {
-        return new AuthenticationResponse(
-                    authResult.User.Id,
-                    authResult.User.FirstName,
-                    authResult.User.LastName,
-                    authResult.User.Email,
-                    authResult.Token);
     }
 }

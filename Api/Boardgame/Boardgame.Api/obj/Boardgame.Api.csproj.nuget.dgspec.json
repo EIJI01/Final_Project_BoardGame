@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Api\\Boardgame.Api.csproj": {}
+    "c:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Api\\Boardgame.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Api\\Boardgame.Api.csproj": {
+    "c:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Api\\Boardgame.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Api\\Boardgame.Api.csproj",
+        "projectUniqueName": "c:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Api\\Boardgame.Api.csproj",
         "projectName": "Boardgame.Api",
-        "projectPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Api\\Boardgame.Api.csproj",
+        "projectPath": "c:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Api\\Boardgame.Api.csproj",
         "packagesPath": "C:\\Users\\chany\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Api\\obj\\",
+        "outputPath": "c:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chany\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -31,8 +31,8 @@
               "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Application\\Boardgame.Application.csproj": {
                 "projectPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Application\\Boardgame.Application.csproj"
               },
-              "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Contracts\\Boardgame.Contracts.csproj": {
-                "projectPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Contracts\\Boardgame.Contracts.csproj"
+              "c:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Contracts\\Boardgame.Contracts.csproj": {
+                "projectPath": "c:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Contracts\\Boardgame.Contracts.csproj"
               },
               "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Infrastructure\\Boardgame.Infrastructure.csproj": {
                 "projectPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Infrastructure\\Boardgame.Infrastructure.csproj"
@@ -49,6 +49,16 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Mapster": {
+              "target": "Package",
+              "version": "[7.3.0, )"
+            },
+            "Mapster.DependencyInjection": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -145,14 +155,14 @@
         }
       }
     },
-    "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Contracts\\Boardgame.Contracts.csproj": {
+    "c:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Contracts\\Boardgame.Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Contracts\\Boardgame.Contracts.csproj",
+        "projectUniqueName": "c:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Contracts\\Boardgame.Contracts.csproj",
         "projectName": "Boardgame.Contracts",
-        "projectPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Contracts\\Boardgame.Contracts.csproj",
+        "projectPath": "c:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Contracts\\Boardgame.Contracts.csproj",
         "packagesPath": "C:\\Users\\chany\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Contracts\\obj\\",
+        "outputPath": "c:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Contracts\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chany\\AppData\\Roaming\\NuGet\\NuGet.Config",
