@@ -1,0 +1,36 @@
+version: "3"
+services:
+  ## Database postgres
+  postgres:
+    image: postgres:14.1-alpine
+    restart: always
+    container_name: database
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+
+  dotnetclean:
+    image: dotnetclean
+    restart: always
+    depends_on:
+      - postgres
+
+  webapp:
+    image: webboardgame
+    container_name: webboardgame
+    depends_on:
+      - dotnetclean
+
+  webadmin:
+    image: webadmin
+    container_name: webadmin
+    depends_on:
+      - dotnetclean
+
+volumes:
+  db:
+    driver: local

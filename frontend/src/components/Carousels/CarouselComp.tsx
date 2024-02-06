@@ -1,7 +1,6 @@
 import { Carousel } from "@material-tailwind/react";
 import { TypeImage } from "../../data/event";
 import { useState } from "react";
-import { useStateDispatchContext } from "../../hooks/useStateDispatchHook";
 
 type Props = {
   loop?: boolean;

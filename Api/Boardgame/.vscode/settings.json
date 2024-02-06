@@ -4,10 +4,10 @@
       "route": "api"
     },
     "dev": {
-      "host": "https://localhost:7124"
+      "host": "http://localhost:8000"
     },
     "prod": {
-      "host": "https://localhost:7124"
+      "host": "http://localhost:8000"
     }
   }
 }

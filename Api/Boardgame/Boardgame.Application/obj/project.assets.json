@@ -155,11 +155,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Application\\Boardgame.Application.csproj",
+      "projectUniqueName": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Application\\Boardgame.Application.csproj",
       "projectName": "Boardgame.Application",
-      "projectPath": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Application\\Boardgame.Application.csproj",
+      "projectPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Application\\Boardgame.Application.csproj",
       "packagesPath": "C:\\Users\\chany\\.nuget\\packages\\",
-      "outputPath": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Application\\obj\\",
+      "outputPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\chany\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -176,8 +176,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Domain\\Boardgame.Domain.csproj": {
-              "projectPath": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Domain\\Boardgame.Domain.csproj"
+            "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Domain\\Boardgame.Domain.csproj": {
+              "projectPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Domain\\Boardgame.Domain.csproj"
             }
           }
         }

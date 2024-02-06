@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HhPuRIGDat7iFWLwMaSccLFtiB97vtuIRQKJcY9HnopA/lvqjCsulDEKcEAvdtIWcemwzC4zkf+dD9TgcxZsng==",
+  "dgSpecHash": "jiqOEH/mSbUHOHQy6kG+zcvmYJXdC0NdO6aoOQ43PUkQ5iKZnmnNdyp65M6PIENjPSopN8tKnT8LI5U7H4ENnQ==",
   "success": true,
-  "projectFilePath": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Infrastructure\\Boardgame.Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Infrastructure\\Boardgame.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\chany\\.nuget\\packages\\erroror\\1.9.0\\erroror.1.9.0.nupkg.sha512",
     "C:\\Users\\chany\\.nuget\\packages\\mediatr\\8.0.0\\mediatr.8.0.0.nupkg.sha512",

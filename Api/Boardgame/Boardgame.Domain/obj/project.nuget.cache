@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Tzqw5CiFfIQqMwdcJnUcWBNbwuSdXTqBtQRKj2SnPHSnJGdHiCll6VuM3rYLhGyZr0cs/KeogUgLnHr9H4tLaA==",
+  "dgSpecHash": "u8pwm7jspe9YmtwPM0lMw+Lpl8+IUwyy0AFUV6K7ZyY99Wxc3TmDtNyePpVngHNLZeYi5aKyC51tKcn8dOBsAg==",
   "success": true,
-  "projectFilePath": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Domain\\Boardgame.Domain.csproj",
+  "projectFilePath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Domain\\Boardgame.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\chany\\.nuget\\packages\\erroror\\1.9.0\\erroror.1.9.0.nupkg.sha512"
   ],

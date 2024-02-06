@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5DqwMCNHqcATOOMxa7Om97Xmvrt0jfDEZDq1tv6oxyjP2If593CIEr0zm7dmrK7yCE/Qi5AbPOl96RiYaVVTjA==",
+  "dgSpecHash": "drqTRspOb2AzgEieGq31+zTyAJueluwUt7VO6kG8Bd5WYZh0cxyWifM9dRTjukny5YWCKrngK3sLE/CMxBaDkg==",
   "success": true,
-  "projectFilePath": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Api\\Boardgame.Api.csproj",
+  "projectFilePath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Api\\Boardgame.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\chany\\.nuget\\packages\\erroror\\1.9.0\\erroror.1.9.0.nupkg.sha512",
     "C:\\Users\\chany\\.nuget\\packages\\mediatr\\8.0.0\\mediatr.8.0.0.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Domain\\Boardgame.Domain.csproj": {}
+    "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Domain\\Boardgame.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Domain\\Boardgame.Domain.csproj": {
+    "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Domain\\Boardgame.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Domain\\Boardgame.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Domain\\Boardgame.Domain.csproj",
         "projectName": "Boardgame.Domain",
-        "projectPath": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Domain\\Boardgame.Domain.csproj",
+        "projectPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Domain\\Boardgame.Domain.csproj",
         "packagesPath": "C:\\Users\\chany\\.nuget\\packages\\",
-        "outputPath": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Domain\\obj\\",
+        "outputPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chany\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,4 +1,4 @@
-POST {{host}}/{{route}}/authentication/register
+POST http://localhost:8000/api/authentication/register
 Content-Type: application/json
 
 {

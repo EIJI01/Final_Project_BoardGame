@@ -637,11 +637,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Infrastructure\\Boardgame.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Infrastructure\\Boardgame.Infrastructure.csproj",
       "projectName": "Boardgame.Infrastructure",
-      "projectPath": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Infrastructure\\Boardgame.Infrastructure.csproj",
+      "projectPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Infrastructure\\Boardgame.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\chany\\.nuget\\packages\\",
-      "outputPath": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Infrastructure\\obj\\",
+      "outputPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\chany\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -658,8 +658,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Application\\Boardgame.Application.csproj": {
-              "projectPath": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Application\\Boardgame.Application.csproj"
+            "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Application\\Boardgame.Application.csproj": {
+              "projectPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Application\\Boardgame.Application.csproj"
             }
           }
         }
