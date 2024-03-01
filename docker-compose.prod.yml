@@ -1,0 +1,37 @@
+version: "3"
+services:
+  ## Server .Net6.0
+  dotnetclean:
+    build:
+      context: ./Api/Boardgame/
+      dockerfile: Dockerfile.prod
+    environment:
+      - ConnectionStrings__DefaultConnection=Data Source=host.docker.internal;Initial Catalog=BoardGameData; User Id=sa; Password=mssql1234;
+
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    volumes:
+      - ./Api/Boardgame/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - dotnetclean
+    ports:
+      - "8000:8000"
+
+  # Web client boardgame
+  webapp:
+    build:
+      context: ./frontend
+      target: prod
+    ports:
+      - "3000:3000"
+
+  ## Web client webadmin
+  webadmin:
+    build:
+      context: ./webadmin
+      target: prod
+    depends_on:
+      - dotnetclean
+    ports:
+      - "5000:5000"

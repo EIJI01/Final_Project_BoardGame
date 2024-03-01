@@ -1,0 +1,16 @@
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+RUN dotnet dev-certs https --trust
+ENV ASPNETCORE_ENVIRONMENT=Development
+WORKDIR /app
+
+COPY ["Boardgame.Api/Boardgame.Api.csproj", "Boardgame.Api/"]
+COPY ["Boardgame.Contracts/Boardgame.Contracts.csproj", "Boardgame.Contracts/"]
+COPY ["Boardgame.Infrastructure/Boardgame.Infrastructure.csproj", "Boardgame.Infrastructure/"]
+COPY ["Boardgame.Application/Boardgame.Application.csproj", "Boardgame.Application/"]
+COPY ["Boardgame.Domain/Boardgame.Domain.csproj", "Boardgame.Domain/"]
+
+RUN dotnet restore "Boardgame.Api/Boardgame.Api.csproj"
+COPY . .
+
+ENTRYPOINT ["dotnet", "watch", "run", "--project", "Boardgame.Api/Boardgame.Api.csproj", "--urls=http://+:8000"]
+

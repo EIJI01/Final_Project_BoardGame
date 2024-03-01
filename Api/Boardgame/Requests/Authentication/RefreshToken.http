@@ -1,0 +1,8 @@
+# POST http://localhost:8000/api/authentication/refreshtoken
+POST http://localhost:5107/api/authentication/refreshtoken
+Content-Type: application/json
+
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkNjEzMjEzNi0xOGNiLTQ1NTAtOTMwYy0xOGFiYTFkZTZjNmQiLCJnaXZlbl9uYW1lIjoiQ2hhbnl1dCIsImVtYWlsIjoiY2hhbnl1dDA5ODYwNzE4MTNAZ21haWwuY29tIiwianRpIjoiOTE3MDhhYzQtNjRhYy00NWRkLThlMGQtZmMzZTExMTUwYmI4Iiwicm9sZSI6Ik1FTUJFUiIsImV4cCI6MTcwODIwMTgzMSwiaXNzIjoiQm9hcmRHYW1lQXBwIiwiYXVkIjoiQm9hcmRHYW1lQXBwIn0.MCivonmmk_RqUYR0JAFN138nB_7Ro9eF77h24aJnY2w",
+  "refreshToken": "5LKX3PLFBEG548SMG8Y48OJ5H2I415"
+}

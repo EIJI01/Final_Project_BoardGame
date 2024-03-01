@@ -3,7 +3,7 @@ import DataGrid from "../../DataGrid/DataGrid";
 import DataGridFooter from "../../DataGrid/DataGridFooter";
 import DataGridHeader from "../../DataGrid/DataGridHeader";
 import { useStateDispatchContext } from "../../../hooks/useStateDispatchHook";
-import { CARD_LIST_HEADER, CARD_LIST_ROWS, TABLE_ROWS } from "../../../data/data";
+import { CARD_LIST_HEADER } from "../../../data/data";
 
 import {
   Chip,
@@ -13,10 +13,15 @@ import {
   Typography,
   Option,
   CardBody,
+  Spinner,
 } from "@material-tailwind/react";
-import { formatDate, formatTime } from "../../../utils/format";
-import { useCallback, useState } from "react";
+import { formatTime } from "../../../utils/format";
+import { useCallback, useEffect, useState } from "react";
 import DateDefault from "../../DatePickers/DateDefault";
+import { ScanSystemResponse } from "../../../models/data/scanSystem";
+import { CardResponse } from "../../../models/data/card";
+import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
+import { TableResponseHub } from "../../../models/data/table";
 
 export interface TitleTableProps {
   no: boolean;
@@ -39,7 +44,54 @@ export default function ManageQueueTable() {
     status: true,
     edit: true,
   });
+  const [allCards, setAllCards] = useState<CardResponse[]>([]);
+  const [allTable, setAllTable] = useState<TableResponseHub[]>([]);
+  const [cardListRows, setCardListRows] = useState<ScanSystemResponse[]>([]);
   const [startDate, setStartDate] = useState<Date>(new Date());
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const connection = new HubConnectionBuilder()
+      .withUrl(`https://localhost:7124/database-tracking`)
+      .configureLogging(LogLevel.Information)
+      .build();
+
+    connection.on("ReceivedScanSystems", (scanSystem) => {
+      const jsonParse = JSON.parse(scanSystem);
+      setCardListRows(jsonParse);
+    });
+
+    connection.on("ReceivedCards", (cards) => {
+      const jsonParse = JSON.parse(cards);
+      setAllCards(jsonParse);
+    });
+
+    connection.on("ReceivedTables", (tables) => {
+      const jsonParse = JSON.parse(tables);
+      setAllTable(jsonParse);
+    });
+
+    const InvokeScanSystems = () => {
+      connection.invoke("SendCards").catch((err) => console.log(err));
+      connection.invoke("SendScanSystems").catch((err) => console.log(err));
+      connection.invoke("SendTables").catch((err) => console.log(err));
+    };
+
+    const startConnection = async () => {
+      try {
+        await connection.start();
+        console.log("Connection started successfully!");
+        InvokeScanSystems();
+      } catch (error) {
+        console.error("Error starting connection:", error);
+        startConnection();
+      }
+    };
+    startConnection();
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+  }, []);
 
   const handleSetStartDate = useCallback(
     (value: Date | null) => {
@@ -93,8 +145,12 @@ export default function ManageQueueTable() {
       <DateDefault startDate={startDate} onChangeStartDate={handleSetStartDate} />
     </div>
   );
-  const body = CARD_LIST_ROWS.map((items, index) => {
-    const isLast = index === TABLE_ROWS.length - 1;
+  const body = cardListRows.map((items, index) => {
+    const singleCard = allCards.filter((data) => data.Id === items.CardId);
+    const singleTable = allTable.filter((data) => data.Id === items.TableId);
+    const card = singleCard[0];
+    const table = singleTable[0];
+    const isLast = index === cardListRows.length - 1;
     const classes = isLast
       ? "p-4 border-b dark:border-gray-800"
       : "p-4 py-2 border-b border-blue-gray-50 dark:border-gray-800";
@@ -103,7 +159,7 @@ export default function ManageQueueTable() {
       <tr
         key={index}
         onClick={() => {
-          window.location.href = `/gm/manage-cards/${items.id}`;
+          window.location.href = `/gm/manage-cards/${items.Id}`;
         }}
         className="hover:bg-blue-gray-50 cursor-pointer hover:dark:bg-main-dark-bg/90"
       >
@@ -117,7 +173,7 @@ export default function ManageQueueTable() {
                 color="blue-gray"
                 className="font-normal dark:text-main-dark-text"
               >
-                {items.id}
+                {card.CardNumber}
               </Typography>
             </div>
           </div>
@@ -129,7 +185,7 @@ export default function ManageQueueTable() {
             color="blue-gray"
             className="font-normal dark:text-main-dark-text"
           >
-            {formatTime(items.time_in)}
+            {formatTime(items?.StartTime)}
           </Typography>
         </td>
         <td className={`${classes} ${titleTable.time_out ? "" : "hidden"}`}>
@@ -139,7 +195,7 @@ export default function ManageQueueTable() {
             color="blue-gray"
             className="font-normal opacity-70 dark:text-main-dark-text"
           >
-            {items.status ? "---" : formatTime(items.time_out)}
+            {items.Status ? "---" : formatTime(items.StopTime)}
           </Typography>
         </td>
         <td className={`${classes} ${titleTable.price ? "" : "hidden"}`}>
@@ -149,7 +205,7 @@ export default function ManageQueueTable() {
             color="blue-gray"
             className="font-normal dark:text-main-dark-text"
           >
-            {items.status ? "---" : `${items.price}$`}
+            {items.Status ? "---" : `${items.TotalPrice}$`}
           </Typography>
         </td>
         <td className={`${classes} ${titleTable.table ? "" : "hidden"}`}>
@@ -159,7 +215,7 @@ export default function ManageQueueTable() {
             color="blue-gray"
             className="font-normal dark:text-main-dark-text"
           >
-            {items.table_id}
+            {table ? table.TableNumber : "---"}
           </Typography>
         </td>
         <td className={`${classes} ${titleTable.status ? "" : "hidden"}`}>
@@ -167,8 +223,8 @@ export default function ManageQueueTable() {
             <Chip
               variant="ghost"
               size="sm"
-              value={items.status ? "online" : "offline"}
-              style={{ backgroundColor: items.status ? "green" : "red", color: "white" }}
+              value={items.Status ? "online" : "offline"}
+              style={{ backgroundColor: items.Status ? "green" : "red", color: "white" }}
             />
           </div>
         </td>
@@ -188,12 +244,17 @@ export default function ManageQueueTable() {
       </tr>
     );
   });
-  return (
+  return isLoading ? (
+    <div className="flex justify-center items-center h-[80vh]">
+      <Spinner color="blue" className="mx-auto h-12 w-12" />
+    </div>
+  ) : (
     <div>
       <DataGrid>
         <DataGridHeader
           title="Crad list"
-          subTitle={`${formatDate(CARD_LIST_ROWS[0].time_in)}`}
+          // subTitle={`${cardListRows. ? formatDate(cardListRows[0].StartTime) : ""}`}
+          subTitle={new Date().toLocaleDateString()}
           buttonBody={buttonBody}
         />
         <CardBody

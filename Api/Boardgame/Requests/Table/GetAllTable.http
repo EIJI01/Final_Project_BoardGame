@@ -1,0 +1,7 @@
+# POST http://localhost:5107/api/table/get-all
+POST http://localhost:8000/api/table/get-all
+Content-Type: application/json
+
+{
+    "branchId": "e4d756fa-ce1c-46cc-8cb8-ba08712c6708"
+}

@@ -1,16 +1,18 @@
-import { CARD_LIST_ROWS } from "../../data/data";
 import { useStateDispatchContext } from "../../hooks/useStateDispatchHook";
+import { ScanSystemResponse } from "../../models/data/scanSystem";
 
 interface Props {
-  numberOfTable: number;
+  numberOfTable: string;
   onClick: () => void;
+  tableId: string;
+  scanSystemData: ScanSystemResponse[];
 }
 
-const Table = ({ numberOfTable, onClick }: Props) => {
+const Table = ({ numberOfTable, onClick, tableId, scanSystemData }: Props) => {
   const { currentColor } = useStateDispatchContext();
-  const cardInTable = CARD_LIST_ROWS.filter(
-    (item) => item.table_id === numberOfTable && item.status === true
-  );
+  const cardInTable =
+    scanSystemData.filter((item) => item.TableId === tableId && item.Status === true) || [];
+
   return (
     <div className=" w-full md:w-60 lg:w-72 h-auto mx-auto">
       <div className="tables">
@@ -46,7 +48,7 @@ const Table = ({ numberOfTable, onClick }: Props) => {
                   {cardInTable.length > 0 ? "unavailable" : "available"}
                 </div>
               </div>
-              <div className=" dark:text-main-bure-text text-center">Table {numberOfTable}</div>
+              <div className=" dark:text-main-bure-text text-center">{numberOfTable}</div>
               <div className=" font-semobold text-lg  lg:hidden">
                 <span style={{ color: cardInTable.length > 0 ? "red" : "green" }}>
                   {cardInTable.length}

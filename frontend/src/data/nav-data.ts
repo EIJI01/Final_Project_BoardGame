@@ -8,7 +8,7 @@ import {
 } from "@heroicons/react/24/solid";
 export const navListMenuItemsMember = [
   {
-    title: "Reservation Queue",
+    title: "Queue",
     description: "Find the perfect solution for your needs.",
     icon: QueueListIcon,
     path: "/member/booking-queue",
@@ -24,6 +24,44 @@ export const navListMenuItemsMember = [
     description: "Meet and learn about our dedication",
     icon: QrCodeIcon,
     path: "/member/scan-qr",
+  },
+  {
+    title: "New Services",
+    description: "Soom.",
+    icon: PlusIcon,
+    path: undefined,
+  },
+  {
+    title: "New Services",
+    description: "Soom.",
+    icon: PlusIcon,
+    path: undefined,
+  },
+  {
+    title: "New Services",
+    description: "Soom.",
+    icon: PlusIcon,
+    path: undefined,
+  },
+];
+export const navListMenuItemsGuest = [
+  {
+    title: "Scan Qrcode",
+    description: "Meet and learn about our dedication",
+    icon: QrCodeIcon,
+    path: "/member/scan-qr",
+  },
+  {
+    title: "New Services",
+    description: "Soom.",
+    icon: PlusIcon,
+    path: undefined,
+  },
+  {
+    title: "New Services",
+    description: "Soom.",
+    icon: PlusIcon,
+    path: undefined,
   },
   {
     title: "New Services",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Contracts\\Boardgame.Contracts.csproj": {}
+    "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Contracts\\Boardgame.Contracts.csproj": {}
   },
   "projects": {
-    "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Contracts\\Boardgame.Contracts.csproj": {
+    "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Contracts\\Boardgame.Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Contracts\\Boardgame.Contracts.csproj",
+        "projectUniqueName": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Contracts\\Boardgame.Contracts.csproj",
         "projectName": "Boardgame.Contracts",
-        "projectPath": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Contracts\\Boardgame.Contracts.csproj",
+        "projectPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Contracts\\Boardgame.Contracts.csproj",
         "packagesPath": "C:\\Users\\chany\\.nuget\\packages\\",
-        "outputPath": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Contracts\\obj\\",
+        "outputPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Contracts\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chany\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -55,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

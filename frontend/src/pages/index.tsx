@@ -9,3 +9,5 @@ export { default as ManageQrScan } from "./gm/ManageQrScan";
 export { default as ManageTable } from "./gm/ManageTable";
 export { default as GmProfile } from "./gm/GmProfile";
 export { default as MemberProfile } from "./member/MemberProfile";
+export { default as ForgetPassword } from "./forget-password/ForgetPassword";
+export { default as ResetPassword } from "./reset-password/ResetPassword";

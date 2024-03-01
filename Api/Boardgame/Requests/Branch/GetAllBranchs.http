@@ -1,0 +1,2 @@
+GET http://localhost:8000/api/branch/get-all
+# GET http://localhost:5107/api/branch/get-all

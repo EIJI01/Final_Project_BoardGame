@@ -1,0 +1,7 @@
+POST http://localhost:8000/api/table/get-id
+# POST http://localhost:5107/api/table/get-id
+Content-Type: application/json
+
+{
+    "tableId": "4339957e-c2d9-4624-b02e-342156b067cd"
+}

@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Boardgame.Application
-build_property.ProjectDir = C:\Final-Project\project-final\Api\Boardgame\Boardgame.Application\
+build_property.ProjectDir = c:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Application\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

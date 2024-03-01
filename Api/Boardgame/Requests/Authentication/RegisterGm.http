@@ -1,0 +1,22 @@
+
+POST http://localhost:5107/api/authentication/gm/register-gm
+# POST http://localhost:8000/api/authentication/gm/register-gm
+# Admin
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjOGE0MDdmZS03NDU4LTQxNjMtOGU4NS0wOGRjMzkwMGRmZTEiLCJnaXZlbl9uYW1lIjoiQWRtaW4iLCJqdGkiOiJlM2EwNTI5MC0xZTAzLTQzODUtYmUxOC1kZWY0ODg4MzFiNDciLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MDkxOTU1OTgsImlzcyI6IkJvYXJkR2FtZUFwcCIsImF1ZCI6IkJvYXJkR2FtZUFwcCJ9.g0LeFJwvtIJRr5wL_6-4XQpiP4XJLMAUPPYZLLs3mXw
+
+# {
+#     "name": "Chanyut",
+#     "email": "chanyut0986071813@gmail.com",
+#     "phoneNumber": "0985541245",
+#     "password": "$chanyutD01",
+#     "confirmPassword": "$chanyutD01"
+# }
+
+{
+    "name": "Rakeka",
+    "email": "rakeka3945@ebuthor.com",
+    "phoneNumber": "0822659456",
+    "password": "$chanyutD01",
+    "confirmPassword": "$chanyutD01"
+}

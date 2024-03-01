@@ -2,8 +2,9 @@ import { Alert } from "@material-tailwind/react";
 
 type Props = {
   open: boolean;
-  onClose: (value: boolean) => void;
+  onClose: () => void;
   type: "success" | "error";
+  data: string;
 };
 
 function Icon() {
@@ -23,17 +24,17 @@ function Icon() {
   );
 }
 
-export default function AlertSuccess({ open, onClose, type }: Props) {
+export default function AlertSuccess({ open, onClose, type, data }: Props) {
   return (
     <Alert
       open={open}
-      onClose={() => onClose(false)}
+      onClose={() => onClose()}
       icon={<Icon />}
       className={`border-l-4 font-medium text-main-dark-text mx-auto w-96 rounded-lg ${
         type === "success" ? "border-[#2ec946] bg-[#2ec946]/60" : "border-[#F44336] bg-[#F44336]/60"
       }`}
     >
-      Add card success.
+      {data}
     </Alert>
   );
 }

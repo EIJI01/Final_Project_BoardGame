@@ -7,39 +7,95 @@ import {
   Input,
   Select,
   Option,
-  CardFooter,
+  Spinner,
 } from "@material-tailwind/react";
 import { UseUserContext } from "../../../contexts/ContextProvider";
 import { useStateDispatchContext } from "../../../hooks/useStateDispatchHook";
 import { ButtonCustom } from "../..";
-import { useCallback, useState } from "react";
-import { QUEUE_NINTENDO_ROWS, QUEUE_TABLE_ROWS } from "../../../data/data";
+import { useEffect, useState } from "react";
+// import { QUEUE_NINTENDO_ROWS, QUEUE_TABLE_ROWS } from "../../../data/data";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
-type Props = {};
+export type FormQueue = {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  numberOfPeople: string;
+  tableType: string;
+  branchId: string;
+  isExpected: boolean;
+};
 
-export default function ReservationQueue({}: Props) {
+export default function ReservationQueue() {
   const { currentUser } = UseUserContext();
-  const [formDataName, setFormDataName] = useState<string | undefined>(currentUser?.name);
-  const [formDataTel, setFormDataTel] = useState<string | undefined>(currentUser?.tel);
-  const [formDataNumberPeople, setFormDataNumberPeople] = useState<string | undefined>("1");
-  const [formDataTable, setFormDataTable] = useState<string | undefined>("table");
   const { currentColor } = useStateDispatchContext();
-  const [openReservated, setOpenReservated] = useState<boolean>(false);
-  const [isExpected, setIsExpected] = useState<boolean>(false);
-  const setOpenReservation = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      if (isExpected) {
-        setOpenReservated(true);
-      }
-    },
-    [formDataName, formDataTel, formDataNumberPeople, formDataTable, isExpected]
-  );
-  const setOpenReservationCancel = useCallback(() => {
-    setOpenReservated(false);
-  }, [openReservated]);
+  const [openReservated] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  return (
+  const schema = yup.object().shape({
+    name: yup
+      .string()
+      .required("Name is required")
+      .default(() => currentUser!.name),
+    email: yup
+      .string()
+      .required("Email is required")
+      .default(() => currentUser!.email),
+    phoneNumber: yup
+      .string()
+      .default(() => currentUser!.tel)
+      .required("Phone is a required field")
+      .matches(
+        /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/,
+        "Invalid phone number format"
+      ),
+    numberOfPeople: yup.string().required("Number of people is required"),
+    tableType: yup.string().required("Table type is required"),
+    branchId: yup.string().required("Branch is required"),
+    isExpected: yup
+      .boolean()
+      .required("Expected is required")
+      .oneOf([true], "The terms and conditions must be accepted."),
+  });
+
+  // const setOpenReservation = (event: React.FormEvent<HTMLFormElement>) => {
+  //   setOpenReservated(true);
+  // };
+
+  // const setOpenReservationCancel = useCallback(() => {
+  //   setOpenReservated(false);
+  // }, [openReservated]);
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<FormQueue>({ resolver: yupResolver(schema) });
+
+  useEffect(() => {
+    setValue("email", currentUser?.email ?? "", { shouldValidate: true });
+    setValue("name", currentUser?.name ?? "", { shouldValidate: true });
+    setValue("phoneNumber", currentUser?.tel ?? "", { shouldValidate: true });
+  }, [setValue, currentUser?.email, currentUser?.name, currentUser?.tel]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+  }, []);
+
+  const onSubmit: SubmitHandler<FormQueue> = async (data) => {
+    console.log(data);
+  };
+
+  return isLoading ? (
+    <div className="flex justify-center items-center h-[80vh]">
+      <Spinner color="blue" className="mx-auto h-12 w-12" />
+    </div>
+  ) : (
     <>
       {!openReservated && (
         <div className="pt-4 lg:px-52">
@@ -47,21 +103,43 @@ export default function ReservationQueue({}: Props) {
             <div className="w-full">
               <Card
                 placeholder={""}
-                className="w-full lg:h-[500px] shadow-none lg:shadow-md dark:lg:bg-[#1d1d1d] bg-inherit"
+                className="w-full lg:h-[600px] shadow-none lg:shadow-md dark:lg:bg-[#1d1d1d] bg-inherit"
               >
                 <CardHeader
                   placeholder={""}
                   floated={false}
-                  className="h-16 m-0 flex items-center pl-10 text-xl font-bold text-main-dark-text"
+                  className="py-7 m-0 flex items-center pl-10 text-xl font-bold text-main-dark-text"
                   style={{ backgroundColor: currentColor }}
                 >
-                  Reservation Queue
+                  Queue
                 </CardHeader>
                 <CardBody placeholder={""} className="text-center p-0">
                   <div className="w-full lg:px-32 px-4 ">
-                    <form className="mt-8 mb-2  max-w-80 sm:w-full" onSubmit={setOpenReservation}>
+                    <form
+                      className="mt-8 mb-2  max-w-80 sm:w-full"
+                      onSubmit={handleSubmit(onSubmit)}
+                    >
                       <div className="lg:grid grid-flow-col gap-6">
-                        <div className="mb-4 lg:mb-1 flex flex-col lg:gap-6 gap-4">
+                        <div className="lg:mb-1 flex flex-col lg:gap-3 gap-4">
+                          <Typography
+                            placeholder={""}
+                            variant="h6"
+                            color="blue-gray"
+                            className="-mb-3 dark:text-main-dark-text"
+                          >
+                            Email
+                          </Typography>
+                          <Input
+                            crossOrigin={""}
+                            {...register("email")}
+                            size="lg"
+                            defaultValue={currentUser?.email}
+                            readOnly
+                            className=" border-1 !border-blue-gray-200 focus:!border-1 cursor-default"
+                            labelProps={{
+                              className: "before:content-none after:content-none",
+                            }}
+                          />
                           <Typography
                             placeholder={""}
                             variant="h6"
@@ -72,15 +150,14 @@ export default function ReservationQueue({}: Props) {
                           </Typography>
                           <Input
                             crossOrigin={""}
-                            disabled
-                            name="nameUser"
+                            {...register("name")}
                             size="lg"
-                            value={currentUser?.name!}
-                            className=" !border-t-blue-gray-200 focus:!border-t-gray-900 cursor-not-allowed"
+                            readOnly
+                            defaultValue={currentUser?.name!}
+                            className=" border-1 !border-blue-gray-200 focus:!border-1 cursor-default"
                             labelProps={{
                               className: "before:content-none after:content-none",
                             }}
-                            onChange={(e) => setFormDataName(e.target.value)}
                           />
                           <Typography
                             placeholder={""}
@@ -91,20 +168,31 @@ export default function ReservationQueue({}: Props) {
                           >
                             Your telephone
                           </Typography>
-                          <Input
-                            crossOrigin={""}
-                            disabled
-                            size="lg"
-                            name="telephone"
-                            value={currentUser?.tel}
-                            className=" !border-t-blue-gray-200 focus:!border-t-gray-900 cursor-not-allowed"
-                            labelProps={{
-                              className: "before:content-none after:content-none",
-                            }}
-                            onChange={(e) => setFormDataTel(e.target.value)}
-                          />
+                          {currentUser?.tel ? (
+                            <Input
+                              crossOrigin={""}
+                              {...register("phoneNumber")}
+                              size="lg"
+                              readOnly
+                              defaultValue={currentUser?.tel}
+                              className=" border-1 !border-blue-gray-200 focus:!border-1 cursor-default"
+                              labelProps={{
+                                className: "before:content-none after:content-none",
+                              }}
+                            />
+                          ) : (
+                            <Input
+                              crossOrigin={""}
+                              {...register("phoneNumber")}
+                              size="lg"
+                              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+                              labelProps={{
+                                className: "before:content-none after:content-none",
+                              }}
+                            />
+                          )}
                         </div>
-                        <div className="lg:mb-1 flex flex-col lg:gap-6 gap-4">
+                        <div className="lg:mb-1 flex flex-col lg:gap-3 gap-4">
                           <Typography
                             placeholder={""}
                             variant="h6"
@@ -115,12 +203,13 @@ export default function ReservationQueue({}: Props) {
                           </Typography>
                           <Select
                             placeholder={""}
+                            {...register("numberOfPeople")}
                             size="lg"
                             label="Select number"
-                            name="numberOfPeople"
-                            value={formDataNumberPeople}
-                            onChange={setFormDataNumberPeople}
                             className="dark:text-main-dark-text"
+                            onChange={(e) =>
+                              setValue("numberOfPeople", e as string, { shouldValidate: true })
+                            }
                             labelProps={{
                               className: "dark:text-main-dark-text",
                             }}
@@ -152,20 +241,47 @@ export default function ReservationQueue({}: Props) {
                           </Typography>
                           <Select
                             placeholder={""}
+                            {...register("tableType")}
                             size="lg"
                             label="Select table"
-                            name="typeTable"
-                            value={formDataTable}
-                            onChange={setFormDataTable}
                             className="dark:text-main-dark-text"
                             labelProps={{ className: "dark:text-main-dark-text" }}
+                            onChange={(e) =>
+                              setValue("tableType", e as string, { shouldValidate: true })
+                            }
                             menuProps={{
                               className:
                                 "dark:lg:bg-main-bure-text dark:bg-[#1d1d1d] dark:text-main-dark-text ",
                             }}
                           >
-                            <Option value="table">Table</Option>
-                            <Option value="nintendo">Nintendo</Option>
+                            <Option value="0">Table</Option>
+                            <Option value="1">Nintendo</Option>
+                          </Select>
+                          <Typography
+                            placeholder={""}
+                            variant="h6"
+                            color="blue-gray"
+                            className="-mb-3 dark:text-main-dark-text"
+                          >
+                            Select Branch
+                          </Typography>
+                          <Select
+                            placeholder={""}
+                            {...register("branchId")}
+                            size="lg"
+                            label="Select Branch"
+                            className="dark:text-main-dark-text"
+                            labelProps={{ className: "dark:text-main-dark-text" }}
+                            onChange={(e) =>
+                              setValue("branchId", e as string, { shouldValidate: true })
+                            }
+                            menuProps={{
+                              className:
+                                "dark:lg:bg-main-bure-text dark:bg-[#1d1d1d] dark:text-main-dark-text ",
+                            }}
+                          >
+                            <Option value="0">Lungmor</Option>
+                            <Option value="1">Central</Option>
                           </Select>
                         </div>
                       </div>
@@ -179,8 +295,7 @@ export default function ReservationQueue({}: Props) {
                       </Typography>
                       <div className="mt-3">
                         <Checkbox
-                          checked={isExpected}
-                          onChange={() => setIsExpected(!isExpected)}
+                          {...register("isExpected")}
                           crossOrigin={""}
                           label={
                             <Typography
@@ -206,6 +321,21 @@ export default function ReservationQueue({}: Props) {
                       >
                         next
                       </ButtonCustom>
+                      <p className=" text-red-500 text-xs mt-3">
+                        {errors.branchId
+                          ? errors.branchId.message
+                          : errors.isExpected
+                          ? errors.isExpected.message
+                          : errors.name
+                          ? errors.name.message
+                          : errors.numberOfPeople
+                          ? errors.numberOfPeople.message
+                          : errors.phoneNumber
+                          ? errors.phoneNumber.message
+                          : errors.tableType
+                          ? errors.tableType.message
+                          : ""}
+                      </p>
                     </form>
                   </div>
                 </CardBody>
@@ -214,7 +344,10 @@ export default function ReservationQueue({}: Props) {
           </div>
         </div>
       )}
-      {openReservated && (
+    </>
+  );
+
+  /* {openReservated && (
         <div className="pt-4 lg:px-52">
           <div className="flex justify-center items-center">
             <div className="w-full">
@@ -353,7 +486,5 @@ export default function ReservationQueue({}: Props) {
             </div>
           </div>
         </div>
-      )}
-    </>
-  );
+      )} */
 }

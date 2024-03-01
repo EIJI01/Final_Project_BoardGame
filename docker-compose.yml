@@ -1,0 +1,36 @@
+version: "3"
+services:
+  ## Database Microsoft slqserver
+  sql-server:
+    container_name: sql-server
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    restart: always
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_USER: "SA"
+      SA_PASSWORD: "mssql1234"
+    ports:
+      - 1433:1433
+    volumes:
+      - my-volume:/var/opt/mssql
+
+  dotnetclean:
+    image: dotnetclean
+    restart: always
+    depends_on:
+      - sql-server
+
+  webapp:
+    image: webboardgame
+    container_name: webboardgame
+    depends_on:
+      - dotnetclean
+
+  webadmin:
+    image: webadmin
+    container_name: webadmin
+    depends_on:
+      - dotnetclean
+
+volumes:
+  my-volume:

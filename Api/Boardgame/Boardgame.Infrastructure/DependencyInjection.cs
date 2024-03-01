@@ -1,8 +1,10 @@
-using Boardgame.Application.Common.interfaces.Authentication;
+using Boardgame.Application.Common.interfaces.Authentication.Persistence;
 using Boardgame.Application.Common.interfaces.Persistence;
 using Boardgame.Application.Common.interfaces.Services;
 using Boardgame.Infrastructure.Authentication;
-using Boardgame.Infrastructure.Persistence;
+using Boardgame.Infrastructure.Email.Configs;
+using Boardgame.Infrastructure.Persistence.Database;
+using Boardgame.Infrastructure.Persistence.Repositories;
 using Boardgame.Infrastructure.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,10 +17,20 @@ public static class DependencyInjection
         this IServiceCollection services,
         ConfigurationManager configuration)
     {
-        services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SectionName));
-        services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
+        services.AddConfigDataContext(configuration);
+        services.AddAuth(configuration);
         services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
+        services.AddSingleton<IRandomStringProvider, RandomStringProvider>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddConfigEmailProvider(configuration);
+        services.AddScoped<IAuthentication, AuthenticationRepository>();
+        services.AddScoped<IRoleRepository, RoleRepository>();
+        services.AddScoped<IBranchRepository, BranchRepository>();
+        services.AddScoped<IWorkRepository, WorkRepository>();
+        services.AddScoped<ITableRepository, TableRepository>();
+        services.AddScoped<IScanSystemRepository, ScanSystemRepository>();
+        services.AddScoped<ICardRepository, CardRepository>();
+        services.AddScoped<IQueueRepository, QueueRepository>();
 
         return services;
     }

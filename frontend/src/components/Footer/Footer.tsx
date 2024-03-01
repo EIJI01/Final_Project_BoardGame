@@ -31,25 +31,27 @@ export default function FooterWithLogo() {
             <Typography
               placeholder={""}
               as="a"
-              href={checkTypeUser(currentUser?.role) ? "/gm/manage-cards" : "/member/booking-queue"}
+              href={
+                checkTypeUser(currentUser?.role!) ? "/gm/manage-cards" : "/member/booking-queue"
+              }
               color="blue-gray"
               className="font-normal transition-colors footer dark:text-main-dark-text text-xs lg:text-base"
             >
-              {checkTypeUser(currentUser?.role) ? "Manage Crads" : "Reservation Queue"}
+              {checkTypeUser(currentUser?.role!) ? "Manage Crads" : "Reservation Queue"}
             </Typography>
           </li>
           <li>
             <Typography
               placeholder={""}
               as="a"
-              href={checkTypeUser(currentUser?.role) ? "/gm/manage-queue" : "/member/calling-gm"}
+              href={checkTypeUser(currentUser?.role!) ? "/gm/manage-queue" : "/member/calling-gm"}
               color="blue-gray"
               className="font-normal transition-colors footer dark:text-main-dark-text text-xs lg:text-base"
             >
-              {checkTypeUser(currentUser?.role) ? "Manage Queue" : "Calling GM"}
+              {checkTypeUser(currentUser?.role!) ? "Manage Queue" : "Calling GM"}
             </Typography>
           </li>
-          <li className={checkTypeUser(currentUser?.role) ? "" : "hidden"}>
+          <li className={checkTypeUser(currentUser?.role!) ? "" : "hidden"}>
             <Typography
               placeholder={""}
               as="a"
@@ -57,7 +59,7 @@ export default function FooterWithLogo() {
               color="blue-gray"
               className="font-normal transition-colors footer dark:text-main-dark-text text-xs lg:text-base"
             >
-              {checkTypeUser(currentUser?.role) ? "Manage Table" : ""}c
+              {checkTypeUser(currentUser?.role!) ? "Manage Table" : ""}c
             </Typography>
           </li>
         </ul>

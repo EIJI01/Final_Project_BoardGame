@@ -1,34 +1,104 @@
 import { useParams } from "react-router-dom";
-import { CARD_LIST_ROWS } from "../../../data/data";
 import GenerateQRCode from "../../GenQRCode/GenerateQRCode";
 import { useStateDispatchContext } from "../../../hooks/useStateDispatchHook";
-import { Card, Input, Button, Typography } from "@material-tailwind/react";
-import { useCallback, useState } from "react";
+import { Card, Input, Button, Typography, Spinner } from "@material-tailwind/react";
+import { useCallback, useEffect, useState } from "react";
 import { formatTime } from "../../../utils/format";
-
-type Props = {};
+import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
+import { ScanSystemResponse } from "../../../models/data/scanSystem";
+import { CardResponse } from "../../../models/data/card";
+import { TableResponseHub } from "../../../models/data/table";
 
 interface FormData {
-  id: number;
+  id: string;
   time_in?: string;
   time_out?: string;
   price?: number;
   status: boolean;
-  table_id: number;
+  table_id: string;
 }
 
-export default function CardId({}: Props) {
+export default function CardId() {
   const { id } = useParams();
   const { currentColor, currentMode } = useStateDispatchContext();
-  const card = CARD_LIST_ROWS.filter((item) => item.id.toString() === id);
+  const [cardListRows, setCardListRows] = useState<ScanSystemResponse[]>([]);
+  const [allCards, setAllCards] = useState<CardResponse[]>([]);
+  const [allTable, setAllTable] = useState<TableResponseHub[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [formData, setFormData] = useState<FormData>({
-    id: card[0].id,
-    time_in: formatTime(card[0].time_in),
-    time_out: card[0].status === true ? "" : formatTime(card[0].time_out),
-    price: card[0].price,
-    status: card[0].status,
-    table_id: card[0].table_id,
+    id: "",
+    time_in: "",
+    time_out: "",
+    price: 0,
+    status: false,
+    table_id: "",
   });
+
+  const cards = cardListRows.filter((item) => item.Id === id);
+  const card = cards[0];
+  const qrs = allCards.filter((data) => data.Id === card.CardId);
+  const qr = qrs[0];
+  const tables = allTable.filter((data) => data.Id === card.TableId);
+  const table = tables[0];
+  console.log("card", card);
+
+  console.log("cardListRows = ", cardListRows);
+  console.log("id = ", id);
+  useEffect(() => {
+    const connection = new HubConnectionBuilder()
+      .withUrl(`https://localhost:7124/database-tracking`)
+      .configureLogging(LogLevel.Information)
+      .build();
+
+    connection.on("ReceivedScanSystems", (scanSystem) => {
+      const jsonParse = JSON.parse(scanSystem);
+      setCardListRows(jsonParse);
+    });
+
+    connection.on("ReceivedCards", (cards) => {
+      const jsonParse = JSON.parse(cards);
+      setAllCards(jsonParse);
+    });
+
+    connection.on("ReceivedTables", (tables) => {
+      const jsonParse = JSON.parse(tables);
+      setAllTable(jsonParse);
+    });
+
+    const InvokeScanSystems = () => {
+      connection.invoke("SendScanSystems").catch((err) => console.log(err));
+      connection.invoke("SendCards").catch((err) => console.log(err));
+      connection.invoke("SendTables").catch((err) => console.log(err));
+    };
+
+    const startConnection = async () => {
+      try {
+        await connection.start();
+        console.log("Connection started successfully!");
+        InvokeScanSystems();
+      } catch (error) {
+        console.error("Error starting connection:", error);
+        startConnection();
+      }
+    };
+    startConnection();
+    setInterval(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, []);
+
+  useEffect(() => {
+    if (card) {
+      setFormData({
+        id: card.CardId,
+        time_in: formatTime(card.StartTime),
+        time_out: card.Status === true ? "" : formatTime(card.StopTime),
+        price: card.TotalPrice,
+        status: card.Status,
+        table_id: card.TableId,
+      });
+    }
+  }, [cards]);
 
   const handleClickFormData = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +115,11 @@ export default function CardId({}: Props) {
     },
     [formData]
   );
-  return (
+  return isLoading ? (
+    <div className="flex justify-center items-center h-[80vh]">
+      <Spinner color="blue" className="mx-auto h-12 w-12" />
+    </div>
+  ) : (
     <div className="mt-8  lg:mx-32">
       <div className="lg:grid grid-flow-col gap-5">
         <div className="w-full  lg:flex justify-center items-start lg-max:mb-5">
@@ -58,11 +132,11 @@ export default function CardId({}: Props) {
                 placeholder={""}
                 className="font-bold text-xl text-center text-main-dark-text"
               >
-                Card Number: {card[0].id}
+                Card Number: {qr?.CardNumber}
               </Typography>
             </div>
             <div className="mx-auto w-fit">
-              <GenerateQRCode value={card[0].id.toString()} size={250} level="M" />
+              <GenerateQRCode value={card?.CardId} size={250} level="M" />
             </div>
           </div>
         </div>
@@ -86,7 +160,7 @@ export default function CardId({}: Props) {
                 color="blue-gray"
                 style={{ color: currentColor }}
               >
-                Table {card[0].table_id}
+                Table {table?.TableNumber}
               </Typography>
             </div>
             <form className="mt-8 mb-2 w-full max-w-full-lg sm:w-full" onSubmit={handleSubmit}>
@@ -179,7 +253,7 @@ export default function CardId({}: Props) {
                       crossOrigin={""}
                       disabled
                       name="status"
-                      value={formData.status ? "online" : "offline"}
+                      value={formData.status === true ? "online" : "offline"}
                       size="lg"
                       placeholder="online / offline"
                       className=" !border-t-blue-gray-200 focus:!border-t-gray-900 cursor-not-allowed"

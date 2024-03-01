@@ -15,7 +15,7 @@ import { NavList } from "./NavList";
 import { useNavigate } from "react-router-dom";
 import { UseUserContext } from "../../contexts/ContextProvider";
 import { useStateDispatchContext } from "../../hooks/useStateDispatchHook";
-import { memo, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import ButtonCustom from "../ButtonCustom/ButtonCustom";
 import logo from "../../assets/logo-boardgame.png";
 import { UserCircleIcon, ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
@@ -25,8 +25,16 @@ const NavbarLayouts = memo((): JSX.Element => {
   const [menuOpen, setIsMenuOpen] = useState<boolean>(false);
   const { currentUser } = UseUserContext();
   const { currentLanguage, currentColor, openNav, setOpenNav } = useStateDispatchContext();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const navigate = useNavigate();
-
+  const handleLogout = useCallback(() => {
+    localStorage.clear();
+  }, []);
+  useEffect(() => {
+    setInterval(() => {
+      setIsLoading(false);
+    }, 200);
+  }, []);
   return (
     <Navbar
       placeholder=""
@@ -42,97 +50,114 @@ const NavbarLayouts = memo((): JSX.Element => {
             placeholder=""
             className=" cursor-pointer lg:text-[12px] font-semibold  dark:text-main-dark-text lg-max:hidden"
           >
-            Boardgame Everyday
+            BoardGame Everyday
           </Typography>
         </div>
         <div className="hidden lg:block">
           <NavList />
         </div>
         <div className="hidden gap-2 lg:flex">
-          {currentUser ? (
-            <Menu offset={{ mainAxis: 20 }}>
-              <MenuHandler>
-                <Typography placeholder="" as="div" variant="small" className="font-medium">
-                  <ListItem
-                    placeholder=""
-                    className="flex items-center gap-2 py-1 pr-4 font-medium text-main-text"
-                    selected={false}
-                    onClick={() => setIsMenuOpen((prev) => !prev)}
-                    style={{ backgroundColor: currentColor }}
-                  >
-                    <Avatar
-                      placeholder=""
-                      size="sm"
-                      alt="avatar"
-                      src={currentUser.image}
-                      className="  "
-                      style={{ border: `2px solid white` }}
-                    />
+          {!!!isLoading ? (
+            <div className="hidden gap-2 lg:flex">
+              {currentUser ? (
+                <Menu offset={{ mainAxis: 20 }}>
+                  <MenuHandler>
+                    <Typography placeholder="" as="div" variant="small" className="font-medium">
+                      <ListItem
+                        placeholder=""
+                        className="flex items-center gap-2 py-1 pr-4 font-medium text-main-text"
+                        selected={false}
+                        onClick={() => setIsMenuOpen((prev) => !prev)}
+                        style={{ backgroundColor: currentColor }}
+                      >
+                        <Avatar
+                          placeholder=""
+                          size="sm"
+                          alt="avatar"
+                          src={currentUser.image}
+                          className="  "
+                          style={{ border: `2px solid white` }}
+                        />
 
-                    <Typography
-                      placeholder={``}
-                      className={`${
-                        currentColor ? "text-main-dark-text text-sm" : "text-main-bure-text"
-                      } dark:text-main-dark-text text-sm`}
-                    >
-                      {currentLanguage.languages === "Thai" ? (
-                        <span className="text-md font-semibold">สวัสดี</span>
-                      ) : (
-                        <span className="text-md font-semibold">Hi,</span>
-                      )}{" "}
-                      {currentUser.name}
+                        <Typography
+                          placeholder={``}
+                          className={`${
+                            currentColor ? "text-main-dark-text text-sm" : "text-main-bure-text"
+                          } dark:text-main-dark-text text-sm`}
+                        >
+                          {currentLanguage.languages === "Thai" ? (
+                            <span className="text-md font-semibold">สวัสดี</span>
+                          ) : (
+                            <span className="text-md font-semibold">Hi,</span>
+                          )}{" "}
+                          {currentUser.name}
+                        </Typography>
+                        <ChevronDownIcon
+                          strokeWidth={2.5}
+                          className={`hidden h-3 w-3 transition-transform lg:block ${
+                            currentColor ? "text-main-dark-text text-sm" : "text-main-bure-text"
+                          } dark:text-main-dark-text ${menuOpen ? "rotate-180" : ""}`}
+                        />
+                      </ListItem>
                     </Typography>
-                    <ChevronDownIcon
-                      strokeWidth={2.5}
-                      className={`hidden h-3 w-3 transition-transform lg:block ${
-                        currentColor ? "text-main-dark-text text-sm" : "text-main-bure-text"
-                      } dark:text-main-dark-text ${menuOpen ? "rotate-180" : ""}`}
-                    />
-                  </ListItem>
-                </Typography>
-              </MenuHandler>
-              <MenuList placeholder={""}>
-                <MenuItem
-                  placeholder={""}
-                  className="border-b-1"
-                  onClick={() => navigate(checkUser(currentUser.role))}
-                >
-                  <div className="flex justify-around items-center p-1">
-                    <UserCircleIcon className="w-5 h-5" />
-                    Profile
-                  </div>
-                </MenuItem>
-                <MenuItem placeholder={""} onClick={() => (window.location.href = "/login")}>
-                  <div className="flex justify-around items-center p-1">
-                    <ArrowLeftOnRectangleIcon className="w-5 h-5" />
-                    Log out
-                  </div>
-                </MenuItem>
-              </MenuList>
-            </Menu>
-          ) : (
-            <>
-              <ButtonCustom
-                variant="outlined"
-                size="sm"
-                onClick={() => navigate("/login")}
-                className="dark:text-main-dark-text"
-              >
-                {currentLanguage.languages === "Thai" ? "เข้าสู่ระบบ" : "Sign In"}
-              </ButtonCustom>
+                  </MenuHandler>
+                  <MenuList placeholder={""}>
+                    <MenuItem
+                      placeholder={""}
+                      className="border-b-1"
+                      onClick={() => navigate(checkUser(currentUser.role))}
+                    >
+                      <div className="flex justify-around items-center p-1">
+                        <UserCircleIcon className="w-5 h-5" />
+                        Profile
+                      </div>
+                    </MenuItem>
+                    <MenuItem
+                      placeholder={""}
+                      onClick={() => {
+                        handleLogout();
+                        window.location.href = "/login";
+                      }}
+                    >
+                      <div className="flex justify-around items-center p-1">
+                        <ArrowLeftOnRectangleIcon className="w-5 h-5" />
+                        Log out
+                      </div>
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+              ) : (
+                <>
+                  <ButtonCustom
+                    variant="outlined"
+                    size="sm"
+                    onClick={() => (window.location.href = "/login")}
+                    className="dark:text-main-dark-text"
+                  >
+                    {currentLanguage.languages === "Thai" ? "เข้าสู่ระบบ" : "Sign In"}
+                  </ButtonCustom>
 
-              <ButtonCustom
-                variant="gradient"
-                color={currentColor}
-                className="text-main-dark-text"
-                size="sm"
-                onClick={() => navigate("/register")}
-              >
-                {currentLanguage.languages === "Thai" ? "ลงทะเบียน" : "Sign Up"}
-              </ButtonCustom>
-            </>
+                  <ButtonCustom
+                    variant="gradient"
+                    color={currentColor}
+                    className="text-main-dark-text"
+                    size="sm"
+                    onClick={() => (window.location.href = "/register")}
+                  >
+                    {currentLanguage.languages === "Thai" ? "ลงทะเบียน" : "Sign Up"}
+                  </ButtonCustom>
+                </>
+              )}
+            </div>
+          ) : (
+            <div className="lg:flex">
+              <div className="flex animate-pulse flex-wrap items-center gap-8">
+                <div className="grid h-10 w-40 place-items-center rounded-lg bg-gray-100"></div>
+              </div>
+            </div>
           )}
         </div>
+
         <IconButton
           placeholder=""
           variant="text"
@@ -156,7 +181,10 @@ const NavbarLayouts = memo((): JSX.Element => {
             variant="outlined"
             size="sm"
             fullWidth
-            onClick={() => (window.location.href = "/login")}
+            onClick={() => {
+              handleLogout();
+              window.location.href = "/login";
+            }}
             className="dark:text-main-dark-text"
           >
             Log Out

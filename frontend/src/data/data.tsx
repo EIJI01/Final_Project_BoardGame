@@ -5737,7 +5737,7 @@ export const TABS = [
     value: "unmonitored",
   },
 ];
-export const CARD_TABLE_HEAD = ["Card ID", "Start TIme", "Price", ""];
+export const CARD_TABLE_HEAD = ["Card ID", "Start TIme", "Total Price", ""];
 
 export const TABLE_HEAD = ["Member", "Function", "Status", "Employed", ""];
 

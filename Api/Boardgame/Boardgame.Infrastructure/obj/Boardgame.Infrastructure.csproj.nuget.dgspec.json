@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Infrastructure\\Boardgame.Infrastructure.csproj": {}
+    "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Infrastructure\\Boardgame.Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Application\\Boardgame.Application.csproj": {
+    "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Application\\Boardgame.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Application\\Boardgame.Application.csproj",
+        "projectUniqueName": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Application\\Boardgame.Application.csproj",
         "projectName": "Boardgame.Application",
-        "projectPath": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Application\\Boardgame.Application.csproj",
+        "projectPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Application\\Boardgame.Application.csproj",
         "packagesPath": "C:\\Users\\chany\\.nuget\\packages\\",
-        "outputPath": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Application\\obj\\",
+        "outputPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chany\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Domain\\Boardgame.Domain.csproj": {
-                "projectPath": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Domain\\Boardgame.Domain.csproj"
+              "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Domain\\Boardgame.Domain.csproj": {
+                "projectPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Domain\\Boardgame.Domain.csproj"
               }
             }
           }
@@ -44,6 +44,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "MediatR": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "MediatR.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Microsoft.Extensions.DependencyInjection.Abstractions": {
               "target": "Package",
               "version": "[6.0.0, )"
@@ -65,18 +73,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Domain\\Boardgame.Domain.csproj": {
+    "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Domain\\Boardgame.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Domain\\Boardgame.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Domain\\Boardgame.Domain.csproj",
         "projectName": "Boardgame.Domain",
-        "projectPath": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Domain\\Boardgame.Domain.csproj",
+        "projectPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Domain\\Boardgame.Domain.csproj",
         "packagesPath": "C:\\Users\\chany\\.nuget\\packages\\",
-        "outputPath": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Domain\\obj\\",
+        "outputPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chany\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -108,6 +116,14 @@
             "ErrorOr": {
               "target": "Package",
               "version": "[1.9.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.4, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.0, )"
             }
           },
           "imports": [
@@ -126,18 +142,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Infrastructure\\Boardgame.Infrastructure.csproj": {
+    "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Infrastructure\\Boardgame.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Infrastructure\\Boardgame.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Infrastructure\\Boardgame.Infrastructure.csproj",
         "projectName": "Boardgame.Infrastructure",
-        "projectPath": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Infrastructure\\Boardgame.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Infrastructure\\Boardgame.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\chany\\.nuget\\packages\\",
-        "outputPath": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chany\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -154,8 +170,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Application\\Boardgame.Application.csproj": {
-                "projectPath": "C:\\Final-Project\\project-final\\Api\\Boardgame\\Boardgame.Application\\Boardgame.Application.csproj"
+              "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Application\\Boardgame.Application.csproj": {
+                "projectPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Application\\Boardgame.Application.csproj"
               }
             }
           }
@@ -170,6 +186,18 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlserver": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[6.0.1, )"
@@ -199,7 +227,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }
