@@ -1,0 +1,9 @@
+# POST http://localhost:8000/api/authentication/admin/register-admin
+POST http://localhost:5107/api/authentication/admin/register-admin
+Content-Type: application/json
+
+{
+    "name":"Admin",
+    "username": "chanyut281144",
+    "password": "$chanyutD01Admin"
+}

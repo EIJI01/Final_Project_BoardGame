@@ -1,0 +1,5 @@
+# GET http://localhost:8000/api/user
+GET http://localhost:5107/api/user
+# Member Admin Gm
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1MjI4OTY4ZS03N2IzLTRjMDAtNDZiMy0wOGRjMzZmOGJiOWMiLCJnaXZlbl9uYW1lIjoiQ2hhbnl1dCIsImp0aSI6ImJkMzE2YmEzLTQ1M2YtNDE1OS1hMTBhLWQwYjc3ZjQ0M2I3NyIsInJvbGUiOiJHTSIsImV4cCI6MTcwOTA1MTg3MiwiaXNzIjoiQm9hcmRHYW1lQXBwIiwiYXVkIjoiQm9hcmRHYW1lQXBwIn0.HG_d0aaJgPe_iqo1yO0s1Cn54LipkKtcyEdiXjrjzyk

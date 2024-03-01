@@ -1,17 +1,35 @@
 import QrScanner from "qr-scanner";
 import { useEffect, useRef } from "react";
+import { UseUserContext } from "../../contexts/ContextProvider";
+import { checkTypeUser } from "../../utils/routing";
+import { addScanSystem } from "../../data/services/scanSystem-service/addScanSystem";
 
 interface Props {
   handleScanQrcode: (value: string | undefined) => void;
   idQrcode: string | undefined;
+  tableId?: string;
 }
 
-export default function QRScaner({ handleScanQrcode, idQrcode }: Props) {
+export default function QRScaner({ handleScanQrcode, idQrcode, tableId }: Props) {
   const videoElementRef = useRef<HTMLVideoElement | null>(null);
+  const { currentUser } = UseUserContext();
   useEffect(() => {
-    if (!!!idQrcode) return undefined;
-    window.location.href = `/member/scan-qr/${idQrcode}`;
-  }, [idQrcode]);
+    if (checkTypeUser(currentUser?.role!) === true && idQrcode && tableId) {
+      const addScan = async () => {
+        try {
+          var result = await addScanSystem({ cardId: idQrcode, tableId });
+          console.log(result);
+        } catch (err: any) {
+          console.log(err);
+        }
+      };
+      addScan();
+    } else if (checkTypeUser(currentUser?.role!) === false && idQrcode) {
+      window.location.href = `/member/scan-qr/${idQrcode}`;
+    } else {
+      return undefined;
+    }
+  }, [tableId, idQrcode]);
 
   useEffect(() => {
     const video = videoElementRef.current as HTMLVideoElement;

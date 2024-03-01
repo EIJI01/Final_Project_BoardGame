@@ -1,10 +1,11 @@
-import { Card, Typography } from "@material-tailwind/react";
+import { Card, Spinner, Typography } from "@material-tailwind/react";
 import DataGridHeader from "../../DataGrid/DataGridHeader";
 import DataGridBody from "../../DataGrid/DataGridBody";
 import { QUEUE_NINTENDO_ROWS, QUEUE_TABLE_ROWS, TABLE_HEAD_QUEUE } from "../../../data/data";
 import IconTable from "../../../assets/table-nintendo/table.png";
 import IconNintendo from "../../../assets/table-nintendo/nintendo-switch.png";
 import { useStateDispatchContext } from "../../../hooks/useStateDispatchHook";
+import { useEffect, useState } from "react";
 
 const iconTable = (
   <div>
@@ -141,7 +142,18 @@ export default function ManageQrScanComp() {
   const { currentColor } = useStateDispatchContext();
   const lenghtTable = QUEUE_TABLE_ROWS.length;
   const lengthNintendo = QUEUE_NINTENDO_ROWS.length;
-  return (
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+  }, []);
+  return isLoading ? (
+    <div className="flex justify-center items-center h-[80vh]">
+      <Spinner color="blue" className="mx-auto h-12 w-12" />
+    </div>
+  ) : (
     <div className="lg:grid grid-cols-2 gap-8 lg:px-20 lg:pt-4">
       <div className="hidden lg:block">
         <Card placeholder="" className="h-auto w-full dark:bg-black lg-max:rounded-none">

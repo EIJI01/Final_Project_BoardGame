@@ -1,0 +1,9 @@
+POST http://localhost:5107/api/scansystem/add-number
+# POST http://localhost:8000/api/scansystem/add-number
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0OGYyMzBkNS01ZjIzLTQ1ZGQtOWE4Yy0wMTdjZGUxNmY1YmYiLCJnaXZlbl9uYW1lIjoiQ2hhbnl1dCIsImp0aSI6ImY2ODI2MTgwLWRhNmUtNGFlNC1iYmZiLTliNGE4MmM4NTVkMCIsInJvbGUiOiJHTSIsImV4cCI6MTcwODgxMTA1NSwiaXNzIjoiQm9hcmRHYW1lQXBwIiwiYXVkIjoiQm9hcmRHYW1lQXBwIn0.9iAvhOik-rxUPdiuU5YkovBITe6mHYslYKYF2dbOS9Q
+
+{
+    "cardNumber": "LM069",
+    "tableId": "4339957e-c2d9-4624-b02e-342156b067cd"
+}

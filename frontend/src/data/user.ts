@@ -1,4 +1,4 @@
-import { User } from "../models/user";
+import { User } from "../models/data/user";
 import { Role } from "../models/value-type/enum-type";
 import profile1 from "../assets/avatar/avatar1.jpg";
 import profile2 from "../assets/avatar/avatar2.jpg";
@@ -6,6 +6,7 @@ import profile2 from "../assets/avatar/avatar2.jpg";
 export const Member: User = {
   id: "112233",
   name: "chanyut",
+  email: "chanyut@gmail.com",
   username: "chan_aa@gmail.com",
   role: Role.MEMBER,
   image: profile1,
@@ -15,6 +16,7 @@ export const Member: User = {
 export const Gm: User = {
   id: "Gm112255",
   name: "Michel",
+  email: "chanyut@gmail.com",
   username: "_michel2251",
   role: Role.GM,
   image: profile2,

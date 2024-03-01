@@ -5,7 +5,8 @@ using MediatR;
 namespace Boardgame.Application.Authentication.Commands.Register;
 
 public record RegisterCommand(
-        string FirstName,
-        string LastName,
+        string Name,
         string Email,
-        string Password) : IRequest<ErrorOr<AuthenticationResult>>;
+        string PhoneNumber,
+        string Password,
+        string ConfirmPassword) : IRequest<ErrorOr<AuthenticationResult>>;

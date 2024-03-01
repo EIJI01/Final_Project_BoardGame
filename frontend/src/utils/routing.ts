@@ -1,12 +1,21 @@
 import { UseUserContext } from "../contexts/ContextProvider";
-import { navListMenuItemsGm, navListMenuItemsMember } from "../data/nav-data";
+import {
+  navListMenuItemsGm,
+  navListMenuItemsGuest,
+  navListMenuItemsMember,
+} from "../data/nav-data";
 import { Role } from "../models/value-type/enum-type";
 
 export const checkNavUser = () => {
   const { currentUser } = UseUserContext();
-  const isEmployeeGm = !!currentUser && currentUser.role === Role.GM;
-  if (isEmployeeGm) return navListMenuItemsGm;
-  return navListMenuItemsMember;
+  const isEmployeeGm = currentUser && currentUser.role === Role.GM;
+  const isMember = currentUser && currentUser.role === Role.MEMBER;
+  if (isEmployeeGm) {
+    return navListMenuItemsGm;
+  } else if (isMember) {
+    return navListMenuItemsMember;
+  }
+  return navListMenuItemsGuest;
 };
 
 export const protectedRoute = (data: Array<any>): Array<string> => {
@@ -26,6 +35,7 @@ export const checkUser = (role: Role) => {
     return "/notfound";
   }
 };
+
 export const checkTypeUser = (role: Role) => {
   if (role === Role.GM) {
     return true;

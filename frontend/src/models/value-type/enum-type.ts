@@ -1,6 +1,7 @@
 export enum Role {
-  MEMBER,
-  GM,
+  MEMBER = "MEMBER",
+  GM = "GM",
+  ADMIN = "ADMIN",
 }
 
 export enum REDUCER_ACTION_TYPE {

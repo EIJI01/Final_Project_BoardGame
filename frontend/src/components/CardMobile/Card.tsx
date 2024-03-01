@@ -3,13 +3,14 @@ import { useStateDispatchContext } from "../../hooks/useStateDispatchHook";
 import { ArchiveBoxIcon, ArrowPathIcon, CurrencyDollarIcon } from "@heroicons/react/24/solid";
 
 interface Props {
-  id: number;
-  name: string;
+  id: string;
+  name: number;
   startTime: string;
+  cardNumber: string;
   clickCheckout: () => void;
   clickChangeTable: () => void;
   clickDeleteCard: () => void;
-  setId: (value: number) => void;
+  setId: (value: string) => void;
 }
 
 export default function Card({
@@ -20,6 +21,7 @@ export default function Card({
   setId,
   clickChangeTable,
   clickDeleteCard,
+  cardNumber,
 }: Props) {
   const { currentColor } = useStateDispatchContext();
   return (
@@ -29,7 +31,7 @@ export default function Card({
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
               <Typography placeholder={""} className="dark:text-main-dark-text text-xl font-bold">
-                Card {id}
+                Card {cardNumber}
               </Typography>
               <Typography
                 placeholder={""}

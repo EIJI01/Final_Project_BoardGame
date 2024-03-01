@@ -1,0 +1,10 @@
+# POST http://localhost:5107/api/scansystem/add
+POST http://localhost:8000/api/scansystem/add
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0OGYyMzBkNS01ZjIzLTQ1ZGQtOWE4Yy0wMTdjZGUxNmY1YmYiLCJnaXZlbl9uYW1lIjoiQ2hhbnl1dCIsImp0aSI6ImJhMWE4NGFmLWI1OGUtNDBjMi1hMDM2LWViMzRhMmI0ZDRiMiIsInJvbGUiOiJHTSIsImV4cCI6MTcwODcwMDUxMSwiaXNzIjoiQm9hcmRHYW1lQXBwIiwiYXVkIjoiQm9hcmRHYW1lQXBwIn0.8431say1PkLJlKQ6_a1yl-Fa9mZss1QoHYfVi8zHFYg
+# Gm
+
+{
+    "cardId": "051cd230-bc76-49a1-9aa2-08120bddc835",
+    "tableId": "4339957e-c2d9-4624-b02e-342156b067cd"
+}

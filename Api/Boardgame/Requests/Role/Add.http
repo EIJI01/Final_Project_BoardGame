@@ -1,0 +1,17 @@
+# POST http://localhost:8000/role/add
+POST  http://localhost:5107/api/roles/add
+# Admin
+Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNmQzMzA1ZC01Njk1LTRjYmUtODQwMC02MzNjZDczNmY1YTQiLCJnaXZlbl9uYW1lIjoiVGVtcCIsImVtYWlsIjoic29oZXRlbTg3MkBsYXltcm8uY29tIiwianRpIjoiZmNjYjQ5NzEtOWVhYy00NDNjLWI3MGMtNDY5NDc5M2ZiN2QzIiwicm9sZSI6Ik1FTUJFUiIsImV4cCI6MTcwODI0NzQ2MiwiaXNzIjoiQm9hcmRHYW1lQXBwIiwiYXVkIjoiQm9hcmRHYW1lQXBwIn0._F1e_7LHjAwH26hT63206XxGjiTX7-GgQENrj4-6a8c
+
+# {
+#     "role":"Member"
+# }
+
+# {
+#     "role":"Gm"
+# }
+
+{
+    "role":"Admin"
+}

@@ -1,9 +1,14 @@
 using Boardgame.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace Boardgame.Application.Common.interfaces.Persistence;
 
 public interface IUserRepository
 {
-    User? GetUserByEmail(string email);
-    void Add(User user);
+    Task<UserIdentity>? GetUserByEmailAsync(string email);
+    Task<UserIdentity>? GetUserByUsernameAsync(string username);
+    Task<UserIdentity>? GetUserByIdAsync(Guid id);
+    Task Add(UserIdentity user);
+    Task<IdentityResult> AddUserToRoleAsync(UserIdentity user, string role);
+    Task<string> GetUserRoleAsync(UserIdentity user);
 }

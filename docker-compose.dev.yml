@@ -10,11 +10,12 @@ services:
     environment:
       - DOTNET_USE_POLLING_FILE_WATCHER=true
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Host=host.docker.internal;Username=postgres;Password=postgres;Database=postgres
+      - ConnectionStrings__DefaultConnection=Data Source=host.docker.internal;Initial Catalog=BoardGameData; User Id=sa; Password=mssql1234;
     ports:
-      - "8001:8000"
+      - "8000:8000"
     volumes:
       - ./Api/Boardgame/Boardgame.Api/:/app/Boardgame.Api
+      - ./Api/Boardgame/Boardgame.Contracts/:/app/Boardgame.Contracts
       - ./Api/Boardgame/Boardgame.Infrastructure/:/app/Boardgame.Infrastructure
       - ./Api/Boardgame/Boardgame.Application/:/app/Boardgame.Application
       - ./Api/Boardgame/Boardgame.Domain/:/app/Boardgame.Domain

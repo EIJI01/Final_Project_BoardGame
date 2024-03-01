@@ -7,9 +7,10 @@ interface Props {
   handleOpen: () => void;
   body?: JSX.Element;
   header?: JSX.Element;
+  handleClose?: () => void;
 }
 
-export default function DialogDefault({ open, handleOpen, body, header }: Props) {
+export default function DialogDefault({ open, handleOpen, body, header, handleClose }: Props) {
   const { currentColor, currentMode } = useStateDispatchContext();
   return (
     <Dialog
@@ -25,8 +26,8 @@ export default function DialogDefault({ open, handleOpen, body, header }: Props)
         <ButtonCustom variant="outlined" onClick={handleOpen} className="mr-1">
           <span style={{ color: currentMode.modes === "Dark" ? "white" : "" }}>Cancel</span>
         </ButtonCustom>
-        <ButtonCustom variant="gradient" color={currentColor} onClick={handleOpen}>
-          <span>Confirm</span>
+        <ButtonCustom variant="gradient" color={currentColor} onClick={handleClose}>
+          {<span>Confirm</span>}
         </ButtonCustom>
       </DialogFooter>
     </Dialog>

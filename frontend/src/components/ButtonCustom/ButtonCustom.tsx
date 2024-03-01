@@ -10,6 +10,7 @@ type Props = {
   className?: string;
   onClick?: () => void;
   style?: CSSProperties;
+  type?: "submit" | "reset" | "button" | undefined;
 };
 
 const ButtonCustom = ({
@@ -21,6 +22,7 @@ const ButtonCustom = ({
   size,
   onClick,
   style,
+  type,
 }: Props): JSX.Element => {
   const { currentMode } = useStateDispatchContext();
   const sizeSm = "h-9  px-4 rounded-lg text-xs font-semibold";
@@ -29,6 +31,7 @@ const ButtonCustom = ({
   const sizeXl = "h-14 px-12 rounded-lg text-md font-semibold";
   return (
     <button
+      type={type}
       className={`${className && className} ${fullWidth && "w-full"}
       ${
         size === "sm"

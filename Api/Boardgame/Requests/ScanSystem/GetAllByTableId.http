@@ -1,0 +1,8 @@
+POST http://localhost:5107/api/scansystem/get-tableid
+# POST http://localhost:8000/api/scansystem/get-tableid
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0OGYyMzBkNS01ZjIzLTQ1ZGQtOWE4Yy0wMTdjZGUxNmY1YmYiLCJnaXZlbl9uYW1lIjoiQ2hhbnl1dCIsImp0aSI6ImUyODllMWU4LWI3ZTctNGU3YS04MTE3LTk1NzkxMGJhZjczMyIsInJvbGUiOiJHTSIsImV4cCI6MTcwODgxMDMwNCwiaXNzIjoiQm9hcmRHYW1lQXBwIiwiYXVkIjoiQm9hcmRHYW1lQXBwIn0.42Q9jFqx7IYP823gJVWulZUUlhlWK0eMq4O-nlAcrU4
+
+{
+    "tableId": "4339957e-c2d9-4624-b02e-342156b067cd"
+}

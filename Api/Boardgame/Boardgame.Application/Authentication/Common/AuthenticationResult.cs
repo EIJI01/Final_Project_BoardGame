@@ -1,7 +1,9 @@
 using Boardgame.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace Boardgame.Application.Authentication.Common;
 
 public record AuthenticationResult(
-    User User,
-    string Token);
+    UserIdentity User,
+    string AccessToken,
+    string RefreshToken);

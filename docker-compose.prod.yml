@@ -6,7 +6,7 @@ services:
       context: ./Api/Boardgame/
       dockerfile: Dockerfile.prod
     environment:
-      - ConnectionStrings__DefaultConnection=Host=host.docker.internal;Username=postgres;Password=postgres;Database=postgres
+      - ConnectionStrings__DefaultConnection=Data Source=host.docker.internal;Initial Catalog=BoardGameData; User Id=sa; Password=mssql1234;
 
   nginx:
     container_name: nginx
@@ -24,7 +24,7 @@ services:
       context: ./frontend
       target: prod
     ports:
-      - "3001:3001"
+      - "3000:3000"
 
   ## Web client webadmin
   webadmin:
@@ -34,4 +34,4 @@ services:
     depends_on:
       - dotnetclean
     ports:
-      - "5001:5001"
+      - "5000:5000"

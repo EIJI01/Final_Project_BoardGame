@@ -30,7 +30,7 @@ docker compose -f docker-compose.yml -f <docker-compose.dev | docker-compose.pro
 
 ### Execute with Load balancer
 
-- For execute project with load balancer
+- For execute project with load balancerv
 
 ```html
 docker compose -f <docker-compose.yml> -f <docker-compose.prod.yaml> up --scale <container_name>=<number_of_scaling (e.g. =3)> -d --build 

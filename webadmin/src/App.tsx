@@ -1,25 +1,12 @@
-import { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
 import "./App.css";
+import { Layout } from "./components";
 
 function App() {
-  const [data, setData] = useState<string[]>([]);
-  useEffect(() => {
-    fetch("http://localhost:5107/api/test")
-      .then((res) => res.json())
-      .then((result) => {
-        setData(result);
-        console.log(result);
-      });
-  }, []);
-
   return (
-    <div>
-      {data.map((item, i) => (
-        <div key={i} style={{ color: "black", fontSize: "2rem", fontWeight: "bold" }}>
-          {item}
-        </div>
-      ))}
-    </div>
+    <Layout>
+      <Outlet />
+    </Layout>
   );
 }
 

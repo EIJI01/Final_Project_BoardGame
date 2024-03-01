@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("Boardgame.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+de9c5fe8a97a3cea503d833033f747446f0ebb12")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6feb300ccc8a0d39f9de25e5ffdb0406d25fdfac")]
 [assembly: System.Reflection.AssemblyProductAttribute("Boardgame.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Boardgame.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

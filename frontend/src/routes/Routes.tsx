@@ -1,29 +1,30 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import { HomePage } from "../pages";
+import {
+  BookingQueue,
+  CallingGm,
+  ForgetPassword,
+  GmProfile,
+  HomePage,
+  LoginPage,
+  ManageQrScan,
+  ManageQueue,
+  ManageTable,
+  MemberProfile,
+  RegisterPage,
+  ResetPassword,
+  ScanQrcode,
+} from "../pages";
 import { Suspense } from "react";
 import Fallback from "../hooks/Fallback";
-import { lazyLoadWithDelay } from "../utils/lazyload";
-import { GuardedRoute } from "../hooks/GuardedRoute";
-
-// import MemberProfile from '../pages/member/MemberProfile';
-
-const LoginPage = lazyLoadWithDelay("../pages", "LoginPage");
-const RegisterPage = lazyLoadWithDelay("../pages", "RegisterPage");
-const BookingQueue = lazyLoadWithDelay("../pages", "BookingQueue");
-const CallingGm = lazyLoadWithDelay("../pages", "CallingGm");
-const ScanQrcode = lazyLoadWithDelay("../pages", "ScanQrcode");
-const ManageQrScan = lazyLoadWithDelay("../pages", "ManageQrScan");
-const ManageQueue = lazyLoadWithDelay("../pages", "ManageQueue");
-const ManageTable = lazyLoadWithDelay("../pages", "ManageTable");
-const MemberProfile = lazyLoadWithDelay("../pages", "MemberProfile");
-const GmProfile = lazyLoadWithDelay("../pages", "GmProfile");
-const ManageTableComp = lazyLoadWithDelay("../components", "ManageTableComp");
-const TableId = lazyLoadWithDelay("../components", "TableId");
-const IdScaned = lazyLoadWithDelay("../components", "IdScaned");
-const ScanQRCode = lazyLoadWithDelay("../components", "ScanQRCode");
-const ManageQueueTable = lazyLoadWithDelay("../components", "ManageQueueTable");
-const CardId = lazyLoadWithDelay("../components", "CardId");
+import {
+  CardId,
+  IdScaned,
+  ManageQueueTable,
+  ManageTableComp,
+  ScanQRCode,
+  TableId,
+} from "../components";
 
 export const router = createBrowserRouter([
   {
@@ -37,51 +38,41 @@ export const router = createBrowserRouter([
       {
         path: "member/booking-queue",
         element: (
-          <GuardedRoute>
-            <Suspense fallback={<Fallback />}>
-              <BookingQueue />
-            </Suspense>
-          </GuardedRoute>
+          <Suspense fallback={<Fallback />}>
+            <BookingQueue />
+          </Suspense>
         ),
       },
       {
         path: "member/calling-gm",
         element: (
-          <GuardedRoute>
-            <Suspense fallback={<Fallback />}>
-              <CallingGm />
-            </Suspense>
-          </GuardedRoute>
+          <Suspense fallback={<Fallback />}>
+            <CallingGm />
+          </Suspense>
         ),
       },
       {
         path: "member/scan-qr",
         element: (
-          <GuardedRoute>
-            <Suspense fallback={<Fallback />}>
-              <ScanQrcode />
-            </Suspense>
-          </GuardedRoute>
+          <Suspense fallback={<Fallback />}>
+            <ScanQrcode />
+          </Suspense>
         ),
         children: [
           {
             path: "",
             element: (
-              <GuardedRoute>
-                <Suspense fallback={<Fallback />}>
-                  <ScanQRCode />
-                </Suspense>
-              </GuardedRoute>
+              <Suspense fallback={<Fallback />}>
+                <ScanQRCode />
+              </Suspense>
             ),
           },
           {
             path: ":id",
             element: (
-              <GuardedRoute>
-                <Suspense fallback={<Fallback />}>
-                  <IdScaned />
-                </Suspense>
-              </GuardedRoute>
+              <Suspense fallback={<Fallback />}>
+                <IdScaned />
+              </Suspense>
             ),
           },
         ],
@@ -89,61 +80,49 @@ export const router = createBrowserRouter([
       {
         path: "member/profile",
         element: (
-          <GuardedRoute>
-            <Suspense fallback={<Fallback />}>
-              <MemberProfile />
-            </Suspense>
-          </GuardedRoute>
+          <Suspense fallback={<Fallback />}>
+            <MemberProfile />
+          </Suspense>
         ),
       },
       {
         path: "gm/profile",
         element: (
-          <GuardedRoute>
-            <Suspense fallback={<Fallback />}>
-              <GmProfile />
-            </Suspense>
-          </GuardedRoute>
+          <Suspense fallback={<Fallback />}>
+            <GmProfile />
+          </Suspense>
         ),
       },
       {
         path: "gm/manage-queue",
         element: (
-          <GuardedRoute>
-            <Suspense fallback={<Fallback />}>
-              <ManageQrScan />
-            </Suspense>
-          </GuardedRoute>
+          <Suspense fallback={<Fallback />}>
+            <ManageQrScan />
+          </Suspense>
         ),
       },
       {
         path: "gm/manage-cards",
         element: (
-          <GuardedRoute>
-            <Suspense fallback={<Fallback />}>
-              <ManageQueue />
-            </Suspense>
-          </GuardedRoute>
+          <Suspense fallback={<Fallback />}>
+            <ManageQueue />
+          </Suspense>
         ),
         children: [
           {
             path: "",
             element: (
-              <GuardedRoute>
-                <Suspense fallback={<Fallback />}>
-                  <ManageQueueTable />
-                </Suspense>
-              </GuardedRoute>
+              <Suspense fallback={<Fallback />}>
+                <ManageQueueTable />
+              </Suspense>
             ),
           },
           {
             path: ":id",
             element: (
-              <GuardedRoute>
-                <Suspense fallback={<Fallback />}>
-                  <CardId />
-                </Suspense>
-              </GuardedRoute>
+              <Suspense fallback={<Fallback />}>
+                <CardId />
+              </Suspense>
             ),
           },
         ],
@@ -151,31 +130,25 @@ export const router = createBrowserRouter([
       {
         path: "gm/manage-table",
         element: (
-          <GuardedRoute>
-            <Suspense fallback={<Fallback />}>
-              <ManageTable />
-            </Suspense>
-          </GuardedRoute>
+          <Suspense fallback={<Fallback />}>
+            <ManageTable />
+          </Suspense>
         ),
         children: [
           {
             path: "",
             element: (
-              <GuardedRoute>
-                <Suspense fallback={<Fallback />}>
-                  <ManageTableComp />
-                </Suspense>
-              </GuardedRoute>
+              <Suspense fallback={<Fallback />}>
+                <ManageTableComp />
+              </Suspense>
             ),
           },
           {
             path: ":id",
             element: (
-              <GuardedRoute>
-                <Suspense fallback={<Fallback />}>
-                  <TableId />
-                </Suspense>
-              </GuardedRoute>
+              <Suspense fallback={<Fallback />}>
+                <TableId />
+              </Suspense>
             ),
           },
         ],
@@ -195,6 +168,22 @@ export const router = createBrowserRouter([
     element: (
       <Suspense fallback={<Fallback />}>
         <RegisterPage />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/forget-password",
+    element: (
+      <Suspense fallback={<Fallback />}>
+        <ForgetPassword />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/reset-password",
+    element: (
+      <Suspense fallback={<Fallback />}>
+        <ResetPassword />
       </Suspense>
     ),
   },
