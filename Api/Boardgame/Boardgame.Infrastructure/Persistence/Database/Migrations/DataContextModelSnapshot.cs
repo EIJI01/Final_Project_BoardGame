@@ -67,6 +67,26 @@ namespace Boardgame.Infrastructure.Persistence.Database.Migrations
                     b.ToTable("Card", (string)null);
                 });
 
+            modelBuilder.Entity("Boardgame.Domain.Entities.ConnectionHub", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ConnectionId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ConnectionHub", (string)null);
+                });
+
             modelBuilder.Entity("Boardgame.Domain.Entities.Event", b =>
                 {
                     b.Property<Guid>("Id")
@@ -90,6 +110,35 @@ namespace Boardgame.Infrastructure.Persistence.Database.Migrations
                     b.ToTable("Event", (string)null);
                 });
 
+            modelBuilder.Entity("Boardgame.Domain.Entities.Notification", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("NotificationStatus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TableId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Notification", (string)null);
+                });
+
             modelBuilder.Entity("Boardgame.Domain.Entities.Queue", b =>
                 {
                     b.Property<Guid>("Id")
@@ -109,10 +158,10 @@ namespace Boardgame.Infrastructure.Persistence.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("TableId")
+                    b.Property<Guid?>("TableId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("TableType")
@@ -125,11 +174,9 @@ namespace Boardgame.Infrastructure.Persistence.Database.Migrations
 
                     b.HasIndex("BranchId");
 
-                    b.HasIndex("TableId")
-                        .IsUnique();
+                    b.HasIndex("TableId");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
                     b.ToTable("Queue", (string)null);
                 });
@@ -214,7 +261,7 @@ namespace Boardgame.Infrastructure.Persistence.Database.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("StopTime")
+                    b.Property<DateTime?>("StopTime")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("TableId")
@@ -350,7 +397,7 @@ namespace Boardgame.Infrastructure.Persistence.Database.Migrations
                     b.Property<DateTime>("TimeIn")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("TimeOut")
+                    b.Property<DateTime?>("TimeOut")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("UserId")
@@ -483,6 +530,28 @@ namespace Boardgame.Infrastructure.Persistence.Database.Migrations
                     b.Navigation("Branch");
                 });
 
+            modelBuilder.Entity("Boardgame.Domain.Entities.ConnectionHub", b =>
+                {
+                    b.HasOne("Boardgame.Domain.Entities.UserIdentity", "User")
+                        .WithMany("ConnectionHubs")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Boardgame.Domain.Entities.Notification", b =>
+                {
+                    b.HasOne("Boardgame.Domain.Entities.UserIdentity", "User")
+                        .WithMany("Notifications")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Boardgame.Domain.Entities.Queue", b =>
                 {
                     b.HasOne("Boardgame.Domain.Entities.Branch", "Branch")
@@ -492,14 +561,13 @@ namespace Boardgame.Infrastructure.Persistence.Database.Migrations
                         .IsRequired();
 
                     b.HasOne("Boardgame.Domain.Entities.TablePlay", "Table")
-                        .WithOne("Queue")
-                        .HasForeignKey("Boardgame.Domain.Entities.Queue", "TableId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .WithMany("Queue")
+                        .HasForeignKey("TableId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Boardgame.Domain.Entities.UserIdentity", "User")
-                        .WithOne("Queue")
-                        .HasForeignKey("Boardgame.Domain.Entities.Queue", "UserId")
+                        .WithMany("Queue")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -646,6 +714,10 @@ namespace Boardgame.Infrastructure.Persistence.Database.Migrations
 
             modelBuilder.Entity("Boardgame.Domain.Entities.UserIdentity", b =>
                 {
+                    b.Navigation("ConnectionHubs");
+
+                    b.Navigation("Notifications");
+
                     b.Navigation("Queue");
 
                     b.Navigation("Refresh");

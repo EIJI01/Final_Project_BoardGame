@@ -1,6 +1,4 @@
 using System.Net;
-using Boardgame.Application.Common.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Boardgame.Api.Controllers;

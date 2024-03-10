@@ -4,4 +4,5 @@ using MediatR;
 namespace Boardgame.Application.Services.ScanSystems.Command;
 
 public record CheckoutCommand(
-    string ScanSystemId) : IRequest<ErrorOr<bool>>;
+    string ScanSystemId,
+    int TotalPrice) : IRequest<ErrorOr<bool>>;

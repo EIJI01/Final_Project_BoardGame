@@ -6,4 +6,5 @@ public interface ICardRepository
 {
     Task<Card?> GetCardById(Guid id);
     Task<Card?> GetCardByNumber(string number);
+    Task<List<Card>> GetAllCards();
 }

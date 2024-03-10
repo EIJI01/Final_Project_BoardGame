@@ -15,13 +15,14 @@ import {
   CardBody,
   Spinner,
 } from "@material-tailwind/react";
-import { formatTime } from "../../../utils/format";
+import { formatDateTimes } from "../../../utils/format";
 import { useCallback, useEffect, useState } from "react";
 import DateDefault from "../../DatePickers/DateDefault";
-import { ScanSystemResponse } from "../../../models/data/scanSystem";
-import { CardResponse } from "../../../models/data/card";
+import { ScanSystemJoinCardResponse } from "../../../models/data/scanSystem";
 import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 import { TableResponseHub } from "../../../models/data/table";
+import moment from "moment";
+import { urlSignalR } from "../../../utils/Url";
 
 export interface TitleTableProps {
   no: boolean;
@@ -44,26 +45,37 @@ export default function ManageQueueTable() {
     status: true,
     edit: true,
   });
-  const [allCards, setAllCards] = useState<CardResponse[]>([]);
   const [allTable, setAllTable] = useState<TableResponseHub[]>([]);
-  const [cardListRows, setCardListRows] = useState<ScanSystemResponse[]>([]);
+  const [cardListRows, setCardListRows] = useState<ScanSystemJoinCardResponse[]>([]);
   const [startDate, setStartDate] = useState<Date>(new Date());
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [copyValue, setCopyValue] = useState<ScanSystemJoinCardResponse[]>([]);
 
   useEffect(() => {
+    const value = cardListRows.filter((c) => {
+      const date = moment(c.StartTime);
+
+      return (
+        date.date() === startDate.getDate() &&
+        date.month() === startDate.getMonth() &&
+        date.year() === startDate.getFullYear()
+      );
+    });
+    setCopyValue(value);
+  }, [startDate, cardListRows]);
+
+  console.log(copyValue);
+  useEffect(() => {
+    const branch = localStorage.getItem("branchId");
     const connection = new HubConnectionBuilder()
-      .withUrl(`https://localhost:7124/database-tracking`)
+      .withUrl(`${urlSignalR}/database-tracking`)
       .configureLogging(LogLevel.Information)
       .build();
 
-    connection.on("ReceivedScanSystems", (scanSystem) => {
+    connection.on("ReceivedScanSystemJoinCards", (scanSystem) => {
       const jsonParse = JSON.parse(scanSystem);
-      setCardListRows(jsonParse);
-    });
-
-    connection.on("ReceivedCards", (cards) => {
-      const jsonParse = JSON.parse(cards);
-      setAllCards(jsonParse);
+      const filterScanSystem = jsonParse.filter((s: any) => s.BranchId === branch);
+      setCardListRows(filterScanSystem);
     });
 
     connection.on("ReceivedTables", (tables) => {
@@ -72,8 +84,7 @@ export default function ManageQueueTable() {
     });
 
     const InvokeScanSystems = () => {
-      connection.invoke("SendCards").catch((err) => console.log(err));
-      connection.invoke("SendScanSystems").catch((err) => console.log(err));
+      connection.invoke("SendScanSystemsJoinCards").catch((err) => console.log(err));
       connection.invoke("SendTables").catch((err) => console.log(err));
     };
 
@@ -99,7 +110,6 @@ export default function ManageQueueTable() {
     },
     [startDate]
   );
-
   const handleShowTitleTable = useCallback(
     (value: string | undefined) => {
       console.log(value);
@@ -145,12 +155,10 @@ export default function ManageQueueTable() {
       <DateDefault startDate={startDate} onChangeStartDate={handleSetStartDate} />
     </div>
   );
-  const body = cardListRows.map((items, index) => {
-    const singleCard = allCards.filter((data) => data.Id === items.CardId);
+  const body = copyValue.map((items, index) => {
     const singleTable = allTable.filter((data) => data.Id === items.TableId);
-    const card = singleCard[0];
     const table = singleTable[0];
-    const isLast = index === cardListRows.length - 1;
+    const isLast = index === copyValue.length - 1;
     const classes = isLast
       ? "p-4 border-b dark:border-gray-800"
       : "p-4 py-2 border-b border-blue-gray-50 dark:border-gray-800";
@@ -165,7 +173,6 @@ export default function ManageQueueTable() {
       >
         <td className={`${classes} ${titleTable.no ? "" : "hidden"}`}>
           <div className="flex items-center gap-3">
-            {/* <Avatar placeholder="" src={img} alt={name} size="sm" /> */}
             <div className="flex flex-col">
               <Typography
                 placeholder=""
@@ -173,7 +180,7 @@ export default function ManageQueueTable() {
                 color="blue-gray"
                 className="font-normal dark:text-main-dark-text"
               >
-                {card.CardNumber}
+                {items.CardNumber}
               </Typography>
             </div>
           </div>
@@ -185,7 +192,7 @@ export default function ManageQueueTable() {
             color="blue-gray"
             className="font-normal dark:text-main-dark-text"
           >
-            {formatTime(items?.StartTime)}
+            {formatDateTimes(items?.StartTime)}
           </Typography>
         </td>
         <td className={`${classes} ${titleTable.time_out ? "" : "hidden"}`}>
@@ -195,7 +202,7 @@ export default function ManageQueueTable() {
             color="blue-gray"
             className="font-normal opacity-70 dark:text-main-dark-text"
           >
-            {items.Status ? "---" : formatTime(items.StopTime)}
+            {items.Status ? "---" : formatDateTimes(items.StopTime)}
           </Typography>
         </td>
         <td className={`${classes} ${titleTable.price ? "" : "hidden"}`}>
@@ -253,7 +260,6 @@ export default function ManageQueueTable() {
       <DataGrid>
         <DataGridHeader
           title="Crad list"
-          // subTitle={`${cardListRows. ? formatDate(cardListRows[0].StartTime) : ""}`}
           subTitle={new Date().toLocaleDateString()}
           buttonBody={buttonBody}
         />

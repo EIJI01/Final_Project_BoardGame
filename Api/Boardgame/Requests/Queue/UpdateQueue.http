@@ -1,0 +1,9 @@
+PATCH http://localhost:5107/api/queue/update-queue
+# PATCH http://localhost:8000/api/queue/update-queue
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMGRkMmU1Zi1iZGMyLTQ4MzItOWE2YS0wOGRjMzkyOWY1NjMiLCJnaXZlbl9uYW1lIjoiVGFtcCIsImp0aSI6IjRjZWNjOWE3LWEyMzYtNGMyOC1iY2IxLWExMjExMTJjYTk5OSIsInJvbGUiOiJNRU1CRVIiLCJleHAiOjE3MDkzODkzNjMsImlzcyI6IkJvYXJkR2FtZUFwcCIsImF1ZCI6IkJvYXJkR2FtZUFwcCJ9.ztDTh-oiSDOQoXK5TERts0uVbmC8ZoTv2PSkPFea-Dc
+# Gm
+
+{
+    "queueId": "633F5F0E-908B-4080-AA14-47752C8C051E"
+}

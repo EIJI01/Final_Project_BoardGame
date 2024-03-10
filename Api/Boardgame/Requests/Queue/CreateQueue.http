@@ -1,0 +1,19 @@
+POST http://localhost:5107/api/queue/create-queue
+# POST http://localhost:8000/api/queue/create-queue
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMGRkMmU1Zi1iZGMyLTQ4MzItOWE2YS0wOGRjMzkyOWY1NjMiLCJnaXZlbl9uYW1lIjoiVGFtcCIsImp0aSI6IjRjZWNjOWE3LWEyMzYtNGMyOC1iY2IxLWExMjExMTJjYTk5OSIsInJvbGUiOiJNRU1CRVIiLCJleHAiOjE3MDkzODkzNjMsImlzcyI6IkJvYXJkR2FtZUFwcCIsImF1ZCI6IkJvYXJkR2FtZUFwcCJ9.ztDTh-oiSDOQoXK5TERts0uVbmC8ZoTv2PSkPFea-Dc
+# Gm
+
+# {
+#     "email": "casere3229@comsb.com",
+#     "tableType": 0,
+#     "numberOfPeople": 6,
+#     "branchId": "673C9908-D75B-4BB4-A4AC-8EC5E66A7BAA"
+# }
+
+{
+    "email": "temp2@gmail.com",
+    "tableType": 1,
+    "numberOfPeople": 2,
+    "branchId": "E4D756FA-CE1C-46CC-8CB8-BA08712C6708"
+}

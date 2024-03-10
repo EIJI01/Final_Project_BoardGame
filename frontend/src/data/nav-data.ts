@@ -14,12 +14,6 @@ export const navListMenuItemsMember = [
     path: "/member/booking-queue",
   },
   {
-    title: "Calling GM",
-    description: "Meet and learn about our dedication",
-    icon: UserGroupIcon,
-    path: "/member/calling-gm",
-  },
-  {
     title: "Scan Qrcode",
     description: "Meet and learn about our dedication",
     icon: QrCodeIcon,

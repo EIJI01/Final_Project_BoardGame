@@ -57,3 +57,4 @@ C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Contracts\obj\Debug
 C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Contracts\obj\Debug\net6.0\refint\Boardgame.Contracts.dll
 C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Contracts\obj\Debug\net6.0\Boardgame.Contracts.pdb
 C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Contracts\obj\Debug\net6.0\ref\Boardgame.Contracts.dll
+C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Contracts\obj\Debug\net6.0\Boardgame.Contracts.csproj.AssemblyReference.cache

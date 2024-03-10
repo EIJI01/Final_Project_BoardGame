@@ -4,8 +4,15 @@ using Boardgame.Application.Authentication.Commands.Register;
 using Boardgame.Application.Authentication.Commands.ResetPassword;
 using Boardgame.Application.Authentication.Common;
 using Boardgame.Application.Authentication.Queries.ForgetPassword;
+using Boardgame.Application.Services._Branchs.Command;
 using Boardgame.Application.Services._Branchs.Common;
 using Boardgame.Application.Services._Branchs.Query;
+using Boardgame.Application.Services.Cards.Common;
+using Boardgame.Application.Services.Cards.Query;
+using Boardgame.Application.Services.Notifications.Command;
+using Boardgame.Application.Services.Queues.Command;
+using Boardgame.Application.Services.Queues.Common;
+using Boardgame.Application.Services.Queues.Query;
 using Boardgame.Application.Services.Roles.Command;
 using Boardgame.Application.Services.ScanSystems.Command;
 using Boardgame.Application.Services.ScanSystems.Common;
@@ -17,8 +24,14 @@ using Boardgame.Application.Services.Users.Query;
 using Boardgame.Application.Services.Works.Command;
 using Boardgame.Contracts.Authentication.Requests;
 using Boardgame.Contracts.Authentication.Response;
+using Boardgame.Contracts.Services.Branchs.AdminRequest;
 using Boardgame.Contracts.Services.Branchs.Requests;
 using Boardgame.Contracts.Services.Branchs.Response;
+using Boardgame.Contracts.Services.Cards.Requests;
+using Boardgame.Contracts.Services.Cards.Response;
+using Boardgame.Contracts.Services.Notifications.Requests;
+using Boardgame.Contracts.Services.Queues.Requests;
+using Boardgame.Contracts.Services.Queues.Response;
 using Boardgame.Contracts.Services.ScanSystems.Requests;
 using Boardgame.Contracts.Services.ScanSystems.Response;
 using Boardgame.Contracts.Services.Tables.Requests;
@@ -57,6 +70,20 @@ public class MappingConfig : IRegister
         config.NewConfig<CheckoutRequest, CheckoutCommand>();
         config.NewConfig<ChangeTableRequest, ChangeTableCommand>();
         config.NewConfig<DeleteScanSystemRequest, DeleteScanSystemCommand>();
+        config.NewConfig<CreateQueueRequest, CreateQueueCommand>();
+        config.NewConfig<GetInformationQueueRequest, GetInformationQueueQuery>();
+        config.NewConfig<GetAllMemberRequest, GetAllMemberQuery>();
+        config.NewConfig<GetScanByCardIdRequestAndTrueRequest, GetScanByCardIdAndTrueQuery>();
+        config.NewConfig<GetScanByCardNumberAndTrueRequest, GetScanByCardNumberAndTrueQuery>();
+        config.NewConfig<GetAllCardsRequest, GetAllCardsQuery>();
+        config.NewConfig<CreateNotificationRequest, CreateNotificationCommand>();
+        config.NewConfig<UpdateQueueStatusRequest, UpdateQueueStatusCommand>();
+        config.NewConfig<UpdateQueueUserOkRequest, UpdateQueueUserOkCommand>();
+        config.NewConfig<UpdateQueueComingSuccessRequest, UpdateQueueComingSuccessCommand>();
+        config.NewConfig<UpdateQueueUserCancelRequest, UpdateQueueUserCancelCommand>();
+        config.NewConfig<UpdateQueueNotSuccessOkRequest, UpdateQueueNotSuccessOkCommand>();
+        config.NewConfig<UpdateScanSystemByScanSystemIdRequest, UpdateScanSystemByScanSystemIdCommand>();
+        config.NewConfig<CreateBranchByAdminRequest, CreateBranchByAdminCommand>();
 
         // Response
         config.NewConfig<AuthenticationResult, AuthenticationResponse>()
@@ -78,5 +105,9 @@ public class MappingConfig : IRegister
         config.NewConfig<ScanSystemWithCardResult, ScanSystemWithCardResponse>()
             .Map(dest => dest, dest => dest.ScanSystem)
             .Map(dest => dest.Card, dest => dest.Card);
+        config.NewConfig<QueueResult, QueueResponse>()
+            .Map(dest => dest, dest => dest.Queue);
+        config.NewConfig<CardResult, CardResponse>()
+            .Map(dest => dest, dest => dest.Card);
     }
 }

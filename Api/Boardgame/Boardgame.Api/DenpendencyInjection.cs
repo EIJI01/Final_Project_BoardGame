@@ -16,9 +16,12 @@ public static class DependencyInjection
         services.AddSingleton<ProblemDetailsFactory, BoardgameProblemDetailsFactory>();
         services.AddSignalR();
         services.AddSingleton<DatabaseTracking>();
+        services.AddSingleton<NotificationHub>();
         services.AddSingleton<SubscribeScanSystemTableDependency>();
         services.AddSingleton<SubscribeCardTableDependency>();
         services.AddSingleton<SubscribeTablesDependency>();
+        services.AddSingleton<SubscribeQueueDependency>();
+        services.AddSingleton<SubscribeNotificationDependency>();
         services.AddCorsPolicy();
 
         return services;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import SkeletonDefalse from "../components/skeleton/Skeleton";
 
-export default function Dashboard() {
+const Dashboard = () => {
   const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
     const setIsLoading = () => {
@@ -17,4 +17,6 @@ export default function Dashboard() {
   }
 
   return <div>Dashboard</div>;
-}
+};
+
+export default Dashboard;

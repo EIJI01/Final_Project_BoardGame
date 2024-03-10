@@ -14,6 +14,11 @@ public class CardRepository : ICardRepository
         _dataContext = dataContext;
     }
 
+    public async Task<List<Card>> GetAllCards()
+    {
+        return await _dataContext.Cards!.ToListAsync();
+    }
+
     public async Task<Card?> GetCardById(Guid id)
     {
         return await _dataContext.Cards!.FirstOrDefaultAsync(c => c.Id == id);

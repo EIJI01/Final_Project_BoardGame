@@ -7,6 +7,7 @@ import { ScanSystemResponse } from "../../../models/data/scanSystem";
 import { Spinner } from "@material-tailwind/react";
 import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 import { sortTable } from "../../../utils/sort";
+import { urlSignalR } from "../../../utils/Url";
 
 type Props = {};
 
@@ -27,7 +28,7 @@ export default function ManageTableComp({}: Props): JSX.Element {
       }
     };
     const connection = new HubConnectionBuilder()
-      .withUrl(`https://localhost:7124/database-tracking`)
+      .withUrl(`${urlSignalR}/database-tracking`)
       .configureLogging(LogLevel.Information)
       .build();
 

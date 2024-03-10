@@ -13,10 +13,16 @@ import { UseUserContext } from "../../../contexts/ContextProvider";
 import { useStateDispatchContext } from "../../../hooks/useStateDispatchHook";
 import { ButtonCustom } from "../..";
 import { useEffect, useState } from "react";
-// import { QUEUE_NINTENDO_ROWS, QUEUE_TABLE_ROWS } from "../../../data/data";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { BranchAllIdResponse } from "../../../models/data/branch";
+import { getAllBranchId } from "../../../data/services/branch-service/getAllIdbranch";
+import { createQueue } from "../../../data/services/queue-service/create-queue";
+import { getQueueInformation } from "../../../data/services/queue-service/get-queue.information";
+import { QueueResponseLower } from "../../../models/data/queue";
+import { Link, useNavigate } from "react-router-dom";
+import { ForwardIcon } from "@heroicons/react/24/outline";
 
 export type FormQueue = {
   name: string;
@@ -33,19 +39,23 @@ export default function ReservationQueue() {
   const { currentColor } = useStateDispatchContext();
   const [openReservated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [allBranch, setAllBranch] = useState<BranchAllIdResponse[]>([]);
+  const [loadingButton, setLoadingButton] = useState<boolean>(false);
+  const [isQueueExist, setIsQueueExist] = useState<QueueResponseLower>();
+  const navigate = useNavigate();
 
   const schema = yup.object().shape({
     name: yup
       .string()
       .required("Name is required")
-      .default(() => currentUser!.name),
+      .default(() => currentUser?.name),
     email: yup
       .string()
       .required("Email is required")
-      .default(() => currentUser!.email),
+      .default(() => currentUser?.email),
     phoneNumber: yup
       .string()
-      .default(() => currentUser!.tel)
+      .default(() => currentUser?.tel)
       .required("Phone is a required field")
       .matches(
         /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/,
@@ -59,14 +69,6 @@ export default function ReservationQueue() {
       .required("Expected is required")
       .oneOf([true], "The terms and conditions must be accepted."),
   });
-
-  // const setOpenReservation = (event: React.FormEvent<HTMLFormElement>) => {
-  //   setOpenReservated(true);
-  // };
-
-  // const setOpenReservationCancel = useCallback(() => {
-  //   setOpenReservated(false);
-  // }, [openReservated]);
 
   const {
     register,
@@ -82,13 +84,52 @@ export default function ReservationQueue() {
   }, [setValue, currentUser?.email, currentUser?.name, currentUser?.tel]);
 
   useEffect(() => {
+    const fetchBranch = async () => {
+      var result = await getAllBranchId();
+      setAllBranch(result);
+    };
+    const fetchQueue = async () => {
+      var result = await getQueueInformation();
+      setIsQueueExist(result);
+    };
+    fetchBranch();
+    fetchQueue();
     setTimeout(() => {
       setIsLoading(false);
     }, 1500);
   }, []);
 
+  useEffect(() => {
+    if (isQueueExist?.status === 1) {
+      navigate(`/member/booking-queue/${isQueueExist?.id}`);
+    } else if (isQueueExist?.status === 2) {
+      navigate(`/member/booking-queue/queue/table/${isQueueExist.tableId}`);
+    }
+  }, [isQueueExist]);
+
   const onSubmit: SubmitHandler<FormQueue> = async (data) => {
-    console.log(data);
+    setLoadingButton(true);
+    try {
+      var result = await createQueue({
+        email: data.email,
+        tableType: Number(data.tableType),
+        numberOfPeople: Number(data.numberOfPeople),
+        branchId: data.branchId,
+      });
+      console.log(result);
+      if (result) {
+        setTimeout(async () => {
+          setLoadingButton(false);
+          var result = await getQueueInformation();
+          setIsQueueExist(result);
+        }, 2000);
+      }
+    } catch (err: any) {
+      setTimeout(() => {
+        setLoadingButton(false);
+      });
+      console.log(err);
+    }
   };
 
   return isLoading ? (
@@ -108,10 +149,23 @@ export default function ReservationQueue() {
                 <CardHeader
                   placeholder={""}
                   floated={false}
-                  className="py-7 m-0 flex items-center pl-10 text-xl font-bold text-main-dark-text"
+                  className="py-7 m-0 flex items-center px-10 text-xl font-bold text-main-dark-text justify-between"
                   style={{ backgroundColor: currentColor }}
                 >
-                  Queue
+                  <div>Queue</div>
+                  {isQueueExist ? (
+                    <div className="flex gap-2 items-center">
+                      <ForwardIcon className="h-6 w-6" strokeWidth={2} />
+                      <Link
+                        to={`/member/booking-queue/${isQueueExist.id}`}
+                        className="text-sm hover:underline"
+                      >
+                        check your queue
+                      </Link>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </CardHeader>
                 <CardBody placeholder={""} className="text-center p-0">
                   <div className="w-full lg:px-32 px-4 ">
@@ -125,7 +179,7 @@ export default function ReservationQueue() {
                             placeholder={""}
                             variant="h6"
                             color="blue-gray"
-                            className="-mb-3 dark:text-main-dark-text"
+                            className="-mb-3 dark:text-main-dark-text text-start pl-1"
                           >
                             Email
                           </Typography>
@@ -135,7 +189,7 @@ export default function ReservationQueue() {
                             size="lg"
                             defaultValue={currentUser?.email}
                             readOnly
-                            className=" border-1 !border-blue-gray-200 focus:!border-1 cursor-default"
+                            className=" border-0 !border-blue-gray-50 focus:!border-0 cursor-default"
                             labelProps={{
                               className: "before:content-none after:content-none",
                             }}
@@ -144,7 +198,7 @@ export default function ReservationQueue() {
                             placeholder={""}
                             variant="h6"
                             color="blue-gray"
-                            className="-mb-3 dark:text-main-dark-text"
+                            className="-mb-3 dark:text-main-dark-text text-start pl-1"
                           >
                             Your name
                           </Typography>
@@ -154,7 +208,7 @@ export default function ReservationQueue() {
                             size="lg"
                             readOnly
                             defaultValue={currentUser?.name!}
-                            className=" border-1 !border-blue-gray-200 focus:!border-1 cursor-default"
+                            className=" border-0 !border-blue-gray-200 focus:!border-0 cursor-default"
                             labelProps={{
                               className: "before:content-none after:content-none",
                             }}
@@ -164,7 +218,7 @@ export default function ReservationQueue() {
                             type="label"
                             variant="h6"
                             color="blue-gray"
-                            className="-mb-3 dark:text-main-dark-text"
+                            className="-mb-3 dark:text-main-dark-text text-start pl-1"
                           >
                             Your telephone
                           </Typography>
@@ -175,7 +229,7 @@ export default function ReservationQueue() {
                               size="lg"
                               readOnly
                               defaultValue={currentUser?.tel}
-                              className=" border-1 !border-blue-gray-200 focus:!border-1 cursor-default"
+                              className=" border-0 !border-blue-gray-200 focus:!border-0 cursor-default"
                               labelProps={{
                                 className: "before:content-none after:content-none",
                               }}
@@ -197,7 +251,7 @@ export default function ReservationQueue() {
                             placeholder={""}
                             variant="h6"
                             color="blue-gray"
-                            className="-mb-3 dark:text-main-dark-text"
+                            className="-mb-3 dark:text-main-dark-text text-start pl-1"
                           >
                             Number of people
                           </Typography>
@@ -235,7 +289,7 @@ export default function ReservationQueue() {
                             placeholder={""}
                             variant="h6"
                             color="blue-gray"
-                            className="-mb-3 dark:text-main-dark-text"
+                            className="-mb-3 dark:text-main-dark-text text-start pl-1"
                           >
                             Select type of table
                           </Typography>
@@ -261,7 +315,7 @@ export default function ReservationQueue() {
                             placeholder={""}
                             variant="h6"
                             color="blue-gray"
-                            className="-mb-3 dark:text-main-dark-text"
+                            className="-mb-3 dark:text-main-dark-text text-start pl-1"
                           >
                             Select Branch
                           </Typography>
@@ -280,8 +334,13 @@ export default function ReservationQueue() {
                                 "dark:lg:bg-main-bure-text dark:bg-[#1d1d1d] dark:text-main-dark-text ",
                             }}
                           >
-                            <Option value="0">Lungmor</Option>
-                            <Option value="1">Central</Option>
+                            {allBranch.map((data, i) => {
+                              return (
+                                <Option value={data.id} key={i}>
+                                  {data.branchName}
+                                </Option>
+                              );
+                            })}
                           </Select>
                         </div>
                       </div>
@@ -319,7 +378,7 @@ export default function ReservationQueue() {
                         fullWidth
                         color={currentColor}
                       >
-                        next
+                        {loadingButton ? <Spinner color="blue" className="mx-auto" /> : "Submit"}
                       </ButtonCustom>
                       <p className=" text-red-500 text-xs mt-3">
                         {errors.branchId
@@ -346,145 +405,4 @@ export default function ReservationQueue() {
       )}
     </>
   );
-
-  /* {openReservated && (
-        <div className="pt-4 lg:px-52">
-          <div className="flex justify-center items-center">
-            <div className="w-full">
-              <Card
-                placeholder={""}
-                className="w-full lg:h-[500px] shadow-none lg:shadow-md dark:lg:bg-[#1d1d1d] bg-inherit"
-              >
-                <CardHeader
-                  placeholder={""}
-                  floated={false}
-                  className="h-16 m-0 flex items-center pl-10 text-xl font-bold text-main-dark-text"
-                  style={{ backgroundColor: currentColor }}
-                >
-                  Queue
-                </CardHeader>
-                <CardBody placeholder={""} className="text-center p-0">
-                  <div className="w-full lg:px-32 px-4">
-                    <form className="mt-8 mb-2  max-w-80 sm:w-full">
-                      <div className="lg:grid grid-flow-col gap-6">
-                        <div className="mb-4 lg:mb-1 flex flex-col lg:gap-6 gap-4 justify-between items-center">
-                          <Typography
-                            placeholder={""}
-                            variant="h6"
-                            color="blue-gray"
-                            className=" dark:text-main-dark-text lg:text-center text-start"
-                          >
-                            Your queue is
-                          </Typography>
-                          <Typography
-                            placeholder={""}
-                            variant="h6"
-                            color="blue-gray"
-                            className="text-[10rem] leading-none"
-                            style={{ color: currentColor }}
-                          >
-                            {formDataTable === "table"
-                              ? (QUEUE_TABLE_ROWS.length + 1).toString()
-                              : (QUEUE_NINTENDO_ROWS.length + 1).toString()}
-                          </Typography>
-
-                          <Typography
-                            placeholder={""}
-                            variant="h6"
-                            color="blue-gray"
-                            className=" dark:text-main-dark-text lg:text-center text-end"
-                          >
-                            ... Plese waiting for your queue
-                          </Typography>
-                        </div>
-                        <div className="lg:mb-1 flex flex-col lg:gap-6 gap-4">
-                          <div>
-                            <Typography
-                              placeholder={""}
-                              variant="h6"
-                              color="blue-gray"
-                              className=" dark:text-main-dark-text text-left"
-                            >
-                              Number of people
-                            </Typography>
-                            <Select
-                              placeholder={""}
-                              size="lg"
-                              label={`${formDataNumberPeople} people`}
-                              disabled
-                              className=" cursor-not-allowed"
-                            >
-                              <Option>1 people</Option>
-                              <Option>2 people</Option>
-                              <Option>3 people</Option>
-                              <Option>4 people</Option>
-                              <Option>5 people</Option>
-                              <Option>6 people</Option>
-                            </Select>
-                          </div>
-                          <div>
-                            <Typography
-                              placeholder={""}
-                              variant="h6"
-                              color="blue-gray"
-                              className=" dark:text-main-dark-text text-left"
-                            >
-                              type of table
-                            </Typography>
-                            <Select
-                              placeholder={""}
-                              size="lg"
-                              label={formDataTable}
-                              disabled
-                              className=" cursor-not-allowed"
-                            >
-                              <Option>Table</Option>
-                              <Option>Nintendo</Option>
-                            </Select>
-                          </div>
-                          <div>
-                            <Typography
-                              placeholder={""}
-                              variant="h6"
-                              color="blue-gray"
-                              className=" dark:text-main-dark-text text-left"
-                            >
-                              Telephone
-                            </Typography>
-                            <Input
-                              crossOrigin={""}
-                              disabled
-                              size="lg"
-                              name="telephone"
-                              label={formDataTel}
-                              className=" !border-t-blue-gray-200 focus:!border-t-gray-900 cursor-not-allowed"
-                              labelProps={{
-                                className: "before:content-none after:content-none pl-3",
-                              }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </CardBody>
-                <CardFooter
-                  placeholder={""}
-                  className="flex items-center lg:justify-end justify-center gap-2"
-                >
-                  <ButtonCustom
-                    className=" dark:text-main-dark-text mt-5"
-                    variant="gradient"
-                    size="md"
-                    color={currentColor}
-                    onClick={setOpenReservationCancel}
-                  >
-                    Cancel
-                  </ButtonCustom>
-                </CardFooter>
-              </Card>
-            </div>
-          </div>
-        </div>
-      )} */
 }

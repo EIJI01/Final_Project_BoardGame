@@ -7,6 +7,7 @@ using Boardgame.Application;
 using Boardgame.Infrastructure;
 using Boardgame.Infrastructure.Persistence.Database;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -21,14 +22,22 @@ var app = builder.Build();
     var connectionString = app.Configuration.GetConnectionString("DefaultConnection");
     app.UseCors(CorsPolicyKeys.MyPolicy);
     app.UseExceptionHandler("/error");
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.ContentRootPath, "Images")),
+        RequestPath = "/Images"
+    });
     app.UseHttpsRedirection();
     app.UseAuthentication();
     app.UseAuthorization();
     app.MapControllers();
     app.MapHub<DatabaseTracking>("/database-tracking");
+    app.MapHub<NotificationHub>("/notifications");
     app.UseSqlTableDependency<SubscribeScanSystemTableDependency>(connectionString);
     app.UseSqlTableDependency<SubscribeCardTableDependency>(connectionString);
     app.UseSqlTableDependency<SubscribeTablesDependency>(connectionString);
+    app.UseSqlTableDependency<SubscribeQueueDependency>(connectionString);
+    app.UseSqlNotificationDependency<SubscribeNotificationDependency>(connectionString);
     await SeedDatabase();
     app.Run();
 }

@@ -26,6 +26,8 @@ export const reducer = (state: InitailStateType, action: ReducerAction): Initail
       return { ...state, screenSize: action.payload as number };
     case REDUCER_ACTION_TYPE.SET_SHOW_NAVBAR:
       return { ...state, openNav: action.payload as boolean };
+    case REDUCER_ACTION_TYPE.SET_SHOW_NOTIFICATION:
+      return { ...state, openNotification: action.payload as boolean };
     default:
       return state;
   }

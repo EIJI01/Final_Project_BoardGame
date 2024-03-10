@@ -79,11 +79,11 @@ export default function LoginPage() {
         cookies.remove("myusername");
         cookies.remove("mypass");
       }
-      setInterval(() => {
+      setTimeout(() => {
         window.location.href = "/";
       }, 2000);
     } catch (err: any) {
-      setInterval(() => {
+      setTimeout(() => {
         setError(err);
       }, 2000);
     }

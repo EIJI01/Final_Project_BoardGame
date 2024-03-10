@@ -1,0 +1,12 @@
+POST http://localhost:5107/api/notification/send-notificationNotSuccess
+# POST http://localhost:8000/api/notification/send-notificationSuccess
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNjcyMTgxZS00MTkwLTQ5YjEtOGU4Ni0wOGRjMzkwMGRmZTEiLCJnaXZlbl9uYW1lIjoiQ2hhbnl1dCIsImp0aSI6ImUwYzc0MTAyLTMzNTYtNDE5OC1iMzMxLTdmNmJmYmU3Yjk4NyIsInJvbGUiOiJHTSIsImV4cCI6MTcwOTM5NDM2MywiaXNzIjoiQm9hcmRHYW1lQXBwIiwiYXVkIjoiQm9hcmRHYW1lQXBwIn0.q2eSUK1yrKVgcGeZMjU5ULmlMWDAj1sWOqN3hJkvtEU
+
+# {
+#     "userId": "20DD2E5F-BDC2-4832-9A6A-08DC3929F563"
+# }
+
+{
+    "userId": "8F89F756-CF32-4485-DD37-08DC3A191990"
+}

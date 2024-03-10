@@ -1,4 +1,4 @@
-import { Dialog, DialogHeader, DialogBody, DialogFooter } from "@material-tailwind/react";
+import { Dialog, DialogHeader, DialogBody, DialogFooter, Spinner } from "@material-tailwind/react";
 import { ButtonCustom } from "..";
 import { useStateDispatchContext } from "../../hooks/useStateDispatchHook";
 
@@ -8,9 +8,17 @@ interface Props {
   body?: JSX.Element;
   header?: JSX.Element;
   handleClose?: () => void;
+  isLoadingButton?: boolean;
 }
 
-export default function DialogDefault({ open, handleOpen, body, header, handleClose }: Props) {
+export default function DialogDefault({
+  open,
+  handleOpen,
+  body,
+  header,
+  handleClose,
+  isLoadingButton,
+}: Props) {
   const { currentColor, currentMode } = useStateDispatchContext();
   return (
     <Dialog
@@ -27,7 +35,11 @@ export default function DialogDefault({ open, handleOpen, body, header, handleCl
           <span style={{ color: currentMode.modes === "Dark" ? "white" : "" }}>Cancel</span>
         </ButtonCustom>
         <ButtonCustom variant="gradient" color={currentColor} onClick={handleClose}>
-          {<span>Confirm</span>}
+          {isLoadingButton ? (
+            <Spinner className="w-5 h-5" color="blue-gray" />
+          ) : (
+            <span>Confirm</span>
+          )}
         </ButtonCustom>
       </DialogFooter>
     </Dialog>

@@ -5,7 +5,7 @@ public class ScanSystem
     public Guid Id = Guid.NewGuid();
     public bool Status { get; set; }
     public DateTime StartTime { get; set; }
-    public DateTime StopTime { get; set; }
+    public DateTime? StopTime { get; set; } = null!;
     public decimal TotalPrice { get; set; }
 
     /// Reference

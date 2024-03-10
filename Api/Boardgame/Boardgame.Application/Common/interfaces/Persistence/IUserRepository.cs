@@ -11,4 +11,7 @@ public interface IUserRepository
     Task Add(UserIdentity user);
     Task<IdentityResult> AddUserToRoleAsync(UserIdentity user, string role);
     Task<string> GetUserRoleAsync(UserIdentity user);
+    Task<List<UserIdentity>> GetAllUser();
+    Task UpdateUserInformation(UserIdentity user);
+    // Task<List<UserRoleIdentity>> GetUserRole();
 }

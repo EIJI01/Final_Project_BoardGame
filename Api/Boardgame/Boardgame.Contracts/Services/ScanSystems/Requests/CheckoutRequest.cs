@@ -1,4 +1,5 @@
 namespace Boardgame.Contracts.Services.ScanSystems.Requests;
 
 public record CheckoutRequest(
-    string ScanSystemId);
+    string ScanSystemId,
+    int TotalPrice);

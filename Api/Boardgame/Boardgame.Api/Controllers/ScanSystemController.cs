@@ -126,4 +126,44 @@ public class ScanSystemController : ApiController
         );
     }
 
+    [AllowAnonymous]
+    [HttpPost("get-scanByCard")]
+    public async Task<IActionResult> GetScanByCardId(GetScanByCardIdRequestAndTrueRequest request)
+    {
+        var requestCard = _mapper.Map<GetScanByCardIdAndTrueQuery>(request);
+
+        ErrorOr<ScanSystemResult> resultScan = await _mediator.Send(requestCard);
+
+        return resultScan.Match(
+            resultScan => Ok(_mapper.Map<ScanSystemResponse>(resultScan)),
+            error => Problem(error));
+    }
+
+    [AllowAnonymous]
+    [HttpPost("get-scanByCardNumber")]
+    public async Task<IActionResult> GetScanByCardNumber(GetScanByCardNumberAndTrueRequest request)
+    {
+        var requestCardNumber = _mapper.Map<GetScanByCardNumberAndTrueQuery>(request);
+
+        ErrorOr<ScanSystemResult> resultScan = await _mediator.Send(requestCardNumber);
+
+        return resultScan.Match(
+            resultScan => Ok(_mapper.Map<ScanSystemResponse>(resultScan)),
+            error => Problem(error));
+    }
+
+
+    [Authorize(Roles = RoleKeys.Gm)]
+    [HttpPatch("update-information-scanSystem")]
+    public async Task<IActionResult> UpdateScanSystemByScanSystemId(UpdateScanSystemByScanSystemIdRequest request)
+    {
+        var requestScanSystem = _mapper.Map<UpdateScanSystemByScanSystemIdCommand>(request);
+
+        ErrorOr<bool> result = await _mediator.Send(requestScanSystem);
+
+        return result.Match(
+            result => Ok(new { message = "Update scanSystem success." }),
+            error => Problem(error));
+    }
+
 }

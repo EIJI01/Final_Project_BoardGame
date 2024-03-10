@@ -6,9 +6,10 @@ services:
     image: mcr.microsoft.com/mssql/server:2017-latest
     restart: always
     environment:
-      ACCEPT_EULA: "Y"
-      MSSQL_USER: "SA"
-      SA_PASSWORD: "mssql1234"
+      - "ACCEPT_EULA=Y"
+      - "MSSQL_USER=SA"
+      - "SA_PASSWORD=mssql1234"
+      - "TZ=Asia/Bangkok"
     ports:
       - 1433:1433
     volumes:

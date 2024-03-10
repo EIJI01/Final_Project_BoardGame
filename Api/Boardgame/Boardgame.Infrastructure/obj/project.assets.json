@@ -671,14 +671,10 @@
           "Microsoft.Extensions.Options": "6.0.0"
         },
         "compile": {
-          "lib/net6.0/Microsoft.Extensions.Identity.Core.dll": {
-            "related": ".xml"
-          }
+          "lib/net6.0/Microsoft.Extensions.Identity.Core.dll": {}
         },
         "runtime": {
-          "lib/net6.0/Microsoft.Extensions.Identity.Core.dll": {
-            "related": ".xml"
-          }
+          "lib/net6.0/Microsoft.Extensions.Identity.Core.dll": {}
         }
       },
       "Microsoft.Extensions.Identity.Stores/6.0.5": {
@@ -689,14 +685,10 @@
           "Microsoft.Extensions.Logging": "6.0.0"
         },
         "compile": {
-          "lib/net6.0/Microsoft.Extensions.Identity.Stores.dll": {
-            "related": ".xml"
-          }
+          "lib/net6.0/Microsoft.Extensions.Identity.Stores.dll": {}
         },
         "runtime": {
-          "lib/net6.0/Microsoft.Extensions.Identity.Stores.dll": {
-            "related": ".xml"
-          }
+          "lib/net6.0/Microsoft.Extensions.Identity.Stores.dll": {}
         }
       },
       "Microsoft.Extensions.Logging/6.0.0": {
@@ -738,14 +730,10 @@
       "Microsoft.Extensions.ObjectPool/2.2.0": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Microsoft.Extensions.ObjectPool.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/Microsoft.Extensions.ObjectPool.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Extensions.ObjectPool.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/Microsoft.Extensions.ObjectPool.dll": {}
         }
       },
       "Microsoft.Extensions.Options/6.0.0": {
@@ -775,14 +763,10 @@
           "Microsoft.Extensions.Primitives": "6.0.0"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Extensions.Options.ConfigurationExtensions.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/Microsoft.Extensions.Options.ConfigurationExtensions.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Extensions.Options.ConfigurationExtensions.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/Microsoft.Extensions.Options.ConfigurationExtensions.dll": {}
         }
       },
       "Microsoft.Extensions.Primitives/6.0.0": {
@@ -838,14 +822,10 @@
       "Microsoft.IdentityModel.Abstractions/7.3.0": {
         "type": "package",
         "compile": {
-          "lib/net6.0/Microsoft.IdentityModel.Abstractions.dll": {
-            "related": ".xml"
-          }
+          "lib/net6.0/Microsoft.IdentityModel.Abstractions.dll": {}
         },
         "runtime": {
-          "lib/net6.0/Microsoft.IdentityModel.Abstractions.dll": {
-            "related": ".xml"
-          }
+          "lib/net6.0/Microsoft.IdentityModel.Abstractions.dll": {}
         }
       },
       "Microsoft.IdentityModel.JsonWebTokens/7.3.0": {
@@ -920,14 +900,10 @@
           "Microsoft.IdentityModel.Logging": "7.3.0"
         },
         "compile": {
-          "lib/net6.0/Microsoft.IdentityModel.Tokens.dll": {
-            "related": ".xml"
-          }
+          "lib/net6.0/Microsoft.IdentityModel.Tokens.dll": {}
         },
         "runtime": {
-          "lib/net6.0/Microsoft.IdentityModel.Tokens.dll": {
-            "related": ".xml"
-          }
+          "lib/net6.0/Microsoft.IdentityModel.Tokens.dll": {}
         }
       },
       "Microsoft.Net.Http.Headers/2.2.0": {
@@ -937,14 +913,10 @@
           "System.Buffers": "4.5.0"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Net.Http.Headers.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/Microsoft.Net.Http.Headers.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Net.Http.Headers.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/Microsoft.Net.Http.Headers.dll": {}
         }
       },
       "Microsoft.NETCore.Platforms/3.1.0": {
@@ -3224,11 +3196,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Infrastructure\\Boardgame.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Infrastructure\\Boardgame.Infrastructure.csproj",
       "projectName": "Boardgame.Infrastructure",
-      "projectPath": "c:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Infrastructure\\Boardgame.Infrastructure.csproj",
+      "projectPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Infrastructure\\Boardgame.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\chany\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Infrastructure\\obj\\",
+      "outputPath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\chany\\AppData\\Roaming\\NuGet\\NuGet.Config",

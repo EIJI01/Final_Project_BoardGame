@@ -16,7 +16,7 @@ services:
     depends_on:
       - dotnetclean
     ports:
-      - "8000:8000"
+      - "7124:7124"
 
   # Web client boardgame
   webapp:

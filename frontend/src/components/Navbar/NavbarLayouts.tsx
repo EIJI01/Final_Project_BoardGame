@@ -9,6 +9,7 @@ import {
   Avatar,
   MenuList,
   MenuItem,
+  Badge,
 } from "@material-tailwind/react";
 import { Bars3Icon, ChevronDownIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavList } from "./NavList";
@@ -19,18 +20,42 @@ import { memo, useCallback, useEffect, useState } from "react";
 import ButtonCustom from "../ButtonCustom/ButtonCustom";
 import logo from "../../assets/logo-boardgame.png";
 import { UserCircleIcon, ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
-import { checkUser } from "../../utils/routing";
+import { checkTypeUser } from "../../utils/routing";
+import { BellAlertIcon } from "@heroicons/react/20/solid";
+import { getAllBranchId } from "../../data/services/branch-service/getAllIdbranch";
+import { BranchAllIdResponse } from "../../models/data/branch";
 
 const NavbarLayouts = memo((): JSX.Element => {
   const [menuOpen, setIsMenuOpen] = useState<boolean>(false);
   const { currentUser } = UseUserContext();
-  const { currentLanguage, currentColor, openNav, setOpenNav } = useStateDispatchContext();
+  const {
+    currentLanguage,
+    currentColor,
+    openNav,
+    setOpenNav,
+    setOpenNotification,
+    openNotification,
+  } = useStateDispatchContext();
+  const [branch, setBranch] = useState<BranchAllIdResponse>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const navigate = useNavigate();
   const handleLogout = useCallback(() => {
     localStorage.clear();
   }, []);
   useEffect(() => {
+    const branchId = localStorage.getItem("branchId");
+    const fetchBranch = async () => {
+      try {
+        var result = await getAllBranchId();
+        if (result) {
+          const branch = result.filter((data) => data.id === branchId)[0];
+          setBranch(branch);
+        }
+      } catch (err: any) {
+        console.log(err);
+      }
+    };
+    fetchBranch();
     setInterval(() => {
       setIsLoading(false);
     }, 200);
@@ -41,9 +66,9 @@ const NavbarLayouts = memo((): JSX.Element => {
       className="mx-auto max-w-screen-bestLarg lg:px-10 py-5 dark:bg-main-dark-bg fixed z-40 overflow-hidden dark:border-main-dark"
       fullWidth
     >
-      <div className="flex items-center justify-between text-blue-gray-900">
+      <div className="lg:grid grid-cols-3 text-blue-gray-900 flex items-center justify-between">
         <div className="lg:ml-2 mr-4 cursor-pointer" onClick={() => (window.location.href = "/")}>
-          <div className="bg-white rounded-lg w-fit mx-auto">
+          <div className="bg-white rounded-lg w-fit ml-0">
             <img src={logo} alt="" className="w-auto h-8" />
           </div>
           <Typography
@@ -53,10 +78,19 @@ const NavbarLayouts = memo((): JSX.Element => {
             BoardGame Everyday
           </Typography>
         </div>
-        <div className="hidden lg:block">
+        <div className="hidden lg:block mx-auto">
           <NavList />
         </div>
-        <div className="hidden gap-2 lg:flex">
+
+        <div className="gap-3 lg:flex items-center justify-end">
+          {currentUser && !checkTypeUser(currentUser.role) && (
+            <Badge placement="top-end">
+              <BellAlertIcon
+                className="h-7 w-7 text-gray-500 transform hover:scale-90 transition cursor-pointer"
+                onClick={() => setOpenNotification(!openNotification)}
+              />
+            </Badge>
+          )}
           {!!!isLoading ? (
             <div className="hidden gap-2 lg:flex">
               {currentUser ? (
@@ -102,16 +136,29 @@ const NavbarLayouts = memo((): JSX.Element => {
                     </Typography>
                   </MenuHandler>
                   <MenuList placeholder={""}>
-                    <MenuItem
-                      placeholder={""}
-                      className="border-b-1"
-                      onClick={() => navigate(checkUser(currentUser.role))}
-                    >
-                      <div className="flex justify-around items-center p-1">
-                        <UserCircleIcon className="w-5 h-5" />
-                        Profile
-                      </div>
-                    </MenuItem>
+                    {checkTypeUser(currentUser?.role) ? (
+                      <MenuItem placeholder={""} className="border-b-1">
+                        <div className="flex flex-col justify-around items-center p-1">
+                          <img src={currentUser.image} alt="profile" className="w-14 h-14" />
+                          <div>GM, {currentUser.name}</div>
+                        </div>
+                        <div className="text-center mx-auto">
+                          <span>Branch: </span>
+                          <span>{branch?.branchName}</span>
+                        </div>
+                      </MenuItem>
+                    ) : (
+                      <MenuItem
+                        placeholder={""}
+                        className="border-b-1"
+                        onClick={() => navigate("/member/profile")}
+                      >
+                        <div className="flex justify-around items-center p-1">
+                          <UserCircleIcon className="w-5 h-5" />
+                          Profile
+                        </div>
+                      </MenuItem>
+                    )}
                     <MenuItem
                       placeholder={""}
                       onClick={() => {
@@ -150,7 +197,7 @@ const NavbarLayouts = memo((): JSX.Element => {
               )}
             </div>
           ) : (
-            <div className="lg:flex">
+            <div className="lg:flex hidden">
               <div className="flex animate-pulse flex-wrap items-center gap-8">
                 <div className="grid h-10 w-40 place-items-center rounded-lg bg-gray-100"></div>
               </div>

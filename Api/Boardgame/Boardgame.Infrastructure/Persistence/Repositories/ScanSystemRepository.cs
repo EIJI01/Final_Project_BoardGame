@@ -41,6 +41,11 @@ public class ScanSystemRepository : IScanSystemRepository
         return await _dataContext.ScanSystems!.Where(s => s.CardId == cardId && s.Status == true).ToListAsync();
     }
 
+    public async Task<ScanSystem?> GetScanSystemByCardIdStatusTrue(Guid cardId)
+    {
+        return await _dataContext.ScanSystems!.FirstOrDefaultAsync(s => s.CardId == cardId && s.Status == true);
+    }
+
     public async Task<ScanSystem?> GetScanSystemById(Guid scanSystemId)
     {
         return await _dataContext.ScanSystems!.FirstOrDefaultAsync(s => s.Id == scanSystemId);

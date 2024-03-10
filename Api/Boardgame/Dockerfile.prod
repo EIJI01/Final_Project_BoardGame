@@ -4,13 +4,14 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 # EXPOSE 80
 # EXPOSE 443
-EXPOSE 80
-ENV ASPNETCORE_URLS=http://+:80
+EXPOSE 433
+ENV ASPNETCORE_URLS=https://+:433
 
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 
+ADD Boardgame.Api/Images ./Boardgame.Api/Images
 COPY ["Boardgame.Api/Boardgame.Api.csproj", "Boardgame.Api/"]
 COPY ["Boardgame.Contracts/Boardgame.Contracts.csproj", "Boardgame.Contracts/"]
 COPY ["Boardgame.Infrastructure/Boardgame.Infrastructure.csproj", "Boardgame.Infrastructure/"]
@@ -22,6 +23,8 @@ RUN dotnet restore "Boardgame.Api/Boardgame.Api.csproj"
 COPY . .
 
 WORKDIR "/src/Boardgame.Api"
+RUN dotnet dev-certs https --clean
+RUN dotnet dev-certs https
 RUN dotnet build "Boardgame.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
@@ -30,4 +33,5 @@ RUN dotnet publish "Boardgame.Api.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
 ENTRYPOINT ["dotnet", "Boardgame.Api.dll"]

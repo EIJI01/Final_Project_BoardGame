@@ -37,18 +37,18 @@ export default function FooterWithLogo() {
               color="blue-gray"
               className="font-normal transition-colors footer dark:text-main-dark-text text-xs lg:text-base"
             >
-              {checkTypeUser(currentUser?.role!) ? "Manage Crads" : "Reservation Queue"}
+              {checkTypeUser(currentUser?.role!) ? "Manage Crads" : "Queue"}
             </Typography>
           </li>
           <li>
             <Typography
               placeholder={""}
               as="a"
-              href={checkTypeUser(currentUser?.role!) ? "/gm/manage-queue" : "/member/calling-gm"}
+              href={checkTypeUser(currentUser?.role!) ? "/gm/manage-queue" : "/member/scan-qr"}
               color="blue-gray"
               className="font-normal transition-colors footer dark:text-main-dark-text text-xs lg:text-base"
             >
-              {checkTypeUser(currentUser?.role!) ? "Manage Queue" : "Calling GM"}
+              {checkTypeUser(currentUser?.role!) ? "Manage Queue" : "Scan QRcode"}
             </Typography>
           </li>
           <li className={checkTypeUser(currentUser?.role!) ? "" : "hidden"}>

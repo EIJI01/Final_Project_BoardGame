@@ -1,6 +1,9 @@
+using Boardgame.Application.Common.Authentication;
 using Boardgame.Application.Common.interfaces.Persistence;
 using Boardgame.Domain.Entities;
+using Boardgame.Infrastructure.Persistence.Database;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Boardgame.Infrastructure.Persistence.Repositories;
 
@@ -11,6 +14,7 @@ public class UserRepository : IUserRepository
     public UserRepository(UserManager<UserIdentity> userManager)
     {
         _userManager = userManager;
+
     }
 
     public async Task Add(UserIdentity user)
@@ -21,6 +25,10 @@ public class UserRepository : IUserRepository
     public async Task<IdentityResult> AddUserToRoleAsync(UserIdentity user, string role)
     {
         return await _userManager.AddToRoleAsync(user, role);
+    }
+    public async Task<List<UserIdentity>> GetAllUser()
+    {
+        return await _userManager.Users.ToListAsync();
     }
 
     public async Task<UserIdentity>? GetUserByEmailAsync(string email)
@@ -42,5 +50,10 @@ public class UserRepository : IUserRepository
     {
         var result = await _userManager.GetRolesAsync(user);
         return result.FirstOrDefault()!;
+    }
+
+    public async Task UpdateUserInformation(UserIdentity user)
+    {
+        await _userManager.UpdateAsync(user);
     }
 }
