@@ -7,6 +7,6 @@ public record ScanSystemResponse(
     bool Status,
     DateTime StartTime,
     DateTime StopTime,
-    decimal TotalPice,
+    decimal TotalPrice,
     Guid TableId,
     Guid CardId);

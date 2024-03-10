@@ -1,4 +1,8 @@
-import { Button, Drawer, Tooltip } from "@material-tailwind/react";
+import {
+  // Button,
+  Drawer,
+  Tooltip,
+} from "@material-tailwind/react";
 import { MdOutlineCancel } from "react-icons/md";
 import { useStateDispatchContext } from "../../hooks/useStateDispatchHook";
 import { themeColors } from "../../data/theme-color";
@@ -12,7 +16,7 @@ const RightSidebar = memo(() => {
     currentColor,
     setColors,
     setModes,
-    setLanguages,
+    // setLanguages,
     isOpenThemeSettings,
   } = useStateDispatchContext();
   return (
@@ -99,7 +103,7 @@ const RightSidebar = memo(() => {
         </div>
       </div>
       <div className="flex-col border-t-1 border-color p-4 ml-4">
-        <p className="font-semibold text-lg dark:text-main-dark-text">Language Options</p>
+        {/* <p className="font-semibold text-lg dark:text-main-dark-text">Language Options</p>
         <div className="mt-4 flex gap-3">
           <Button
             placeholder={""}
@@ -126,7 +130,7 @@ const RightSidebar = memo(() => {
           >
             English
           </Button>
-        </div>
+        </div> */}
       </div>
     </Drawer>
   );

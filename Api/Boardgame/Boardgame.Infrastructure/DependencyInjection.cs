@@ -31,6 +31,8 @@ public static class DependencyInjection
         services.AddScoped<IScanSystemRepository, ScanSystemRepository>();
         services.AddScoped<ICardRepository, CardRepository>();
         services.AddScoped<IQueueRepository, QueueRepository>();
+        services.AddScoped<INotificationRepository, NotificationRepository>();
+        services.AddScoped<ISaveFileProvider, SaveFileProvider>();
 
         return services;
     }

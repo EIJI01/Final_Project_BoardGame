@@ -4,6 +4,7 @@ import { url } from "../../../utils/Url";
 import { Role } from "../../../models/value-type/enum-type";
 import api from "../config";
 import { FromEmail } from "../../../pages/forget-password/ForgetPassword";
+import ProfileImage from "../../../assets/avatar/good-pic.png";
 
 export const getUserById = async () => {
   try {
@@ -14,7 +15,7 @@ export const getUserById = async () => {
       username: response.data.userName,
       email: response.data.email,
       role: response.data.role as Role,
-      image: response.data.image,
+      image: response.data.image ? response.data.image : ProfileImage,
       tel: response.data.phoneNumber,
       salary: response.data.salary,
     };

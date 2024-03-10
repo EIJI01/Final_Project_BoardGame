@@ -26,6 +26,7 @@ public class SubscribeScanSystemTableDependency : ISubscribeTableDependencies
         if (e.ChangeType != TableDependency.SqlClient.Base.Enums.ChangeType.None)
         {
             await dashboard.SendScanSystems();
+            await dashboard.SendScanSystemsJoinCards();
         }
     }
 

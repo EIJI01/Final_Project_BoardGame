@@ -3,9 +3,10 @@ import { CheckoutRequest } from "../../../models/data/scanSystem";
 import api from "../config";
 import { url } from "../../../utils/Url";
 
-export const checkout = async ({ scanSystemId }: CheckoutRequest) => {
+export const checkout = async ({ scanSystemId, totalPrice }: CheckoutRequest) => {
   try {
     var result = await api.patch(`${url}/scansystem/checkout`, {
+      totalPrice,
       scanSystemId,
     });
     return result.data;

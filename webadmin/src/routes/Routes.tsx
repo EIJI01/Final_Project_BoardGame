@@ -1,19 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import { Suspense } from "react";
-import { Loading } from "../components";
-import { Login, Register } from "../pages";
+import { Branch, BranchId, BranchMain, Dashboard, Login, NotFound, Register } from "../pages";
+import RegisterGM from "../pages/RegisterGM";
 
-import React from "react";
-
-const Dashboard = React.lazy(() => {
-  return new Promise<any>((resolve) => {
-    setTimeout(
-      () => resolve(import("../pages").then(({ Dashboard }) => ({ default: Dashboard }))),
-      1500
-    );
-  });
-});
+// import ProtectedRoute from "../hooks/ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
@@ -22,11 +12,25 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: (
-          <Suspense fallback={<Loading />}>
-            <Dashboard />
-          </Suspense>
-        ),
+        element: <Dashboard />,
+      },
+      {
+        path: "branch-manage",
+        element: <BranchMain />,
+        children: [
+          {
+            path: "",
+            element: <Branch />,
+          },
+          {
+            path: ":id",
+            element: <BranchId />,
+          },
+        ],
+      },
+      {
+        path: "register-gm",
+        element: <RegisterGM />,
       },
     ],
   },
@@ -35,4 +39,5 @@ export const router = createBrowserRouter([
     element: <Login />,
   },
   { path: "/register", element: <Register /> },
+  { path: "*", element: <NotFound /> },
 ]);

@@ -45,7 +45,7 @@ public class TableController : ApiController
             error => Problem(error));
     }
 
-    [Authorize(Roles = RoleKeys.Gm)]
+    [AllowAnonymous]
     [HttpPost("get-id")]
     public async Task<IActionResult> GetAllTableFromId(GetTableFromIdRequest request)
     {

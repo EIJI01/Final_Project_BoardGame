@@ -1,0 +1,11 @@
+POST http://localhost:5107/api/scansystem/update-information-scanSystem
+# POST http://localhost:8000/api/scansystem/update-information-scanSystem
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNjcyMTgxZS00MTkwLTQ5YjEtOGU4Ni0wOGRjMzkwMGRmZTEiLCJnaXZlbl9uYW1lIjoiQ2hhbnl1dCIsImp0aSI6ImUwYzc0MTAyLTMzNTYtNDE5OC1iMzMxLTdmNmJmYmU3Yjk4NyIsInJvbGUiOiJHTSIsImV4cCI6MTcwOTM5NDM2MywiaXNzIjoiQm9hcmRHYW1lQXBwIiwiYXVkIjoiQm9hcmRHYW1lQXBwIn0.q2eSUK1yrKVgcGeZMjU5ULmlMWDAj1sWOqN3hJkvtEU
+
+{
+    "scanSystemId": "LM069",
+    "startTime": "7AFA0EE1-B44E-47CF-BDB3-83A6022917E8",
+    "stopTime": "7AFA0EE1-B44E-47CF-BDB3-83A6022917E8",
+    "totalPrice": 139
+}

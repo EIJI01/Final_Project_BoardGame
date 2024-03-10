@@ -1,0 +1,5 @@
+GET http://localhost:5107/api/queue/get-queue
+# POST http://localhost:8000/api/queue/get-queue
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMGRkMmU1Zi1iZGMyLTQ4MzItOWE2YS0wOGRjMzkyOWY1NjMiLCJnaXZlbl9uYW1lIjoiVGFtcCIsImp0aSI6ImJjYTNhOTcxLTY3YzUtNGUyNC1hMzBhLTFiMjcxOGMzYTU2YSIsInJvbGUiOiJNRU1CRVIiLCJleHAiOjE3MDkzNjU3NzIsImlzcyI6IkJvYXJkR2FtZUFwcCIsImF1ZCI6IkJvYXJkR2FtZUFwcCJ9.dZ-tRqa3wmJBR42jxqmJM3Q99glxf9_4xUdyUUKECEU
+# Gm

@@ -1,0 +1,12 @@
+POST http://localhost:5107/api/BranchAdmin/admin/create-branch
+# POST http://localhost:8000/api/BranchAdmin/admin/create-branch
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMDMxOGU5Zi03MDUzLTRjODItNmY5Yy0wOGRjM2Q3MjY1YjMiLCJnaXZlbl9uYW1lIjoiQWRtaW4iLCJqdGkiOiIwMDM5OGFlNC0zMDI4LTRjNjEtOGM2NS1kMjQ3ZThiYzgyOTUiLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MTAwNzAwMzksImlzcyI6IkJvYXJkR2FtZUFwcCIsImF1ZCI6IkJvYXJkR2FtZUFwcCJ9.qi49FF5iH_1D2Uoyej4RurMDQdCrOSBE_lNPU4mu2jU
+# Gm
+
+{
+    "branchName": "Korat",
+    "address": "Terminal21 Korat. ชั้น LG ต.ในเมือง อ.เมือง , Nakhon Ratchasima, Thailand, Nakhon Ratchasima",
+    "playPricePerHour": 49,
+    "buffetPrice": 149
+}

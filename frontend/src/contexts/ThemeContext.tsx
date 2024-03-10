@@ -15,6 +15,7 @@ export interface InitailStateType {
   currentLanguage: LanguageType;
   screenSize: number;
   openNav: boolean;
+  openNotification: boolean;
 }
 function initialStateInSession() {
   const colors = getSessionStorageItem<string>("currentColor");
@@ -26,21 +27,22 @@ function initialStateInSession() {
   return { color, mode, language };
 }
 const { color, mode, language } = initialStateInSession();
-const initailState: InitailStateType = {
+const initialState: InitailStateType = {
   currentColor: color,
   currentLanguage: { languages: language },
   currentMode: { modes: mode },
   isOpenThemeSettings: false,
   screenSize: window.innerWidth,
   openNav: false,
+  openNotification: false,
 };
 const ThemeContext = createContext<{ state: InitailStateType; dispatch: React.Dispatch<any> }>({
-  state: initailState,
+  state: initialState,
   dispatch: () => null,
 });
 
 export default function ThemeContextProviders({ children }: { children: React.ReactNode }) {
-  const [state, dispatch] = useReducer(reducer, initailState);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return <ThemeContext.Provider value={{ state, dispatch }}>{children}</ThemeContext.Provider>;
 }

@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import {
   BookingQueue,
-  CallingGm,
   ForgetPassword,
   GmProfile,
   HomePage,
@@ -25,6 +24,9 @@ import {
   ScanQRCode,
   TableId,
 } from "../components";
+import ReservationQueue from "../components/ComponentPage/Customer/ReservationQueue";
+import QueueId from "../components/ComponentPage/Customer/QueueId";
+import QueueTableId from "../components/ComponentPage/Customer/QueueTableId";
 
 export const router = createBrowserRouter([
   {
@@ -42,14 +44,32 @@ export const router = createBrowserRouter([
             <BookingQueue />
           </Suspense>
         ),
-      },
-      {
-        path: "member/calling-gm",
-        element: (
-          <Suspense fallback={<Fallback />}>
-            <CallingGm />
-          </Suspense>
-        ),
+        children: [
+          {
+            path: "",
+            element: (
+              <Suspense fallback={<Fallback />}>
+                <ReservationQueue />
+              </Suspense>
+            ),
+          },
+          {
+            path: ":id",
+            element: (
+              <Suspense fallback={<Fallback />}>
+                <QueueId />
+              </Suspense>
+            ),
+          },
+          {
+            path: "queue/table/:id",
+            element: (
+              <Suspense fallback={<Fallback />}>
+                <QueueTableId />
+              </Suspense>
+            ),
+          },
+        ],
       },
       {
         path: "member/scan-qr",

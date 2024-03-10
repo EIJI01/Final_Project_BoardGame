@@ -45,5 +45,20 @@ export const useStateDispatchContext = () => {
     },
     [state.openNav]
   );
-  return { setModes, setColors, setLanguages, setOpenNav, setIsSettings, setScreenSize, ...state };
+  const setOpenNotification = useCallback(
+    (isOpen: boolean) => {
+      dispatch({ type: REDUCER_ACTION_TYPE.SET_SHOW_NOTIFICATION, payload: isOpen });
+    },
+    [state.openNotification]
+  );
+  return {
+    setModes,
+    setColors,
+    setLanguages,
+    setOpenNav,
+    setIsSettings,
+    setScreenSize,
+    setOpenNotification,
+    ...state,
+  };
 };

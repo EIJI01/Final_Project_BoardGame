@@ -16,6 +16,8 @@ public class DataContext : IdentityDbContext<UserIdentity, RoleIdentity, Guid>
     public DbSet<Event>? Events { get; set; }
     public DbSet<Queue>? Queues { get; set; }
     public DbSet<ScanSystem>? ScanSystems { get; set; }
+    public DbSet<Notification>? Notifications { get; set; }
+    public DbSet<ConnectionHub>? ConnectionHubs { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -28,6 +30,9 @@ public class DataContext : IdentityDbContext<UserIdentity, RoleIdentity, Guid>
         modelBuilder.ApplyConfiguration(new WorkConfiguration());
         modelBuilder.ApplyConfiguration(new EventConfiguration());
         modelBuilder.ApplyConfiguration(new UserIdentityConfiguration());
+        modelBuilder.ApplyConfiguration(new NotificationConfiguration());
+        modelBuilder.ApplyConfiguration(new ConnectionHubConfiguration());
+
         base.OnModelCreating(modelBuilder);
     }
 }

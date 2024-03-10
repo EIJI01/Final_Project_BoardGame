@@ -2,12 +2,18 @@ import { useParams } from "react-router-dom";
 import GenerateQRCode from "../../GenQRCode/GenerateQRCode";
 import { useStateDispatchContext } from "../../../hooks/useStateDispatchHook";
 import { Card, Input, Button, Typography, Spinner } from "@material-tailwind/react";
-import { useCallback, useEffect, useState } from "react";
-import { formatTime } from "../../../utils/format";
+import { useEffect, useState } from "react";
+import { formatDateTime } from "../../../utils/format";
 import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 import { ScanSystemResponse } from "../../../models/data/scanSystem";
 import { CardResponse } from "../../../models/data/card";
 import { TableResponseHub } from "../../../models/data/table";
+import * as yup from "yup";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { updateScanSystem } from "../../../data/services/scanSystem-service/updateScanSystem";
+import AlertSuccess from "../../Alert/AlertSuccess";
+import { urlSignalR } from "../../../utils/Url";
 
 interface FormData {
   id: string;
@@ -16,6 +22,7 @@ interface FormData {
   price?: number;
   status: boolean;
   table_id: string;
+  card_id: string;
 }
 
 export default function CardId() {
@@ -25,14 +32,53 @@ export default function CardId() {
   const [allCards, setAllCards] = useState<CardResponse[]>([]);
   const [allTable, setAllTable] = useState<TableResponseHub[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [formData, setFormData] = useState<FormData>({
-    id: "",
-    time_in: "",
-    time_out: "",
-    price: 0,
-    status: false,
-    table_id: "",
+  const [isLoadingButton, setIsLoadingButton] = useState<boolean>(false);
+  const [openAlertSuccess, setOpenAlertSuccess] = useState<boolean>(false);
+  const [openAlertNotSuccess, setOpenAlertNotSuccess] = useState<boolean>(false);
+
+  const handlerOpenAlertSuccess = () => setOpenAlertSuccess(!openAlertSuccess);
+  const handlerOpenAlertNotSuccess = () => setOpenAlertNotSuccess(!openAlertNotSuccess);
+
+  const schema = yup.object().shape({
+    id: yup.string().required("Id is required"),
+    time_in: yup.string(),
+    time_out: yup.string(),
+    price: yup.number(),
+    status: yup.boolean().required("Status is required"),
+    table_id: yup.string().required("Table Id is required."),
+    card_id: yup.string().required("Card Id is required."),
   });
+
+  const { register, handleSubmit, setValue } = useForm<FormData>({ resolver: yupResolver(schema) });
+
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    try {
+      setIsLoadingButton(true);
+      var result = await updateScanSystem({
+        scanSystemId: data.id,
+        startTime: data.time_in,
+        stopTime: data.time_out,
+        totalPrice: data.price,
+      });
+
+      if (result) {
+        setTimeout(() => {
+          setIsLoadingButton(false);
+          setOpenAlertSuccess(true);
+        }, 2000);
+        setTimeout(() => {
+          setOpenAlertSuccess(false);
+        }, 4000);
+      }
+    } catch (err: any) {
+      setOpenAlertNotSuccess(true);
+      setIsLoadingButton(false);
+      setTimeout(() => {
+        setOpenAlertNotSuccess(false);
+      }, 2000);
+      console.log(err);
+    }
+  };
 
   const cards = cardListRows.filter((item) => item.Id === id);
   const card = cards[0];
@@ -40,13 +86,10 @@ export default function CardId() {
   const qr = qrs[0];
   const tables = allTable.filter((data) => data.Id === card.TableId);
   const table = tables[0];
-  console.log("card", card);
 
-  console.log("cardListRows = ", cardListRows);
-  console.log("id = ", id);
   useEffect(() => {
     const connection = new HubConnectionBuilder()
-      .withUrl(`https://localhost:7124/database-tracking`)
+      .withUrl(`${urlSignalR}/database-tracking`)
       .configureLogging(LogLevel.Information)
       .build();
 
@@ -89,32 +132,18 @@ export default function CardId() {
 
   useEffect(() => {
     if (card) {
-      setFormData({
-        id: card.CardId,
-        time_in: formatTime(card.StartTime),
-        time_out: card.Status === true ? "" : formatTime(card.StopTime),
-        price: card.TotalPrice,
-        status: card.Status,
-        table_id: card.TableId,
-      });
+      setValue("id", card.Id);
+      setValue("price", card.TotalPrice);
+      setValue("status", card.Status);
+      setValue("table_id", card.TableId);
+      setValue("card_id", card.CardId);
+      setValue("time_in", formatDateTime(card.StartTime));
+      setValue("time_out", card.StopTime ? formatDateTime(card.StopTime) : "");
     }
   }, [cards]);
 
-  const handleClickFormData = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = event.target;
-      setFormData({ ...formData, [name]: value });
-    },
-    [formData]
-  );
+  console.log(card?.StartTime);
 
-  const handleSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      console.log(formData);
-    },
-    [formData]
-  );
   return isLoading ? (
     <div className="flex justify-center items-center h-[80vh]">
       <Spinner color="blue" className="mx-auto h-12 w-12" />
@@ -152,7 +181,7 @@ export default function CardId() {
                 color="blue-gray"
                 style={{ color: currentColor }}
               >
-                Edit card information
+                Edit Scan information
               </Typography>
               <Typography
                 placeholder={""}
@@ -163,10 +192,44 @@ export default function CardId() {
                 Table {table?.TableNumber}
               </Typography>
             </div>
-            <form className="mt-8 mb-2 w-full max-w-full-lg sm:w-full" onSubmit={handleSubmit}>
+            <form
+              className="mt-8 mb-2 w-full max-w-full-lg sm:w-full"
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <div className="mb-1 flex flex-col gap-6">
                 <div className="lg:grid grid-cols-2 lg:gap-5 mb-1 flex flex-col gap-6">
                   <div className="mb-1 flex flex-col gap-6">
+                    {false && (
+                      <>
+                        <Input
+                          crossOrigin={""}
+                          size="lg"
+                          {...register("id")}
+                          className=" !border-t-blue-gray-200 focus:!border-t-gray-900 dark:focus:!border-white dark:text-main-dark-text"
+                          labelProps={{
+                            className: "before:content-none after:content-none",
+                          }}
+                        />
+                        <Input
+                          crossOrigin={""}
+                          size="lg"
+                          {...register("table_id")}
+                          className=" !border-t-blue-gray-200 focus:!border-t-gray-900 dark:focus:!border-white dark:text-main-dark-text"
+                          labelProps={{
+                            className: "before:content-none after:content-none",
+                          }}
+                        />
+                        <Input
+                          crossOrigin={""}
+                          size="lg"
+                          {...register("card_id")}
+                          className=" !border-t-blue-gray-200 focus:!border-t-gray-900 dark:focus:!border-white dark:text-main-dark-text"
+                          labelProps={{
+                            className: "before:content-none after:content-none",
+                          }}
+                        />
+                      </>
+                    )}
                     <Typography
                       placeholder={""}
                       variant="h6"
@@ -177,17 +240,13 @@ export default function CardId() {
                     </Typography>
                     <Input
                       crossOrigin={""}
-                      type="time"
-                      name="time_in"
+                      type="datetime-local"
                       size="lg"
-                      step="3600"
-                      value={formData.time_in}
-                      placeholder="12:00:00"
+                      {...register("time_in")}
                       className=" !border-t-blue-gray-200 focus:!border-t-gray-900 dark:focus:!border-white dark:text-main-dark-text"
                       labelProps={{
                         className: "before:content-none after:content-none",
                       }}
-                      onChange={handleClickFormData}
                     />
                   </div>
                   <div className="mb-1 flex flex-col gap-6">
@@ -199,20 +258,30 @@ export default function CardId() {
                     >
                       Time out
                     </Typography>
-                    <Input
-                      crossOrigin={""}
-                      type="time"
-                      name="time_out"
-                      step="3600"
-                      size="lg"
-                      value={formData.time_out}
-                      placeholder="12:00:00"
-                      className=" !border-t-blue-gray-200 focus:!border-t-gray-900 dark:focus:!border-white dark:text-main-dark-text"
-                      labelProps={{
-                        className: "before:content-none after:content-none",
-                      }}
-                      onChange={handleClickFormData}
-                    />
+                    {card.Status === true ? (
+                      <Input
+                        crossOrigin={""}
+                        readOnly
+                        type="datetime-local"
+                        {...register("time_out")}
+                        size="lg"
+                        className=" !border-t-blue-gray-200 focus:!border-blue-gray-200 focus:border-1  border-1 cursor-default dark:text-main-dark-text !bg-gray-400"
+                        labelProps={{
+                          className: "before:content-none after:content-none",
+                        }}
+                      />
+                    ) : (
+                      <Input
+                        crossOrigin={""}
+                        type="datetime-local"
+                        {...register("time_out")}
+                        size="lg"
+                        className=" !border-t-blue-gray-200 focus:!border-t-gray-900 dark:focus:!border-white dark:text-main-dark-text"
+                        labelProps={{
+                          className: "before:content-none after:content-none",
+                        }}
+                      />
+                    )}
                   </div>
                 </div>
                 <div>
@@ -225,18 +294,30 @@ export default function CardId() {
                     >
                       price
                     </Typography>
-                    <Input
-                      crossOrigin={""}
-                      name="price"
-                      size="lg"
-                      value={formData.price}
-                      placeholder="50 &#3647;"
-                      className=" !border-t-blue-gray-200 focus:!border-t-gray-900 dark:focus:!border-white dark:text-main-dark-text"
-                      labelProps={{
-                        className: "before:content-none after:content-none",
-                      }}
-                      onChange={handleClickFormData}
-                    />
+                    {card.Status === true ? (
+                      <Input
+                        crossOrigin={""}
+                        size="lg"
+                        readOnly
+                        {...register("price")}
+                        placeholder="50 &#3647;"
+                        className=" !border-t-blue-gray-200 focus:!border-blue-gray-200 focus:border-1  border-1 cursor-default dark:text-main-dark-text !bg-gray-400"
+                        labelProps={{
+                          className: "before:content-none after:content-none",
+                        }}
+                      />
+                    ) : (
+                      <Input
+                        crossOrigin={""}
+                        size="lg"
+                        {...register("price")}
+                        placeholder="50 &#3647;"
+                        className=" !border-t-blue-gray-200 focus:!border-t-gray-900 dark:focus:!border-white dark:text-main-dark-text"
+                        labelProps={{
+                          className: "before:content-none after:content-none",
+                        }}
+                      />
+                    )}
                   </div>
                 </div>
                 <div>
@@ -251,12 +332,11 @@ export default function CardId() {
                     </Typography>
                     <Input
                       crossOrigin={""}
-                      disabled
-                      name="status"
-                      value={formData.status === true ? "online" : "offline"}
+                      readOnly
                       size="lg"
+                      {...register("status")}
                       placeholder="online / offline"
-                      className=" !border-t-blue-gray-200 focus:!border-t-gray-900 cursor-not-allowed"
+                      className=" !border-t-blue-gray-200 focus:!border-blue-gray-200 focus:border-1  border-1 cursor-default !bg-gray-400"
                       labelProps={{
                         className: "before:content-none after:content-none",
                       }}
@@ -266,12 +346,32 @@ export default function CardId() {
               </div>
 
               <Button placeholder={""} className="mt-6" fullWidth type="submit">
-                Save
+                {isLoadingButton ? <Spinner color="blue" className="mx-auto" /> : "Save"}
               </Button>
             </form>
           </Card>
         </div>
       </div>
+      {openAlertSuccess || openAlertNotSuccess ? (
+        <div className=" fixed top-0 inset-0 z-50 mx-auto h-24 flex items-center justify-center">
+          <div>
+            <AlertSuccess
+              open={openAlertSuccess}
+              data="Update scan success."
+              onClose={handlerOpenAlertSuccess}
+              type="success"
+            />
+            <AlertSuccess
+              open={openAlertNotSuccess}
+              data="Update scan failed."
+              onClose={handlerOpenAlertNotSuccess}
+              type="error"
+            />
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

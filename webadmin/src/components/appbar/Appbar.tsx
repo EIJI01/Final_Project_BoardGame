@@ -73,6 +73,13 @@ export default function AppbarDefault({ open, handleDrawerOpen, children }: Prop
     handleMobileMenuClose();
   };
 
+  const handlerLogout = () => {
+    localStorage.clear();
+    setAnchorEl(null);
+    handleMobileMenuClose();
+    window.location.href = "/login";
+  };
+
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
@@ -125,7 +132,7 @@ export default function AppbarDefault({ open, handleDrawerOpen, children }: Prop
           </CardContent>
         </Card>
       </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
+      <MenuItem onClick={handlerLogout}>
         <Card sx={{ minWidth: 200 }}>
           <CardStyle sx={{ display: "flex", alignItems: "center", fontWeight: "bold" }}>
             Log out

@@ -2,11 +2,14 @@ import {
   IconButton,
   SpeedDial,
   SpeedDialHandler,
-  SpeedDialContent,
-  SpeedDialAction,
-  Typography,
+  // SpeedDialContent,
+  // SpeedDialAction,
+  // Typography,
 } from "@material-tailwind/react";
-import { PlusIcon, CogIcon } from "@heroicons/react/24/outline";
+import {
+  // PlusIcon,
+  CogIcon,
+} from "@heroicons/react/24/outline";
 import { useStateDispatchContext } from "../../hooks/useStateDispatchHook";
 import { memo } from "react";
 
@@ -22,11 +25,12 @@ const SpeedDialButton = memo(() => {
               size="lg"
               className={`rounded-full border-2`}
               style={{ backgroundColor: currentColor }}
+              onClick={() => setIsSettings(true)}
             >
-              <PlusIcon className="h-5 w-5 transition-transform group-hover:rotate-45" />
+              <CogIcon className="h-5 w-5" />
             </IconButton>
           </SpeedDialHandler>
-          <SpeedDialContent placeholder="">
+          {/* <SpeedDialContent placeholder="">
             <SpeedDialAction
               placeholder=""
               className={`relative text-white border-2`}
@@ -43,7 +47,7 @@ const SpeedDialButton = memo(() => {
                 Settings
               </Typography>
             </SpeedDialAction>
-          </SpeedDialContent>
+          </SpeedDialContent> */}
         </SpeedDial>
       </div>
     </div>

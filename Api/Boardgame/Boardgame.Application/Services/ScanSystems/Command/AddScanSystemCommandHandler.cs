@@ -65,7 +65,7 @@ public class AddScanSystemCommandHandler : IRequestHandler<AddScanSystemCommand,
 
         var newScan = new ScanSystem
         {
-            StartTime = _dateTimeProvider.UtcNow,
+            StartTime = _dateTimeProvider.UtcNow.ToLocalTime(),
             Status = true,
             TableId = table.Id,
             CardId = card.Id

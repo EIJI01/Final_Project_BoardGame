@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "SHur84qKk8q/HrAkZBMwheodfPLKBGhMl2XRy16FwkdnPbODtcR3E93hXzT0qDrGFuhj7//38EE8raEDVcQABg==",
+  "dgSpecHash": "qJzmMRatZE8b9hsuuV72FlGoba8kE7CYvW+8dGKt3RXPrau5+0lq+xOojY7goe/PCZ1mpmBYOdmq8wvS1j4M/g==",
   "success": true,
   "projectFilePath": "C:\\Users\\chany\\OneDrive\\Desktop\\Test\\Api\\Boardgame\\Boardgame.Contracts\\Boardgame.Contracts.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\chany\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
+    "C:\\Users\\chany\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.1\\microsoft.extensions.primitives.5.0.1.nupkg.sha512",
+    "C:\\Users\\chany\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512"
+  ],
   "logs": []
 }

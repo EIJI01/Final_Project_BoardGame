@@ -42,7 +42,7 @@ public class AddWorkCommandHandler : IRequestHandler<AddWorkCommand, ErrorOr<boo
         {
             BranchId = branch.Id,
             UserId = user.Id,
-            TimeIn = _dateTimeProvider.UtcNow,
+            TimeIn = _dateTimeProvider.UtcNow.ToLocalTime(),
             Status = true
         };
 

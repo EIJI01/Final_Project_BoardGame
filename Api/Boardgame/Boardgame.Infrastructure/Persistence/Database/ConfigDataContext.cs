@@ -14,6 +14,7 @@ public static class ConfigDataContext
                 configuration
                 .GetConnectionString(
                 "DefaultConnection")));
+
         return services;
     }
 }

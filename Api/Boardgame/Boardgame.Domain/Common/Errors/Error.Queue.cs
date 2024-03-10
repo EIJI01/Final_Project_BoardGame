@@ -10,5 +10,9 @@ public static partial class Errors
             code: "Queue.NotFound",
             description: "Queue is not exist.");
 
+        public static Error DuplicateQueue => Error.Conflict(
+            code: "Queue.Duplicate",
+            description: "Queue is already exist.");
+
     }
 }

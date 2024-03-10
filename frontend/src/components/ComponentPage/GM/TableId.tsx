@@ -47,6 +47,9 @@ import AlertSuccess from "../../Alert/AlertSuccess";
 import { checkout } from "../../../data/services/scanSystem-service/checkout";
 import { changeTable } from "../../../data/services/scanSystem-service/change-table";
 import { deleteScanSystem } from "../../../data/services/scanSystem-service/deleteScanSystem";
+import { getAllBranchId } from "../../../data/services/branch-service/getAllIdbranch";
+import { BranchAllIdResponse } from "../../../models/data/branch";
+import { urlSignalR } from "../../../utils/Url";
 
 type Props = {};
 
@@ -74,6 +77,8 @@ export default function TableId({}: Props) {
   const [openSuccessDelete, setOpenSuccessDelete] = useState<boolean>(false);
   const [openErrorDelete, setOpenErrorDelete] = useState<boolean>(false);
   const [tableId, setTableId] = useState<string>("");
+  const [branch, setBranch] = useState<BranchAllIdResponse>();
+  const [currentPrice, setCurrentPrice] = useState<number>(0);
 
   useEffect(() => {
     if (id) {
@@ -81,6 +86,10 @@ export default function TableId({}: Props) {
       const getTableId = async () => {
         try {
           var result = await getTableById(id!);
+          var resultBranch = await getAllBranchId();
+          const branchList = resultBranch.filter((b) => b.id === branchId);
+          const branch = branchList[0];
+          setBranch(branch);
           setTableData(result);
           var resultAllTable = await getAllTable(branchId!);
           setAllTable(resultAllTable);
@@ -97,7 +106,7 @@ export default function TableId({}: Props) {
 
   useEffect(() => {
     const connection = new HubConnectionBuilder()
-      .withUrl(`https://localhost:7124/database-tracking`)
+      .withUrl(`${urlSignalR}/database-tracking`)
       .configureLogging(LogLevel.Information)
       .build();
 
@@ -171,8 +180,48 @@ export default function TableId({}: Props) {
     }
   };
 
+  console.log("currentPrice", currentPrice);
+
   const handleOpen = () => setOpenScan(!openScan);
   const handleOpenId = () => setOpenId(!openId);
+
+  const calculatePrice = useCallback(() => {
+    if (cardListRows && stateId && branch) {
+      const newDate = new Date().getTime();
+      const startTimes = cardListRows.filter((s) => s.Id === stateId);
+      const scanSystem = startTimes[0];
+      var values = newDate - new Date(`${scanSystem?.StartTime}`).getTime();
+      const hours = Math.floor(values / (1000 * 60 * 60));
+      const minutes = Math.floor((values % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((values % (1000 * 60)) / 1000);
+      if (
+        (hours < 1 && minutes >= 0 && seconds >= 0) ||
+        (hours === 1 && minutes === 0 && seconds === 0)
+      ) {
+        setCurrentPrice(branch.playPricePerHour);
+      } else if (hours === 1 && minutes >= 0 && minutes <= 30 && seconds >= 0) {
+        setCurrentPrice(branch.playPricePerHour + 15);
+      } else if (
+        (hours < 2 && minutes >= 0 && seconds >= 0) ||
+        (hours === 2 && minutes === 0 && seconds === 0)
+      ) {
+        setCurrentPrice(branch.playPricePerHour * 2);
+      } else if (hours === 2 && minutes >= 0 && minutes <= 30 && seconds >= 0) {
+        setCurrentPrice(branch.playPricePerHour * 2 + 15);
+      } else if (
+        (hours < 3 && minutes >= 0 && seconds >= 0) ||
+        (hours === 3 && minutes === 0 && seconds === 0)
+      ) {
+        setCurrentPrice(branch.playPricePerHour * 3);
+      } else {
+        setCurrentPrice(branch.buffetPrice);
+      }
+    }
+  }, [stateId, branch]);
+
+  useEffect(() => {
+    calculatePrice();
+  }, [stateId]);
 
   const handleClickCheckout = useCallback(() => {
     setOpenCheckout(!openCheckout);
@@ -190,21 +239,23 @@ export default function TableId({}: Props) {
   };
 
   const handleFetchCheckout = async () => {
-    try {
-      const result = await checkout({ scanSystemId: stateId });
-      console.log(result.message);
-      handleClickCheckout();
-      setOpenSuccessCheckout(true);
-      setInterval(() => {
-        setOpenSuccessCheckout(false);
-      }, 2000);
-    } catch (err: any) {
-      handleClickCheckout();
-      setOpenErrorCheckout(true);
-      setInterval(() => {
-        setOpenErrorCheckout(false);
-      }, 2000);
-      console.log(err);
+    if (currentPrice && stateId) {
+      try {
+        const result = await checkout({ scanSystemId: stateId, totalPrice: currentPrice });
+        console.log(result.message);
+        handleClickCheckout();
+        setOpenSuccessCheckout(true);
+        setInterval(() => {
+          setOpenSuccessCheckout(false);
+        }, 2000);
+      } catch (err: any) {
+        handleClickCheckout();
+        setOpenErrorCheckout(true);
+        setInterval(() => {
+          setOpenErrorCheckout(false);
+        }, 2000);
+        console.log(err);
+      }
     }
   };
 
@@ -395,7 +446,7 @@ export default function TableId({}: Props) {
                 className="font-semibold text-base text-gray-600"
                 style={{ color: currentMode.modes === "Dark" ? "white" : "" }}
               >
-                Price: {item.TotalPrice}$
+                Price: {currentPrice}$
               </div>
             </div>
           </div>

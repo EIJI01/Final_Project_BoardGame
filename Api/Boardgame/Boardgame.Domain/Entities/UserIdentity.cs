@@ -11,5 +11,7 @@ public class UserIdentity : IdentityUser<Guid>
     // Reference
     public RefreshToken? Refresh { get; set; }
     public ICollection<Work>? Works { get; set; }
-    public Queue? Queue { get; set; }
+    public ICollection<Queue>? Queue { get; set; }
+    public ICollection<Notification>? Notifications { get; set; }
+    public ICollection<ConnectionHub>? ConnectionHubs { get; set; }
 }

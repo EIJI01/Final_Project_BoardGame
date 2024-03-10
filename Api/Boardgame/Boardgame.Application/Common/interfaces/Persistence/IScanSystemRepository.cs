@@ -11,4 +11,5 @@ public interface IScanSystemRepository
     Task<ScanSystem?> GetScanSystemById(Guid scanSystemId);
     Task<bool> UpdateScanSystem(ScanSystem scanSystem);
     Task<bool> DeleteScanSystem(ScanSystem scanSystem);
+    Task<ScanSystem?> GetScanSystemByCardIdStatusTrue(Guid cardId);
 }

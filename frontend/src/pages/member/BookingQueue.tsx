@@ -1,9 +1,9 @@
-import ReservationQueue from "../../components/ComponentPage/Customer/ReservationQueue";
+import { Outlet } from "react-router-dom";
 
 const BookingQueue = (): JSX.Element => {
   return (
     <div>
-      <ReservationQueue />
+      <Outlet />
     </div>
   );
 };

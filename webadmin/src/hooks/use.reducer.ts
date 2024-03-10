@@ -7,6 +7,9 @@ export default function useReducerDispatch() {
     setTheme: (value: string) => {
       dispatch({ type: REDUCER_ACTION_TYPE.SET_THEME_COLOR, payload: value });
     },
+    setOpenRightDrawer: (value: boolean) => {
+      dispatch({ type: REDUCER_ACTION_TYPE.SET_OPEN_RIGHT_DRAWER, payload: value });
+    },
   };
 
   return { state, setState };

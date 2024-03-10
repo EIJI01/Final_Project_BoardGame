@@ -1,0 +1,14 @@
+# PATCH http://localhost:8000/api/user/update-information
+PATCH http://localhost:5107/api/user/update-information
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMGRkMmU1Zi1iZGMyLTQ4MzItOWE2YS0wOGRjMzkyOWY1NjMiLCJnaXZlbl9uYW1lIjoiVGFtcCIsImp0aSI6ImRjNjI3MmNiLWRiYjktNDk2ZS1hYzlhLTdmNTE5NDNhZTI3ZCIsInJvbGUiOiJNRU1CRVIiLCJleHAiOjE3MDk1MzYzNDcsImlzcyI6IkJvYXJkR2FtZUFwcCIsImF1ZCI6IkJvYXJkR2FtZUFwcCJ9.0N7cfau5ez-uvYDR3XfyIrjRKoODsVTsTAwcDuKr9sg
+# Member
+
+{
+    "userId": "",
+    "name": "Saksit",
+    "phoneNumber": "0894512345",
+    "imageName": "",
+    "imageSrc": "",
+    "imageFile": null
+}

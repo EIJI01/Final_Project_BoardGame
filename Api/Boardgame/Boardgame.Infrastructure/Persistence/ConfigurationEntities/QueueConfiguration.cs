@@ -17,16 +17,17 @@ public class QueueConfiguration : IEntityTypeConfiguration<Queue>
 
         builder
             .HasOne(q => q.User)
-            .WithOne(u => u.Queue)
-            .HasForeignKey<Queue>(q => q.UserId);
+            .WithMany(u => u.Queue)
+            .HasForeignKey(q => q.UserId);
+
         builder
             .HasOne(q => q.Branch)
             .WithMany(b => b.Queues)
             .HasForeignKey(q => q.BranchId);
         builder
             .HasOne(q => q.Table)
-            .WithOne(t => t.Queue)
-            .HasForeignKey<Queue>(q => q.TableId)
+            .WithMany(t => t.Queue)
+            .HasForeignKey(q => q.TableId)
             .OnDelete(DeleteBehavior.Restrict);
 
     }

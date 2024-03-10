@@ -4,7 +4,7 @@ public class Work
 {
     public Guid Id = Guid.NewGuid();
     public DateTime TimeIn { get; set; }
-    public DateTime TimeOut { get; set; }
+    public DateTime? TimeOut { get; set; } = null!;
     public bool Status { get; set; }
 
     // Reference

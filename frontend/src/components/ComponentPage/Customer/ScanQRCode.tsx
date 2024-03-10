@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Button,
   Dialog,
@@ -8,40 +8,74 @@ import {
   Typography,
   Input,
   CardHeader,
+  Spinner,
 } from "@material-tailwind/react";
 import QRScaner from "../../QRScan/QRScaner";
 import ScanImage from "../../../assets/scan/scan-qrcode.png";
 import { ButtonCustom } from "../..";
 import { useStateDispatchContext } from "../../../hooks/useStateDispatchHook";
+import { getScanSystemByCardNumber } from "../../../data/services/scanSystem-service/getScanByCardNumber";
+import AlertSuccess from "../../Alert/AlertSuccess";
 
 type Props = {};
 
 export default function ScanQRCode({}: Props) {
   const [open, setOpen] = React.useState(false);
-  const [idQrcode, setIdQrcode] = useState<string | undefined>(undefined);
+  const [idQRcode, setIdQRcode] = useState<string>("");
+  const [numberCard, setNumberCard] = useState<string>("");
   const { currentColor, currentMode } = useStateDispatchContext();
+  const [isLoadingButton, setIsLoadingButton] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const handleOpen = () => setOpen(!open);
   const handleChangeIdQrcode = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = event.target;
-      setIdQrcode(value);
+      setNumberCard(value.toUpperCase());
     },
-    [idQrcode]
+    [numberCard]
   );
 
-  const handleClickSubmit = useCallback(() => {
-    window.location.href = `/member/scan-qr/${idQrcode}`;
-  }, [idQrcode]);
+  const handleClickSubmit = useCallback(async () => {
+    try {
+      setIsLoadingButton(true);
+      var result = await getScanSystemByCardNumber({ cardNumber: numberCard });
+      if (result) {
+        setTimeout(() => {
+          window.location.href = `/member/scan-qr/${result.cardId}`;
+        }, 2000);
+      }
+    } catch (err: any) {
+      setIsLoadingButton(false);
+      setError(true);
+      setTimeout(() => {
+        setError(false);
+      }, 2000);
+      console.log(err);
+    }
+  }, [numberCard]);
 
-  const handleScanQrcode = useCallback(
-    (value: string | undefined) => {
-      setIdQrcode(value);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+  }, []);
+
+  const handleScanQRcode = useCallback(
+    (value: string) => {
+      setIdQRcode(value);
     },
-    [idQrcode]
+    [idQRcode]
   );
 
-  return (
+  const handlerError = () => setError(!error);
+
+  return isLoading ? (
+    <div className="flex justify-center items-center h-[80vh]">
+      <Spinner color="blue" className="mx-auto h-12 w-12" />
+    </div>
+  ) : (
     <>
       <CardHeader
         placeholder={""}
@@ -69,6 +103,7 @@ export default function ScanQRCode({}: Props) {
                   <Input
                     crossOrigin={""}
                     size="lg"
+                    value={numberCard}
                     placeholder="your id qr code"
                     className=" !border-t-blue-gray-200 focus:!border-t-gray-900 dark:text-main-dark-text dark:focus:!border-white"
                     labelProps={{
@@ -84,7 +119,7 @@ export default function ScanQRCode({}: Props) {
                   color={currentMode.modes === "Dark" ? currentColor : undefined}
                   onClick={handleClickSubmit}
                 >
-                  Submit
+                  {isLoadingButton ? <Spinner className="h-6 w-6" color="blue" /> : "Submit"}
                 </ButtonCustom>
               </div>
               <div className=" mt-10">
@@ -123,7 +158,7 @@ export default function ScanQRCode({}: Props) {
       >
         <DialogHeader placeholder={""}>Scan QR Code</DialogHeader>
         <DialogBody placeholder={""} className="h-[500px] lg:p-4 p-0">
-          <QRScaner handleScanQrcode={handleScanQrcode} idQrcode={idQrcode} />
+          <QRScaner handleScanQRcode={handleScanQRcode} idQRcode={idQRcode} />
         </DialogBody>
         <DialogFooter placeholder={""}>
           <Button placeholder={""} variant="text" color="red" onClick={handleOpen} className="mr-1">
@@ -134,6 +169,18 @@ export default function ScanQRCode({}: Props) {
           </Button>
         </DialogFooter>
       </Dialog>
+      {error && (
+        <div className=" fixed top-0 inset-0 z-50 mx-auto h-24 flex items-center justify-center">
+          <div>
+            <AlertSuccess
+              open={error}
+              data="Please check your QR Code again."
+              onClose={handlerError}
+              type="error"
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 }

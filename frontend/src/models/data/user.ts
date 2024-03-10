@@ -14,3 +14,13 @@ export interface User {
 export interface UserRequest {
   id: string;
 }
+
+export interface MemberModel {
+  id: string;
+  userName: string;
+  name: string;
+  email: string;
+  role: string;
+  image: string;
+  phoneNumber: string;
+}

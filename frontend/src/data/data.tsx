@@ -6479,7 +6479,7 @@ export const CARD_LIST_ROWS = [
   },
 ];
 
-export const TABLE_HEAD_QUEUE = ["Queue", "Name", "People", "status"];
+export const TABLE_HEAD_QUEUE = ["Queue", "Name", "People", "Table", "status", "notification"];
 export const QUEUE_TABLE_ROWS = [
   {
     queue: 1,
