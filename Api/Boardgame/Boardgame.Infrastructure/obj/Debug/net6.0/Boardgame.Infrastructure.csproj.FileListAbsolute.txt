@@ -46,7 +46,6 @@ C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Infrastructure\obj\
 C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Infrastructure\obj\Debug\net6.0\Boardgame.Infrastructure.AssemblyInfo.cs
 C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Infrastructure\obj\Debug\net6.0\Boardgame.Infrastructure.csproj.CoreCompileInputs.cache
 C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Infrastructure\obj\Debug\net6.0\Boardgame.Infrastructure.sourcelink.json
-C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Infrastructure\obj\Debug\net6.0\Boardgame.Infrastructure.csproj.CopyComplete
 C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Infrastructure\obj\Debug\net6.0\Boardgame.Infrastructure.dll
 C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Infrastructure\obj\Debug\net6.0\refint\Boardgame.Infrastructure.dll
 C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Infrastructure\obj\Debug\net6.0\Boardgame.Infrastructure.pdb
@@ -68,3 +67,4 @@ C:\Users\chany\OneDrive\Desktop\ApiProject\Api\Boardgame\Boardgame.Infrastructur
 C:\Users\chany\OneDrive\Desktop\ApiProject\Api\Boardgame\Boardgame.Infrastructure\obj\Debug\net6.0\refint\Boardgame.Infrastructure.dll
 C:\Users\chany\OneDrive\Desktop\ApiProject\Api\Boardgame\Boardgame.Infrastructure\obj\Debug\net6.0\Boardgame.Infrastructure.pdb
 C:\Users\chany\OneDrive\Desktop\ApiProject\Api\Boardgame\Boardgame.Infrastructure\obj\Debug\net6.0\ref\Boardgame.Infrastructure.dll
+C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Infrastructure\obj\Debug\net6.0\Boardgam.DC3EBC17.Up2Date

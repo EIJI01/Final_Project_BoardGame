@@ -7,7 +7,7 @@ export interface User {
   email: string;
   role: Role;
   image?: string;
-  tel?: string;
+  phoneNumber?: string;
   salary?: number;
 }
 

@@ -13,5 +13,5 @@ public interface IUserRepository
     Task<string> GetUserRoleAsync(UserIdentity user);
     Task<List<UserIdentity>> GetAllUser();
     Task UpdateUserInformation(UserIdentity user);
-    // Task<List<UserRoleIdentity>> GetUserRole();
+    Task<List<UserIdentity>> GetUserFromRole(string role);
 }

@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import { Branch, BranchId, BranchMain, Dashboard, Login, NotFound, Register } from "../pages";
 import RegisterGM from "../pages/RegisterGM";
+import CreateQRcode from "../pages/CreateQRcode";
 
 // import ProtectedRoute from "../hooks/ProtectedRoute";
 
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: "register-gm",
         element: <RegisterGM />,
+      },
+      {
+        path: "generate-qrcode",
+        element: <CreateQRcode />,
       },
     ],
   },

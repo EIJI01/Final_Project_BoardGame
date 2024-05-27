@@ -18,36 +18,20 @@ import Tooltip from "@mui/material/Tooltip";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
-import { getAllBranch } from "../data/services/branch-service/get-all";
-import { BranchAllIdResponse } from "../models/data/branch";
 import { BsFillPlusSquareFill } from "react-icons/bs";
-import useReducerDispatch from "../hooks/use.reducer";
+import ImageLogo from "../assets/logo-boardgame.png";
+import { User } from "../models/data/user";
+import { getAllGm } from "../data/services/gm-service/getALlGm";
+import DialogDefault from "../components/dialog/DialogDefault";
+import DialogRegister from "./DialogRegister";
 
 interface Data {
   id: number;
-  branchId: string;
-  address: string;
-  branchName: string;
-  playPricePerHour: number;
-  buffetPrice: number;
-}
-
-function createData(
-  id: number,
-  branchId: string,
-  address: string,
-  branchName: string,
-  playPricePerHour: number,
-  buffetPrice: number
-): Data {
-  return {
-    id,
-    branchId,
-    address,
-    branchName,
-    playPricePerHour,
-    buffetPrice,
-  };
+  userId: string;
+  name: string;
+  email: string;
+  image: string;
+  phoneNumber: string;
 }
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -92,36 +76,36 @@ interface HeadCell {
 
 const headCells: readonly HeadCell[] = [
   {
-    id: "branchId",
+    id: "userId",
     numeric: false,
     disablePadding: true,
     label: "ID",
   },
   {
-    id: "branchName",
+    id: "image",
     numeric: false,
     disablePadding: true,
-    label: "Branch Name",
+    label: "image",
   },
 
   {
-    id: "address",
+    id: "name",
     numeric: false,
     disablePadding: false,
-    label: "Address",
+    label: "Name",
   },
 
   {
-    id: "playPricePerHour",
+    id: "email",
     numeric: true,
     disablePadding: false,
-    label: "Play Price PerHour (bath)",
+    label: "Email",
   },
   {
-    id: "buffetPrice",
+    id: "phoneNumber",
     numeric: true,
     disablePadding: false,
-    label: "Buffet Price (bath)",
+    label: "Phone number",
   },
 ];
 
@@ -182,12 +166,11 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 
 interface EnhancedTableToolbarProps {
   numSelected: number;
-  setOpenRightDrawer: (value: boolean) => void;
-  openRightDrawer: boolean;
+  handlerSetOpen: (value: boolean) => void;
 }
 
 function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
-  const { numSelected, setOpenRightDrawer, openRightDrawer } = props;
+  const { numSelected, handlerSetOpen } = props;
 
   return (
     <Toolbar
@@ -218,7 +201,7 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
       ) : (
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
           <Tooltip title="Add Branch">
-            <IconButton onClick={() => setOpenRightDrawer(!openRightDrawer)}>
+            <IconButton onClick={() => handlerSetOpen(true)}>
               <BsFillPlusSquareFill />
             </IconButton>
           </Tooltip>
@@ -234,19 +217,23 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
 }
 export default function RegisterGM() {
   const [order, setOrder] = React.useState<Order>("asc");
-  const [orderBy, setOrderBy] = React.useState<keyof Data>("playPricePerHour");
+  const [orderBy, setOrderBy] = React.useState<keyof Data>("name");
   const [selected, setSelected] = React.useState<readonly number[]>([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [branches, setBranches] = React.useState<BranchAllIdResponse[]>([]);
-  const { state, setState } = useReducerDispatch();
+  const [listGm, setListGm] = React.useState<User[]>([]);
+  const [open, setOpen] = React.useState<boolean>(false);
+
+  const handlerSetOpen = (value: boolean) => {
+    setOpen(value);
+  };
 
   React.useEffect(() => {
     const fetchBranch = async () => {
       try {
-        var result = await getAllBranch();
+        var result = await getAllGm();
         if (result) {
-          setBranches(result);
+          setListGm(result);
           console.log(result);
         }
       } catch (err: any) {
@@ -256,15 +243,15 @@ export default function RegisterGM() {
     fetchBranch();
   }, []);
 
-  const rows = branches.map((data, index) => {
-    return createData(
-      index + 1,
-      data.id,
-      data.address,
-      data.branchName,
-      data.playPricePerHour,
-      data.buffetPrice
-    );
+  const rows = listGm.map((data, index) => {
+    return {
+      id: index + 1,
+      userId: data.id,
+      name: data.name,
+      email: data.email,
+      image: (data.image as string) || ImageLogo,
+      phoneNumber: data.phoneNumber as string,
+    };
   });
 
   const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof Data) => {
@@ -328,11 +315,7 @@ export default function RegisterGM() {
   return (
     <Box sx={{ width: "100%", mb: 2 }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar
-          numSelected={selected.length}
-          setOpenRightDrawer={setState.setOpenRightDrawer}
-          openRightDrawer={state.openRightDrawer}
-        />
+        <EnhancedTableToolbar numSelected={selected.length} handlerSetOpen={handlerSetOpen} />
         <TableContainer>
           <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
             <EnhancedTableHead
@@ -368,13 +351,13 @@ export default function RegisterGM() {
                         }}
                       />
                     </TableCell>
+                    <TableCell align="left">{row.userId}</TableCell>
                     <TableCell component="th" id={labelId} scope="row" padding="none">
-                      {row.branchId}
+                      <img src={row.image} alt="avatar" style={{ width: "70px", height: "40px" }} />
                     </TableCell>
-                    <TableCell align="left">{row.branchName}</TableCell>
-                    <TableCell align="left">{row.address}</TableCell>
-                    <TableCell align="right">{row.playPricePerHour}</TableCell>
-                    <TableCell align="right">{row.buffetPrice}</TableCell>
+                    <TableCell align="left">{row.name}</TableCell>
+                    <TableCell align="right">{row.email}</TableCell>
+                    <TableCell align="right">{row.phoneNumber}</TableCell>
                   </TableRow>
                 );
               })}
@@ -396,6 +379,9 @@ export default function RegisterGM() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
+      <DialogDefault setOpen={handlerSetOpen} open={open}>
+        <DialogRegister />
+      </DialogDefault>
     </Box>
   );
 }

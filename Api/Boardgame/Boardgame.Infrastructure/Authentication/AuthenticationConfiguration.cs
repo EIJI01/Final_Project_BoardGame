@@ -59,11 +59,11 @@ public static class AuthenticationConfiguration
 
         services.Configure<IdentityOptions>(options =>
         {
-            options.Password.RequireDigit = true;
+            options.Password.RequireDigit = false;
             options.Password.RequireLowercase = true;
             options.Password.RequireNonAlphanumeric = false;
-            options.Password.RequireUppercase = true;
-            options.Password.RequiredLength = 8;
+            options.Password.RequireUppercase = false;
+            options.Password.RequiredLength = 6;
             options.Password.RequiredUniqueChars = 0;
         });
 

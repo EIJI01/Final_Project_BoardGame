@@ -9,3 +9,11 @@ export interface LoginResponse {
   accessToken: string;
   refreshToken: string;
 }
+
+export interface RegisterGmForm {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  password: string;
+  confirmPassword: string;
+}
