@@ -40,7 +40,6 @@ C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Application\obj\Deb
 C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Application\obj\Debug\net6.0\Boardgame.Application.AssemblyInfo.cs
 C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Application\obj\Debug\net6.0\Boardgame.Application.csproj.CoreCompileInputs.cache
 C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Application\obj\Debug\net6.0\Boardgame.Application.sourcelink.json
-C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Application\obj\Debug\net6.0\Boardgame.Application.csproj.CopyComplete
 C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Application\obj\Debug\net6.0\Boardgame.Application.dll
 C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Application\obj\Debug\net6.0\refint\Boardgame.Application.dll
 C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Application\obj\Debug\net6.0\Boardgame.Application.pdb
@@ -60,3 +59,4 @@ C:\Users\chany\OneDrive\Desktop\ApiProject\Api\Boardgame\Boardgame.Application\o
 C:\Users\chany\OneDrive\Desktop\ApiProject\Api\Boardgame\Boardgame.Application\obj\Debug\net6.0\refint\Boardgame.Application.dll
 C:\Users\chany\OneDrive\Desktop\ApiProject\Api\Boardgame\Boardgame.Application\obj\Debug\net6.0\Boardgame.Application.pdb
 C:\Users\chany\OneDrive\Desktop\ApiProject\Api\Boardgame\Boardgame.Application\obj\Debug\net6.0\ref\Boardgame.Application.dll
+C:\Users\chany\OneDrive\Desktop\Test\Api\Boardgame\Boardgame.Application\obj\Debug\net6.0\Boardgam.9F7CC5BD.Up2Date

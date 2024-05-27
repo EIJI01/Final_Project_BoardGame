@@ -84,6 +84,7 @@ public class MappingConfig : IRegister
         config.NewConfig<UpdateQueueNotSuccessOkRequest, UpdateQueueNotSuccessOkCommand>();
         config.NewConfig<UpdateScanSystemByScanSystemIdRequest, UpdateScanSystemByScanSystemIdCommand>();
         config.NewConfig<CreateBranchByAdminRequest, CreateBranchByAdminCommand>();
+        config.NewConfig<GetAllGmRequest, GetAllGmQuery>();
 
         // Response
         config.NewConfig<AuthenticationResult, AuthenticationResponse>()

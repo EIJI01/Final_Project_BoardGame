@@ -3,13 +3,16 @@ import SkeletonDefalse from "../components/skeleton/Skeleton";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState<boolean>(true);
+  // useEffect(() => {
+  //   const setIsLoading = () => {
+  //     setTimeout(() => {
+  //       setLoading(false);
+  //     }, 5000);
+  //   };
+  //   setIsLoading();
+  // }, []);
   useEffect(() => {
-    const setIsLoading = () => {
-      setTimeout(() => {
-        setLoading(false);
-      }, 5000);
-    };
-    setIsLoading();
+    window.location.replace("/branch-manage");
   }, []);
 
   if (loading) {

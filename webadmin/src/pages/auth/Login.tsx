@@ -53,7 +53,7 @@ export default function Login() {
         setTimeout(() => {
           // setIsLoadingButton(false);
           window.location.href = "/";
-        }, 2000);
+        }, 500);
       }
     } catch (err: any) {
       setTimeout(() => {

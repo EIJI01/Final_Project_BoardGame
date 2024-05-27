@@ -44,7 +44,18 @@ public class RegisterGmCommandHandler : IRequestHandler<RegisterGmCommand, Error
             PasswordHash = request.Password,
         };
 
-        await _userRepository.Add(user);
+        try
+        {
+            await _userRepository.Add(user);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+        if (await _userRepository.GetUserByEmailAsync(user.Email)! is null)
+        {
+            return Error.Failure(code: "Kuy");
+        }
 
         var resultRole = await _userRepository.AddUserToRoleAsync(user, RoleKeys.Gm);
 

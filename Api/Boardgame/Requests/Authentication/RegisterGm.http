@@ -3,11 +3,11 @@ POST http://localhost:5107/api/authentication/gm/register-gm
 # POST http://localhost:8000/api/authentication/gm/register-gm
 # Admin
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMDMxOGU5Zi03MDUzLTRjODItNmY5Yy0wOGRjM2Q3MjY1YjMiLCJnaXZlbl9uYW1lIjoiQWRtaW4iLCJqdGkiOiJlOTAzYzRlOC0yNDNmLTQ3M2ItOWE0MC0xMGQzYTQ0NmNmYWYiLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MDk2ODQyNTgsImlzcyI6IkJvYXJkR2FtZUFwcCIsImF1ZCI6IkJvYXJkR2FtZUFwcCJ9.QItSxvY7RCQe2XavalGorl6PomA3koRCt5jCyAPH4Xk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiMDMxOGU5Zi03MDUzLTRjODItNmY5Yy0wOGRjM2Q3MjY1YjMiLCJnaXZlbl9uYW1lIjoiQWRtaW4iLCJqdGkiOiI0MjljOGYxZi00N2QzLTRmMjEtOWJhZS04ZjIzZWNiZDg2NzQiLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MTAxMDI5MjMsImlzcyI6IkJvYXJkR2FtZUFwcCIsImF1ZCI6IkJvYXJkR2FtZUFwcCJ9.nDZCXthbZJgyerjs7HOSg7XQp7y1pZk6T9YV_i1aD4s
 
 {
-    "name": "Chanyut",
-    "email": "chanyut0986071813@gmail.com",
+    "name": "TempMail",
+    "email": "casere3229@comsb.com",
     "phoneNumber": "0985541245",
     "password": "$chanyutD01",
     "confirmPassword": "$chanyutD01"

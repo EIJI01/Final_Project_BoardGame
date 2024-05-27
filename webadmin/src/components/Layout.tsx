@@ -18,10 +18,10 @@ import Logo from "../assets/logo-boardgame.png";
 import { sidebarData } from "../data/sidebar-data";
 import { getAllBranch } from "../data/services/branch-service/get-all";
 import { BranchAllIdResponse } from "../models/data/branch";
-import { Collapse } from "@mui/material";
+// import { Collapse } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { IoIosArrowDown } from "react-icons/io";
-import { IoIosArrowUp } from "react-icons/io";
+// import { IoIosArrowDown } from "react-icons/io";
+// import { IoIosArrowUp } from "react-icons/io";
 import DrawerHeader from "./drawer/DrawerHeader";
 import RightDrawerInsidePage from "./drawer/RightDrawerInsidePage";
 import useReducerDispatch from "../hooks/use.reducer";
@@ -55,22 +55,22 @@ export default function Layout({ children }: Props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [data, setData] = React.useState<BranchAllIdResponse[]>([]);
-  const [openBranch, setOpenBranch] = React.useState(false);
+  // const [openBranch, setOpenBranch] = React.useState(false);
   const navigate = useNavigate();
-  const [arrow, setArrow] = React.useState<boolean>(false);
+  // const [arrow, setArrow] = React.useState<boolean>(false);
   const { state } = useReducerDispatch();
 
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-  const handleBranchOpen = () => {
-    setOpenBranch(!openBranch);
-    setArrow(!arrow);
-  };
+  // const handleBranchOpen = () => {
+  //   setOpenBranch(!openBranch);
+  //   setArrow(!arrow);
+  // };
 
-  const handleBranchClickSendId = (id: string) => {
-    navigate(`/branch-manage/${id}`);
-  };
+  // const handleBranchClickSendId = (id: string) => {
+  //   navigate(`/branch-manage/${id}`);
+  // };
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -130,7 +130,7 @@ export default function Layout({ children }: Props) {
                   sx={{ opacity: open ? 1 : 0 }}
                   onClick={() => navigate(text.route!)}
                 />
-                {open && text.branch && (
+                {/* {open && text.branch && (
                   <ListItemIcon
                     sx={{
                       minWidth: 0,
@@ -143,9 +143,9 @@ export default function Layout({ children }: Props) {
                   >
                     {arrow ? <IoIosArrowDown /> : <IoIosArrowUp />}
                   </ListItemIcon>
-                )}
+                )} */}
               </ListItemButton>
-              {open && text.branch && (
+              {/* {open && text.branch && (
                 <Collapse in={openBranch} timeout="auto" unmountOnExit>
                   {text.branch.map((b, i) => {
                     return (
@@ -161,7 +161,7 @@ export default function Layout({ children }: Props) {
                     );
                   })}
                 </Collapse>
-              )}
+              )} */}
             </ListItem>
           ))}
         </List>
